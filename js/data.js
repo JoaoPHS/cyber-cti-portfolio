@@ -4,7 +4,7 @@
 const cyberDatabase = {
     // ═══════════════════════════════════════════════════════════════
     // GRUPOS DE AMEAÇA
-    // Subcategorias: "lucro", "fama", "governo", "osint_sigint"
+    // Subcategorias: "lucro", "governo", "osint_sigint"
     // ═══════════════════════════════════════════════════════════════
     
     grupos: {
@@ -83,14 +83,14 @@ const cyberDatabase = {
             },
         ],
         
-        // FAMA - Hacktivismo, Reputação, Ideologia
-        fama: [
+        // OSINT/SIGINT - Hacktivismo, Coleta de Dados, Surveillance
+        osint_sigint: [
             // RÚSSIA
             {
                 nome: "Killnet | Deanon Club",
                 pais: { pt: "Rússia", en: "Russia" },
                 paisCode: "RU",
-                subcategoria: "fama",
+                subcategoria: "osint_sigint",
                 descricao: {
                     pt: "Coletivo pró-Kremlin formado durante a invasão da Ucrânia. Especializado em DDoS em massa contra alvos da OTAN, instituições europeias e infraestruturas críticas. Braço cibernético não-oficial da guerra de informação russa.",
                     en: "Pro-Kremlin collective formed during Ukraine invasion. Specialized in mass DDoS against NATO targets, European institutions and critical infrastructures. Unofficial cyber arm of Russian information warfare."
@@ -109,7 +109,7 @@ const cyberDatabase = {
                 nome: "Anonymous",
                 pais: { pt: "Global", en: "Global" },
                 paisCode: "UN",
-                subcategoria: "fama",
+                subcategoria: "osint_sigint",
                 descricao: {
                     pt: "Coletivo descentralizado mais icônico da era digital. Ativo desde 2003 contra scientology, governos autoritários e corporações. Operou OpPedophilia, OpTunisia, OpIran e ressurgiu em 2022 com OpRussia.",
                     en: "Most iconic decentralized collective of digital era. Active since 2003 against scientology, authoritarian governments and corporations. Operated OpPedophilia, OpTunisia, OpIran and resurged in 2022 with OpRussia."
@@ -128,7 +128,7 @@ const cyberDatabase = {
                 nome: "Chaos Computer Club (CCC)",
                 pais: { pt: "União Europeia", en: "European Union" },
                 paisCode: "EU",
-                subcategoria: "fama",
+                subcategoria: "osint_sigint",
                 descricao: {
                     pt: "Maior e mais antigo coletivo hacker ético da Europa, fundado em 1981 na Alemanha. Responsável por expor vulnerabilidades governamentais, defender privacidade digital e organizar o famoso Chaos Communication Congress anual.",
                     en: "Largest and oldest ethical hacker collective in Europe, founded in 1981 in Germany. Responsible for exposing government vulnerabilities, defending digital privacy and organizing famous annual Chaos Communication Congress."
@@ -161,7 +161,7 @@ const cyberDatabase = {
                 },
                 raridade: "⭐⭐⭐⭐⭐",
                 tipo: { pt: "APT Estatal / Governo", en: "State APT / Government" },
-                imagePlaceholder: "💥"
+                imagePlaceholder: "assets/images/military.png"
             },
             {
                 nome: "APT28 (Fancy Bear)",
@@ -178,7 +178,7 @@ const cyberDatabase = {
                 },
                 raridade: "⭐⭐⭐⭐⭐",
                 tipo: { pt: "APT Estatal / Governo", en: "State APT / Government" },
-                imagePlaceholder: "🐻"
+                imagePlaceholder: "assets/images/military.png"
             },
             {
                 nome: "APT29 (Cozy Bear)",
@@ -195,7 +195,7 @@ const cyberDatabase = {
                 },
                 raridade: "⭐⭐⭐⭐⭐",
                 tipo: { pt: "APT Estatal / Governo", en: "State APT / Government" },
-                imagePlaceholder: "🕵️"
+                imagePlaceholder: "assets/images/military.png"
             },
             
             // CHINA
@@ -214,7 +214,7 @@ const cyberDatabase = {
                 },
                 raridade: "⭐⭐⭐⭐⭐",
                 tipo: { pt: "APT Estatal / Governo", en: "State APT / Government" },
-                imagePlaceholder: "🐉"
+                imagePlaceholder: "assets/images/military.png"
             },
             {
                 nome: "Volt Typhoon",
@@ -231,7 +231,7 @@ const cyberDatabase = {
                 },
                 raridade: "⭐⭐⭐⭐⭐",
                 tipo: { pt: "APT Estatal / Governo", en: "State APT / Government" },
-                imagePlaceholder: "⚡"
+                imagePlaceholder: "assets/images/military.png"
             },
             
             // IRÃ
@@ -250,7 +250,7 @@ const cyberDatabase = {
                 },
                 raridade: "⭐⭐⭐⭐",
                 tipo: { pt: "APT Estatal / Governo", en: "State APT / Government" },
-                imagePlaceholder: "💧"
+                imagePlaceholder: "assets/images/military.png"
             },
             {
                 nome: "Charming Kitten (APT35)",
@@ -267,7 +267,7 @@ const cyberDatabase = {
                 },
                 raridade: "⭐⭐⭐⭐",
                 tipo: { pt: "APT Estatal / Governo", en: "State APT / Government" },
-                imagePlaceholder: "🐱"
+                imagePlaceholder: "assets/images/military.png"
             },
             
             // COREIA DO NORTE
@@ -286,29 +286,7 @@ const cyberDatabase = {
                 },
                 raridade: "⭐⭐⭐⭐",
                 tipo: { pt: "APT Estatal / Governo", en: "State APT / Government" },
-                imagePlaceholder: "📡"
-            },
-        ],
-        
-        // OSINT/SIGINT - Coleta de Dados, Surveillance
-        osint_sigint: [
-            // ISRAEL
-            {
-                nome: "NSO Group (Pegasus)",
-                pais: { pt: "Israel", en: "Israel" },
-                paisCode: "IL",
-                subcategoria: "osint_sigint",
-                descricao: {
-                    pt: "Empresa privada israelense fabricante do spyware Pegasus, exploits de clique-zero que infectam dispositivos sem interação. Vendido a governos, foi usado contra jornalistas, ativistas e políticos globalmente.",
-                    en: "Israeli private company manufacturing Pegasus spyware, zero-click exploits that infect devices without interaction. Sold to governments, used against journalists, activists and politicians globally."
-                },
-                especialidade: {
-                    pt: "Zero-Click Exploits, Spyware Comercial, Vigilância Total de Dispositivos",
-                    en: "Zero-Click Exploits, Commercial Spyware, Total Device Surveillance"
-                },
-                raridade: "⭐⭐⭐⭐⭐",
-                tipo: { pt: "Surveillance / Privado", en: "Surveillance / Private" },
-                imagePlaceholder: "👁️"
+                imagePlaceholder: "assets/images/military.png"
             },
         ],
     },
@@ -693,7 +671,6 @@ const translations = {
         "desc-gov": "Agências estatais e militares",
         
         "subcat-profit": "Lucro",
-        "subcat-fame": "Fama",
         "subcat-government": "Governo",
         "subcat-osint-sigint": "OSINT/SIGINT",
         "subcat-legends": "Lendas",
@@ -720,7 +697,6 @@ const translations = {
         "desc-gov": "State agencies and military",
         
         "subcat-profit": "Profit",
-        "subcat-fame": "Fame",
         "subcat-government": "Government",
         "subcat-osint-sigint": "OSINT/SIGINT",
         "subcat-legends": "Legends",

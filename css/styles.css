@@ -206,7 +206,6 @@ h1 + p {
 }
 
 /* FAMA / LENDAS - Glitch Cyberpunk Neon Magenta */
-.rpg-card.bg-fama::before,
 .rpg-card.bg-lendas::before {
     content: '';
     position: absolute;
@@ -247,14 +246,12 @@ h1 + p {
     }
 }
 
-.rpg-card.bg-fama,
 .rpg-card.bg-lendas {
     border-color: #ec4899;
     box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
     background: linear-gradient(135deg, #831843 0%, #a21caf 100%);
 }
 
-.rpg-card.bg-fama:hover,
 .rpg-card.bg-lendas:hover {
     box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
 }

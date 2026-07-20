@@ -1,0 +1,10 @@
+PLACEHOLDER: Adicione uma imagem militar aqui (military.png)
+
+Para melhor resultado, use uma imagem de:
+- Camuflagem militar
+- Símbolo de guerra cibernética
+- Ícone de APT/Threat Actor
+- Dimensões recomendadas: 512x512px ou 1024x1024px
+
+Pode ser gerada no Midjourney usando:
+"military cyber warfare icon, digital camouflage pattern, hacking symbol, dark tactical theme, minimalist, professional --ar 1:1"

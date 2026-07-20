@@ -299,7 +299,26 @@ function createCard(threat, lang) {
     
     const imagePlaceholder = document.createElement('div');
     imagePlaceholder.className = 'card-placeholder';
-    imagePlaceholder.textContent = threat.imagePlaceholder || '🎯';
+    
+    // Verificar se é um caminho de imagem ou emoji
+    if (threat.imagePlaceholder && threat.imagePlaceholder.startsWith('assets/')) {
+        // É um caminho de imagem
+        const img = document.createElement('img');
+        img.src = threat.imagePlaceholder;
+        img.alt = threat.nome;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.onerror = function() {
+            // Fallback para emoji se a imagem não carregar
+            this.style.display = 'none';
+            imagePlaceholder.textContent = '🎯';
+        };
+        imagePlaceholder.appendChild(img);
+    } else {
+        // É um emoji
+        imagePlaceholder.textContent = threat.imagePlaceholder || '🎯';
+    }
     
     imageContainer.appendChild(imagePlaceholder);
     
@@ -346,7 +365,6 @@ function getCardBackgroundClass(subcategory) {
     const classMap = {
         // Grupos
         'lucro': 'bg-lucro',
-        'fama': 'bg-fama',
         'governo': 'bg-governo',
         'osint_sigint': 'bg-osint-sigint',
         
@@ -408,7 +426,11 @@ function openThreatModal(threat, lang) {
         
         <!-- Imagem -->
         <div class="modal-image-container">
-            <div class="modal-image-placeholder">${threat.imagePlaceholder || '🎯'}</div>
+            <div class="modal-image-placeholder">
+                ${threat.imagePlaceholder && threat.imagePlaceholder.startsWith('assets/') 
+                    ? `<img src="${threat.imagePlaceholder}" alt="${threat.nome}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.textContent='🎯';">` 
+                    : (threat.imagePlaceholder || '🎯')}
+            </div>
         </div>
         
         <!-- Tipo/Categoria -->
