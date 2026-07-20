@@ -469,6 +469,9 @@ const countries = [
 // Traduções da interface
 const translations = {
     pt: {
+        "title-geopolitics": "Selecione o País de Origem",
+        "subtitle-geopolitics": "Escolha a região geopolítica para iniciar a análise",
+        
         "title-category": "Escolha a Categoria de Ameaça",
         "subtitle-category": "Selecione o tipo de ator de ameaça que deseja explorar",
         "category-groups": "Grupos",
@@ -488,14 +491,14 @@ const translations = {
         "subcat-military": "Militar",
         "subcat-police": "Polícia",
         
-        "title-geopolitics": "Selecione o País de Origem",
-        "subtitle-geopolitics": "Escolha a região geopolítica para filtrar as ameaças",
-        
         "title-cards": "Cards de Ameaças",
         
         "btn-back": "Voltar"
     },
     en: {
+        "title-geopolitics": "Select Country of Origin",
+        "subtitle-geopolitics": "Choose the geopolitical region to start analysis",
+        
         "title-category": "Choose Threat Category",
         "subtitle-category": "Select the type of threat actor you want to explore",
         "category-groups": "Groups",
@@ -514,9 +517,6 @@ const translations = {
         "subcat-intelligence": "Intelligence",
         "subcat-military": "Military",
         "subcat-police": "Police",
-        
-        "title-geopolitics": "Select Country of Origin",
-        "subtitle-geopolitics": "Choose the geopolitical region to filter threats",
         
         "title-cards": "Threat Cards",
         

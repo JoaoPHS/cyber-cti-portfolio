@@ -19,10 +19,25 @@
         </button>
     </div>
 
-    <!-- TELA 1: Escolha de Categoria -->
-    <div id="screen-category" class="screen min-h-screen flex flex-col items-center justify-center p-8">
+    <!-- TELA 1: Seleção de País (NOVA PRIMEIRA TELA) -->
+    <div id="screen-geopolitics" class="screen min-h-screen flex flex-col items-center justify-center p-8">
+        <h1 class="text-5xl font-bold mb-4 text-center" data-lang="title-geopolitics"></h1>
+        <p class="text-xl mb-12 text-center" data-lang="subtitle-geopolitics"></p>
+        
+        <div id="countries-container" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-7xl">
+            <!-- Países serão injetados dinamicamente -->
+        </div>
+    </div>
+
+    <!-- TELA 2: Escolha de Categoria (AGORA É SEGUNDA TELA) -->
+    <div id="screen-category" class="screen hidden min-h-screen flex flex-col items-center justify-center p-8">
+        <button id="btn-back-countries" class="absolute top-20 left-8 px-6 py-3 bg-black border border-zinc-800 hover:border-cyan-400 hover:text-cyan-400 rounded-lg font-bold transition-all flex items-center gap-2">
+            <span>←</span>
+            <span data-lang="btn-back"></span>
+        </button>
+
         <h1 class="text-5xl font-bold mb-4 text-center" data-lang="title-category"></h1>
-        <p class="text-xl mb-12 text-gray-400 text-center" data-lang="subtitle-category"></p>
+        <p class="text-xl mb-12 text-center" data-lang="subtitle-category"></p>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
             <!-- Card: Grupos -->
@@ -75,25 +90,10 @@
         </div>
     </div>
 
-    <!-- TELA 2: Seleção Geopolítica -->
-    <div id="screen-geopolitics" class="screen hidden min-h-screen flex flex-col items-center justify-center p-8">
-        <button id="btn-back-category" class="absolute top-20 left-8 px-6 py-3 bg-black border border-zinc-800 hover:border-cyan-400 hover:text-cyan-400 rounded-lg font-bold transition-all flex items-center gap-2">
-            <span>←</span>
-            <span data-lang="btn-back"></span>
-        </button>
-
-        <h1 class="text-5xl font-bold mb-4 text-center" data-lang="title-geopolitics"></h1>
-        <p class="text-xl mb-12 text-gray-400 text-center" data-lang="subtitle-geopolitics"></p>
-        
-        <div id="countries-container" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-7xl">
-            <!-- Países serão injetados dinamicamente -->
-        </div>
-    </div>
-
     <!-- TELA 3: Grid de Cards RPG -->
     <div id="screen-cards" class="screen hidden min-h-screen flex flex-col p-8">
         <div class="flex justify-between items-center mb-8">
-            <button id="btn-back-geopolitics" class="px-6 py-3 bg-black border border-zinc-800 hover:border-cyan-400 hover:text-cyan-400 rounded-lg font-bold transition-all flex items-center gap-2">
+            <button id="btn-back-category" class="px-6 py-3 bg-black border border-zinc-800 hover:border-cyan-400 hover:text-cyan-400 rounded-lg font-bold transition-all flex items-center gap-2">
                 <span>←</span>
                 <span data-lang="btn-back"></span>
             </button>

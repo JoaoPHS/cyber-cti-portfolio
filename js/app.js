@@ -1,13 +1,13 @@
 // Cyber Threat Intelligence Portfolio - Lógica Principal
-// Sistema de navegação, filtros, idiomas e renderização de cards
+// NOVO FLUXO: País → Categoria → Cards
 
 // Estado Global da Aplicação
 const appState = {
-    currentScreen: 'screen-category',
+    currentScreen: 'screen-geopolitics', // Começa na tela de países
     currentLanguage: 'pt',
+    selectedCountry: null,
     selectedCategory: null,
     selectedSubcategory: null,
-    selectedCountry: null,
     filteredData: []
 };
 
@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeFilters();
     updateLanguage();
     
-    // Garantir que apenas a primeira tela esteja visível
-    goToScreen('screen-category');
+    // Garantir que apenas a primeira tela (países) esteja visível
+    goToScreen('screen-geopolitics');
+    renderCountries();
 });
 
 // SISTEMA DE IDIOMAS
@@ -69,16 +70,19 @@ function updateLanguage() {
     });
 }
 
-// SISTEMA DE NAVEGAÇÃO ENTRE TELAS
+// SISTEMA DE NAVEGAÇÃO ENTRE TELAS - NOVO FLUXO
 function initializeNavigation() {
-    document.getElementById('btn-back-category').addEventListener('click', () => {
-        goToScreen('screen-category');
-        resetFilters();
-    });
-    
-    document.getElementById('btn-back-geopolitics').addEventListener('click', () => {
+    // Voltar de Categoria para Países
+    document.getElementById('btn-back-countries').addEventListener('click', () => {
         goToScreen('screen-geopolitics');
         appState.selectedCountry = null;
+    });
+    
+    // Voltar de Cards para Categoria
+    document.getElementById('btn-back-category').addEventListener('click', () => {
+        goToScreen('screen-category');
+        appState.selectedCategory = null;
+        appState.selectedSubcategory = null;
     });
 }
 
@@ -100,37 +104,13 @@ function goToScreen(screenId) {
 }
 
 function resetFilters() {
+    appState.selectedCountry = null;
     appState.selectedCategory = null;
     appState.selectedSubcategory = null;
-    appState.selectedCountry = null;
     appState.filteredData = [];
 }
 
-// SISTEMA DE FILTROS
-function initializeFilters() {
-    // Listeners para botões de subcategoria
-    const subcategoryButtons = document.querySelectorAll('.subcategory-btn');
-    subcategoryButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const category = e.target.getAttribute('data-category');
-            const subcategory = e.target.getAttribute('data-subcategory');
-            selectSubcategory(category, subcategory);
-        });
-    });
-}
-
-function selectSubcategory(category, subcategory) {
-    appState.selectedCategory = category;
-    appState.selectedSubcategory = subcategory;
-    
-    console.log(`[CTI] Categoria selecionada: ${category} - ${subcategory}`);
-    
-    // Ir para a tela de seleção geopolítica
-    goToScreen('screen-geopolitics');
-    renderCountries();
-}
-
-// RENDERIZAÇÃO DE PAÍSES (Tela 2)
+// RENDERIZAÇÃO DE PAÍSES (TELA 1 - AGORA É A PRIMEIRA)
 function renderCountries() {
     const container = document.getElementById('countries-container');
     container.innerHTML = '';
@@ -164,13 +144,37 @@ function selectCountry(countryCode) {
     
     console.log(`[CTI] País selecionado: ${countryCode}`);
     
+    // Ir para a tela de categorias
+    goToScreen('screen-category');
+}
+
+// SISTEMA DE FILTROS (TELA 2)
+function initializeFilters() {
+    // Listeners para botões de subcategoria
+    const subcategoryButtons = document.querySelectorAll('.subcategory-btn');
+    subcategoryButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const category = e.target.getAttribute('data-category');
+            const subcategory = e.target.getAttribute('data-subcategory');
+            selectSubcategory(category, subcategory);
+        });
+    });
+}
+
+function selectSubcategory(category, subcategory) {
+    appState.selectedCategory = category;
+    appState.selectedSubcategory = subcategory;
+    
+    console.log(`[CTI] Categoria selecionada: ${category} - ${subcategory}`);
+    
+    // Ir para a tela de cards
     filterAndDisplayCards();
     goToScreen('screen-cards');
 }
 
 // FILTRAGEM E RENDERIZAÇÃO DE CARDS (Tela 3)
 function filterAndDisplayCards() {
-    const { selectedCategory, selectedSubcategory, selectedCountry } = appState;
+    const { selectedCountry, selectedCategory, selectedSubcategory } = appState;
     
     // Obter dados da categoria/subcategoria selecionada
     const data = cyberDatabase[selectedCategory][selectedSubcategory] || [];
@@ -196,15 +200,67 @@ function renderCards() {
     
     const lang = appState.currentLanguage;
     
+    // MENSAGEM ESTILIZADA QUANDO NÃO HÁ CARDS
     if (appState.filteredData.length === 0) {
-        container.innerHTML = `
-            <div class="col-span-full text-center text-2xl text-gray-500 py-20">
-                ${lang === 'pt' ? 'Nenhuma ameaça encontrada para este filtro.' : 'No threats found for this filter.'}
-            </div>
-        `;
+        const emptyMessage = document.createElement('div');
+        emptyMessage.className = 'col-span-full flex flex-col items-center justify-center py-20 gap-8';
+        
+        // Ícone de Alerta
+        const icon = document.createElement('div');
+        icon.className = 'text-8xl';
+        icon.textContent = '⚠️';
+        
+        // Mensagem Principal
+        const message = document.createElement('h2');
+        message.className = 'text-4xl font-bold text-center';
+        message.style.color = '#00f0ff';
+        message.style.textShadow = '0 0 20px #00f0ff';
+        message.style.letterSpacing = '0.1em';
+        message.textContent = lang === 'pt' 
+            ? 'NENHUMA AMEAÇA ATIVA DETECTADA NESTE SETOR'
+            : 'NO ACTIVE THREATS DETECTED IN THIS SECTOR';
+        
+        // Submensagem
+        const subMessage = document.createElement('p');
+        subMessage.className = 'text-xl text-center';
+        subMessage.style.color = '#a1a1aa';
+        subMessage.textContent = lang === 'pt'
+            ? 'Este filtro não possui dados cadastrados no momento.'
+            : 'This filter has no registered data at the moment.';
+        
+        // Botão de Voltar Estilizado
+        const backButton = document.createElement('button');
+        backButton.className = 'px-8 py-4 bg-black border-2 rounded-lg font-bold text-lg transition-all';
+        backButton.style.borderColor = '#00f0ff';
+        backButton.style.color = '#00f0ff';
+        backButton.textContent = lang === 'pt' ? '← VOLTAR À SELEÇÃO' : '← BACK TO SELECTION';
+        
+        backButton.addEventListener('mouseenter', () => {
+            backButton.style.background = '#00f0ff';
+            backButton.style.color = '#000000';
+            backButton.style.boxShadow = '0 0 30px rgba(0, 240, 255, 0.5)';
+        });
+        
+        backButton.addEventListener('mouseleave', () => {
+            backButton.style.background = '#000000';
+            backButton.style.color = '#00f0ff';
+            backButton.style.boxShadow = 'none';
+        });
+        
+        backButton.addEventListener('click', () => {
+            goToScreen('screen-category');
+        });
+        
+        emptyMessage.appendChild(icon);
+        emptyMessage.appendChild(message);
+        emptyMessage.appendChild(subMessage);
+        emptyMessage.appendChild(backButton);
+        
+        container.appendChild(emptyMessage);
         return;
     }
     
+    // Renderizar cards normalmente
     appState.filteredData.forEach(threat => {
         const card = createCard(threat, lang);
         container.appendChild(card);
@@ -279,7 +335,7 @@ function createCard(threat, lang) {
     
     // Animação de hover
     card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
+        card.style.transform = 'translateY(-8px) scale(1.02)';
     });
     
     card.addEventListener('mouseleave', () => {
