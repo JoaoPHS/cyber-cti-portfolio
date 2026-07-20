@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeLanguage();
     initializeNavigation();
     initializeFilters();
+    initializeModal();
     updateLanguage();
     
     // Garantir que apenas a primeira tela (países) esteja visível
@@ -269,7 +270,12 @@ function renderCards() {
 
 function createCard(threat, lang) {
     const card = document.createElement('div');
-    card.className = `rpg-card ${getCardBackgroundClass(appState.selectedSubcategory)}`;
+    card.className = `rpg-card ${getCardBackgroundClass(appState.selectedSubcategory)} cursor-pointer`;
+    
+    // Evento de clique para abrir modal
+    card.addEventListener('click', () => {
+        openThreatModal(threat, lang);
+    });
     
     // Header do card
     const header = document.createElement('div');
@@ -297,34 +303,24 @@ function createCard(threat, lang) {
     
     imageContainer.appendChild(imagePlaceholder);
     
-    // Body do card
+    // Body do card - APENAS ESPECIALIDADE
     const body = document.createElement('div');
     body.className = 'card-body';
     
-    const description = document.createElement('p');
-    description.className = 'card-description';
-    description.textContent = threat.descricao[lang] || threat.descricao.pt;
-    
     const specialty = document.createElement('p');
     specialty.className = 'card-specialty';
-    specialty.textContent = `${lang === 'pt' ? 'Especialidade' : 'Specialty'}: ${threat.especialidade[lang] || threat.especialidade.pt}`;
+    specialty.textContent = threat.especialidade[lang] || threat.especialidade.pt;
     
-    body.appendChild(description);
     body.appendChild(specialty);
     
-    // Footer do card
+    // Footer do card - APENAS RARIDADE
     const footer = document.createElement('div');
     footer.className = 'card-footer';
-    
-    const type = document.createElement('div');
-    type.className = 'card-type';
-    type.textContent = threat.tipo[lang] || threat.tipo.pt;
     
     const rarity = document.createElement('div');
     rarity.className = 'card-rarity';
     rarity.textContent = threat.raridade;
     
-    footer.appendChild(type);
     footer.appendChild(rarity);
     
     // Montar card completo
@@ -360,6 +356,150 @@ function getCardBackgroundClass(subcategory) {
     };
     
     return classMap[subcategory] || 'bg-government';
+}
+
+// SISTEMA DE MODAL - Dossiê de Inteligência
+
+// Calcula níveis táticos e estratégicos baseado na raridade
+function calculateLevels(raridade) {
+    const stars = (raridade.match(/⭐/g) || []).length;
+    
+    // Base: 20 por estrela
+    const baseLevel = stars * 20;
+    
+    // Adiciona variação aleatória mas consistente
+    const tactical = Math.min(100, baseLevel + Math.floor(Math.random() * 10));
+    const strategic = Math.min(100, baseLevel + Math.floor(Math.random() * 10));
+    
+    return { tactical, strategic };
+}
+
+// Abre o modal com informações completas
+function openThreatModal(threat, lang) {
+    const modal = document.getElementById('threat-modal');
+    const modalBody = document.getElementById('modal-body');
+    
+    // Calcular níveis
+    const levels = calculateLevels(threat.raridade);
+    
+    // Obter dados do país
+    const countryData = countries.find(c => c.code === threat.paisCode);
+    const countryName = countryData ? countryData.name[lang] : 'Unknown';
+    const countryFlag = countryData ? countryData.flag : '🌐';
+    
+    // Montar conteúdo do modal
+    modalBody.innerHTML = `
+        <!-- Cabeçalho -->
+        <div class="modal-header">
+            <div class="modal-title">
+                ${threat.nome}
+            </div>
+            <div class="modal-subtitle">
+                <span class="text-4xl">${countryFlag}</span>
+                <span>${countryName}</span>
+                <span class="text-yellow-400 text-2xl ml-auto">${threat.raridade}</span>
+            </div>
+        </div>
+        
+        <!-- Imagem -->
+        <div class="modal-image-container">
+            <div class="modal-image-placeholder">${threat.imagePlaceholder || '🎯'}</div>
+        </div>
+        
+        <!-- Tipo/Categoria -->
+        <div class="modal-section">
+            <div class="modal-section-title">${lang === 'pt' ? 'Classificação' : 'Classification'}</div>
+            <div class="card-type" style="display: inline-block; font-size: 1rem; padding: 0.5rem 1rem;">
+                ${threat.tipo[lang] || threat.tipo.pt}
+            </div>
+        </div>
+        
+        <!-- Descrição -->
+        <div class="modal-section">
+            <div class="modal-section-title">${lang === 'pt' ? 'Dossiê de Inteligência' : 'Intelligence Dossier'}</div>
+            <div class="modal-description">
+                ${threat.descricao[lang] || threat.descricao.pt}
+            </div>
+        </div>
+        
+        <!-- Especialidade -->
+        <div class="modal-section">
+            <div class="modal-section-title">${lang === 'pt' ? 'Especialidade' : 'Specialty'}</div>
+            <div class="modal-specialty">
+                ${threat.especialidade[lang] || threat.especialidade.pt}
+            </div>
+        </div>
+        
+        <!-- Níveis Táticos e Estratégicos -->
+        <div class="modal-section">
+            <div class="modal-section-title">${lang === 'pt' ? 'Análise de Capacidade Operacional' : 'Operational Capability Analysis'}</div>
+            
+            <div class="stats-container">
+                <!-- Nível Tático -->
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <span class="stat-name">${lang === 'pt' ? 'Nível Tático' : 'Tactical Level'}</span>
+                        <span class="stat-value">${levels.tactical}/100</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${levels.tactical}%;"></div>
+                    </div>
+                </div>
+                
+                <!-- Nível Estratégico -->
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <span class="stat-name">${lang === 'pt' ? 'Nível Estratégico' : 'Strategic Level'}</span>
+                        <span class="stat-value">${levels.strategic}/100</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${levels.strategic}%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Aplicar classe de fundo dinâmico ao modal
+    const modalContent = modal.querySelector('.modal-content');
+    modalContent.className = `modal-content bg-zinc-950 border-2 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative ${getCardBackgroundClass(appState.selectedSubcategory)}`;
+    
+    // Mostrar modal
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    // Prevenir scroll do body
+    document.body.style.overflow = 'hidden';
+}
+
+// Fecha o modal
+function closeThreatModal() {
+    const modal = document.getElementById('threat-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    
+    // Restaurar scroll do body
+    document.body.style.overflow = 'auto';
+}
+
+// Inicializar eventos do modal
+function initializeModal() {
+    // Botão fechar
+    document.getElementById('modal-close').addEventListener('click', closeThreatModal);
+    
+    // Fechar ao clicar fora do conteúdo
+    document.getElementById('threat-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'threat-modal') {
+            closeThreatModal();
+        }
+    });
+    
+    // Fechar com tecla ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeThreatModal();
+        }
+    });
 }
 
 // Utilitários
