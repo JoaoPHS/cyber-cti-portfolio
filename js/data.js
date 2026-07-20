@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
 // CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE
 // Gerado automaticamente por builder.py
-// Data: 2026-07-20 15:21:09
+// Data: 2026-07-20 15:27:13
 // Com traducao automatica PT/EN usando deep_translator
 // ═══════════════════════════════════════════════════════════════
 
@@ -37,6 +37,26 @@ const cyberDatabase = {
                 "descricao": {
                     "pt": "FIN7 é um grupo de ameaças com motivação financeira que está ativo desde 2013. FIN7 tem como alvo os setores de varejo, restaurantes, hospitalidade, software, consultoria, serviços financeiros, equipamentos médicos, serviços em nuvem, mídia, alimentos e bebidas, transporte, farmacêutico e serviços públicos nos Estados Unidos. Uma parte do FIN7 era operada por uma empresa de fachada chamada Combi Security e frequentemente usava malware de ponto de venda para direcionar esforços.",
                     "en": "FIN7 is a financially-motivated threat group that has been active since 2013. FIN7 has targeted the retail, restaurant, hospitality, software, consulting, financial services, medical equipment, cloud services, media, food and beverage, transportation, pharmaceutical, and utilities industries in the United States. A portion of FIN7 was operated out of a front company called Combi Security and often used point-of-sale malware for targeting efforts."
+                },
+                "especialidade": {
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
+                },
+                "tipo": {
+                    "pt": "APT / Grupo de Ameaça",
+                    "en": "APT / Threat Group"
+                },
+                "imagePlaceholder": "🎯"
+            },
+            {
+                "nome": "TA505",
+                "paisCode": "KP",
+                "categoria": "grupos",
+                "subcategoria": "lucro",
+                "raridade": "⭐⭐⭐⭐⭐",
+                "descricao": {
+                    "pt": "TA505 é um grupo criminoso cibernético que está ativo pelo menos desde 2014. TA505 é conhecido por alterar frequentemente malware, impulsionando tendências globais na distribuição de malware criminoso e campanhas de ransomware envolvendo Clop.",
+                    "en": "TA505 is a cyber criminal group that has been active since at least 2014. TA505 is known for frequently changing malware, driving global trends in criminal malware distribution, and ransomware campaigns involving Clop."
                 },
                 "especialidade": {
                     "pt": "Operações Cibernéticas",
@@ -117,26 +137,6 @@ const cyberDatabase = {
                 "descricao": {
                     "pt": "O Cobalt Group é um grupo de ameaças com motivação financeira que tem como alvo principalmente instituições financeiras desde pelo menos 2016. O grupo conduziu intrusões para roubar dinheiro através de sistemas ATM, processamento de cartões, sistemas de pagamento e sistemas SWIFT. O Cobalt Group tem como alvo principalmente bancos na Europa Oriental, Ásia Central e Sudeste Asiático.",
                     "en": "Cobalt Group is a financially motivated threat group that has primarily targeted financial institutions since at least 2016. The group has conducted intrusions to steal money via targeting ATM systems, card processing, payment systems and SWIFT systems. Cobalt Group has mainly targeted banks in Eastern Europe, Central Asia, and Southeast Asia."
-                },
-                "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
-                },
-                "tipo": {
-                    "pt": "APT / Grupo de Ameaça",
-                    "en": "APT / Threat Group"
-                },
-                "imagePlaceholder": "🎯"
-            },
-            {
-                "nome": "DarkVishnya",
-                "paisCode": "EU",
-                "categoria": "grupos",
-                "subcategoria": "lucro",
-                "raridade": "⭐⭐⭐⭐⭐",
-                "descricao": {
-                    "pt": "DarkVishnya é um ator de ameaças com motivação financeira que visa instituições financeiras na Europa Oriental. Em 2017-2018 o grupo atacou pelo menos 8 bancos nesta região.",
-                    "en": "DarkVishnya is a financially motivated threat actor targeting financial institutions in Eastern Europe. In 2017-2018 the group attacked at least 8 banks in this region."
                 },
                 "especialidade": {
                     "pt": "Operações Cibernéticas",
@@ -374,7 +374,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "UNC3886",
-                "paisCode": "CN",
+                "paisCode": "US",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
@@ -554,7 +554,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "Inception",
-                "paisCode": "RU",
+                "paisCode": "US",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
@@ -733,26 +733,6 @@ const cyberDatabase = {
                 "imagePlaceholder": "🎯"
             },
             {
-                "nome": "Patchwork",
-                "paisCode": "US",
-                "categoria": "grupos",
-                "subcategoria": "governo",
-                "raridade": "⭐⭐⭐⭐",
-                "descricao": {
-                    "pt": "Patchwork é um grupo de espionagem cibernética que foi observado pela primeira vez em dezembro de 2015. Embora o grupo não tenha sido definitivamente atribuído, evidências circunstanciais sugerem que o grupo pode ser uma entidade pró-indiana ou indiana. Patchwork tem sido visto visando indústrias relacionadas a agências diplomáticas e governamentais.",
-                    "en": "Patchwork is a cyber espionage group that was first observed in December 2015. While the group has not been definitively attributed, circumstantial evidence suggests the group may be a pro-Indian or Indian entity. Patchwork has been seen targeting industries related to diplomatic and government agencies."
-                },
-                "especialidade": {
-                    "pt": "Espionagem Cibernética",
-                    "en": "Cyber Espionage"
-                },
-                "tipo": {
-                    "pt": "APT / Grupo de Ameaça",
-                    "en": "APT / Threat Group"
-                },
-                "imagePlaceholder": "🎯"
-            },
-            {
                 "nome": "APT28",
                 "paisCode": "RU",
                 "categoria": "grupos",
@@ -821,6 +801,26 @@ const cyberDatabase = {
                 "descricao": {
                     "pt": "HEXANE é um grupo de ameaça de espionagem cibernética que tem como alvo organizações de petróleo e gás, telecomunicações, aviação e provedores de serviços de Internet desde pelo menos 2017. As empresas visadas estão localizadas no Oriente Médio e na África, incluindo Israel, Arábia Saudita, Kuwait, Marrocos e Tunísia. Os TTPs da HEXANE parecem semelhantes aos APT33 e OilRig, mas devido às diferenças nas vítimas e nas ferramentas, são rastreados como uma entidade separada.",
                     "en": "HEXANE is a cyber espionage threat group that has targeted oil & gas, telecommunications, aviation, and internet service provider organizations since at least 2017. Targeted companies have been located in the Middle East and Africa, including Israel, Saudi Arabia, Kuwait, Morocco, and Tunisia. HEXANE's TTPs appear similar to APT33 and OilRig but due to differences in victims and tools it is tracked as a separate entity."
+                },
+                "especialidade": {
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
+                },
+                "tipo": {
+                    "pt": "APT / Grupo de Ameaça",
+                    "en": "APT / Threat Group"
+                },
+                "imagePlaceholder": "🎯"
+            },
+            {
+                "nome": "Darkhotel",
+                "paisCode": "KP",
+                "categoria": "grupos",
+                "subcategoria": "governo",
+                "raridade": "⭐⭐⭐⭐",
+                "descricao": {
+                    "pt": "Darkhotel é um suposto grupo de ameaças sul-coreano que tem como alvo vítimas principalmente no Leste Asiático desde pelo menos 2004. O nome do grupo é baseado em operações de espionagem cibernética conduzidas através de redes de Internet de hotéis contra executivos viajantes e outros hóspedes selecionados. Darkhotel também conduziu campanhas de spearphishing e infectou vítimas por meio de redes peer-to-peer e de compartilhamento de arquivos.",
+                    "en": "Darkhotel is a suspected South Korean threat group that has targeted victims primarily in East Asia since at least 2004. The group's name is based on cyber espionage operations conducted via hotel Internet networks against traveling executives and other select guests. Darkhotel has also conducted spearphishing campaigns and infected victims through peer-to-peer and file sharing networks."
                 },
                 "especialidade": {
                     "pt": "Espionagem Cibernética",
@@ -1013,6 +1013,26 @@ const cyberDatabase = {
                 "imagePlaceholder": "🎯"
             },
             {
+                "nome": "APT32",
+                "paisCode": "CN",
+                "categoria": "grupos",
+                "subcategoria": "governo",
+                "raridade": "⭐⭐⭐⭐",
+                "descricao": {
+                    "pt": "O APT32 é um grupo suspeito de ameaça baseado no Vietname que está activo desde pelo menos 2014. O grupo tem como alvo múltiplas indústrias do sector privado, bem como governos estrangeiros, dissidentes e jornalistas com um forte foco em países do Sudeste Asiático como o Vietname, as Filipinas, o Laos e o Camboja. Eles usaram extensivamente compromissos estratégicos da web para comprometer as vítimas.",
+                    "en": "APT32 is a suspected Vietnam-based threat group that has been active since at least 2014. The group has targeted multiple private sector industries as well as foreign governments, dissidents, and journalists with a strong focus on Southeast Asian countries like Vietnam, the Philippines, Laos, and Cambodia. They have extensively used strategic web compromises to compromise victims."
+                },
+                "especialidade": {
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
+                },
+                "tipo": {
+                    "pt": "APT / Grupo de Ameaça",
+                    "en": "APT / Threat Group"
+                },
+                "imagePlaceholder": "🎯"
+            },
+            {
                 "nome": "BRONZE BUTLER",
                 "paisCode": "CN",
                 "categoria": "grupos",
@@ -1034,7 +1054,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "POLONIUM",
-                "paisCode": "IL",
+                "paisCode": "IR",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
@@ -1173,26 +1193,6 @@ const cyberDatabase = {
                 "imagePlaceholder": "🎯"
             },
             {
-                "nome": "ToddyCat",
-                "paisCode": "EU",
-                "categoria": "grupos",
-                "subcategoria": "governo",
-                "raridade": "⭐⭐⭐",
-                "descricao": {
-                    "pt": "ToddyCat é um grupo de ameaças sofisticado que está ativo pelo menos desde 2020, usando carregadores personalizados e malware em cadeias de infecção em vários estágios contra alvos governamentais e militares em toda a Europa e Ásia.",
-                    "en": "ToddyCat is a sophisticated threat group that has been active since at least 2020 using custom loaders and malware in multi-stage infection chains against government and military targets across Europe and Asia."
-                },
-                "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
-                },
-                "tipo": {
-                    "pt": "APT / Grupo de Ameaça",
-                    "en": "APT / Threat Group"
-                },
-                "imagePlaceholder": "🎯"
-            },
-            {
                 "nome": "BITTER",
                 "paisCode": "CN",
                 "categoria": "grupos",
@@ -1294,7 +1294,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "Moses Staff",
-                "paisCode": "IL",
+                "paisCode": "IR",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐",
@@ -1374,7 +1374,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "APT37",
-                "paisCode": "KP",
+                "paisCode": "CN",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
@@ -1394,7 +1394,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "VOID MANTICORE",
-                "paisCode": "IL",
+                "paisCode": "IR",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
@@ -1634,7 +1634,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "Gorgon Group",
-                "paisCode": "RU",
+                "paisCode": "US",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐",
@@ -1733,26 +1733,6 @@ const cyberDatabase = {
                 "imagePlaceholder": "🎯"
             },
             {
-                "nome": "BlackByte",
-                "paisCode": "US",
-                "categoria": "grupos",
-                "subcategoria": "governo",
-                "raridade": "⭐⭐⭐⭐⭐",
-                "descricao": {
-                    "pt": "BlackByte é um ator de ameaça de ransomware em operação desde pelo menos 2021. BlackByte está associado a várias versões de ransomware também rotuladas como BlackByte Ransomware. As operações do ransomware BlackByte usaram inicialmente uma chave de criptografia comum, permitindo o desenvolvimento de um descriptografador universal, mas versões subsequentes, como o BlackByte 2.0 Ransomware, usam mecanismos de criptografia mais robustos.",
-                    "en": "BlackByte is a ransomware threat actor operating since at least 2021. BlackByte is associated with several versions of ransomware also labeled BlackByte Ransomware. BlackByte ransomware operations initially used a common encryption key allowing for the development of a universal decryptor, but subsequent versions such as BlackByte 2.0 Ransomware use more robust encryption mechanisms."
-                },
-                "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
-                },
-                "tipo": {
-                    "pt": "APT / Grupo de Ameaça",
-                    "en": "APT / Threat Group"
-                },
-                "imagePlaceholder": "🎯"
-            },
-            {
                 "nome": "Threat Group-3390",
                 "paisCode": "CN",
                 "categoria": "grupos",
@@ -1834,33 +1814,13 @@ const cyberDatabase = {
             },
             {
                 "nome": "Agrius",
-                "paisCode": "IL",
+                "paisCode": "IR",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
                     "pt": "Agrius é um ator de ameaças iraniano ativo desde 2020, notável por uma série de operações de ransomware e limpeza no Oriente Médio, com ênfase em alvos israelenses. Relatórios públicos ligaram Agrius ao Ministério de Inteligência e Segurança do Irã (MOIS).",
                     "en": "Agrius is an Iranian threat actor active since 2020 notable for a series of ransomware and wiper operations in the Middle East, with an emphasis on Israeli targets. Public reporting has linked Agrius to Iran's Ministry of Intelligence and Security (MOIS)."
-                },
-                "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
-                },
-                "tipo": {
-                    "pt": "APT / Grupo de Ameaça",
-                    "en": "APT / Threat Group"
-                },
-                "imagePlaceholder": "🎯"
-            },
-            {
-                "nome": "Sea Turtle",
-                "paisCode": "EU",
-                "categoria": "grupos",
-                "subcategoria": "governo",
-                "raridade": "⭐⭐⭐⭐",
-                "descricao": {
-                    "pt": "Sea Turtle é um ator de ameaça ligado à Turquia, ativo desde pelo menos 2017, realizando operações de espionagem e comprometimento de prestadores de serviços contra vítimas na Ásia, Europa e América do Norte. Sea Turtle é notável por ter como alvo registradores que gerenciam ccTLDs e invasões complexas baseadas em DNS, onde o ator da ameaça comprometeu provedores de DNS para sequestrar a resolução de DNS para as vítimas finais, permitindo que o Sea Turtle falsifique portais de login e outros aplicativos para coleta de credenciais.",
-                    "en": "Sea Turtle is a Türkiye-linked threat actor active since at least 2017 performing espionage and service provider compromise operations against victims in Asia, Europe, and North America. Sea Turtle is notable for targeting registrars managing ccTLDs and complex DNS-based intrusions where the threat actor compromised DNS providers to hijack DNS resolution for ultimate victims, enabling Sea Turtle to spoof log in portals and other applications for credential collection."
                 },
                 "especialidade": {
                     "pt": "Operações Cibernéticas",
@@ -2173,26 +2133,6 @@ const cyberDatabase = {
                 "imagePlaceholder": "🎯"
             },
             {
-                "nome": "Sharpshooter",
-                "paisCode": "KP",
-                "categoria": "grupos",
-                "subcategoria": "governo",
-                "raridade": "⭐⭐⭐⭐",
-                "descricao": {
-                    "pt": "Operação Sharpshooter é o nome de uma campanha de espionagem cibernética descoberta em outubro de 2018, visando empresas nucleares, de defesa, energia e financeiras. Embora tenham sido observadas sobreposições entre este adversário e o Grupo Lazarus, ligações definitivas não foram estabelecidas.",
-                    "en": "Operation Sharpshooter is the name of a cyber espionage campaign discovered in October 2018 targeting nuclear, defense, energy, and financial companies. Though overlaps between this adversary and Lazarus Group have been noted, definitive links have not been established."
-                },
-                "especialidade": {
-                    "pt": "Espionagem Cibernética",
-                    "en": "Cyber Espionage"
-                },
-                "tipo": {
-                    "pt": "APT / Grupo de Ameaça",
-                    "en": "APT / Threat Group"
-                },
-                "imagePlaceholder": "🎯"
-            },
-            {
                 "nome": "Cleaver",
                 "paisCode": "IR",
                 "categoria": "grupos",
@@ -2253,6 +2193,26 @@ const cyberDatabase = {
                 "imagePlaceholder": "🎯"
             },
             {
+                "nome": "APT18",
+                "paisCode": "CN",
+                "categoria": "grupos",
+                "subcategoria": "governo",
+                "raridade": "⭐⭐⭐⭐",
+                "descricao": {
+                    "pt": "O APT18 é um grupo ameaçador que opera desde pelo menos 2009 e tem como alvo uma série de setores, incluindo tecnologia, manufatura, grupos de direitos humanos, governo e médico.",
+                    "en": "APT18 is a threat group that has operated since at least 2009 and has targeted a range of industries, including technology, manufacturing, human rights groups, government, and medical."
+                },
+                "especialidade": {
+                    "pt": "Lateral Movement",
+                    "en": "Lateral Movement"
+                },
+                "tipo": {
+                    "pt": "APT / Grupo de Ameaça",
+                    "en": "APT / Threat Group"
+                },
+                "imagePlaceholder": "🎯"
+            },
+            {
                 "nome": "Orangeworm",
                 "paisCode": "US",
                 "categoria": "grupos",
@@ -2294,7 +2254,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "CopyKittens",
-                "paisCode": "IL",
+                "paisCode": "IR",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
@@ -2413,26 +2373,6 @@ const cyberDatabase = {
                 "imagePlaceholder": "🎯"
             },
             {
-                "nome": "IndigoZebra",
-                "paisCode": "CN",
-                "categoria": "grupos",
-                "subcategoria": "governo",
-                "raridade": "⭐⭐⭐⭐",
-                "descricao": {
-                    "pt": "IndigoZebra é um grupo suspeito de espionagem cibernética chinesa que tem como alvo os governos da Ásia Central desde pelo menos 2014.",
-                    "en": "IndigoZebra is a suspected Chinese cyber espionage group that has been targeting Central Asian governments since at least 2014."
-                },
-                "especialidade": {
-                    "pt": "Espionagem Cibernética",
-                    "en": "Cyber Espionage"
-                },
-                "tipo": {
-                    "pt": "APT / Grupo de Ameaça",
-                    "en": "APT / Threat Group"
-                },
-                "imagePlaceholder": "🎯"
-            },
-            {
                 "nome": "Strider",
                 "paisCode": "IR",
                 "categoria": "grupos",
@@ -2514,7 +2454,7 @@ const cyberDatabase = {
             },
             {
                 "nome": "Charming Kitten",
-                "paisCode": "IL",
+                "paisCode": "IR",
                 "categoria": "grupos",
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
@@ -2525,6 +2465,26 @@ const cyberDatabase = {
                 "especialidade": {
                     "pt": "Espionagem Cibernética",
                     "en": "Cyber Espionage"
+                },
+                "tipo": {
+                    "pt": "APT / Grupo de Ameaça",
+                    "en": "APT / Threat Group"
+                },
+                "imagePlaceholder": "🎯"
+            },
+            {
+                "nome": "APT34",
+                "paisCode": "IR",
+                "categoria": "grupos",
+                "subcategoria": "governo",
+                "raridade": "⭐⭐⭐⭐",
+                "descricao": {
+                    "pt": "",
+                    "en": ""
+                },
+                "especialidade": {
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",

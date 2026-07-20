@@ -71,15 +71,139 @@ CYBER_JARGON_FIXES = {
     'operação cibernética': 'Cyber Ops'
 }
 
-# Mapeamento de palavras-chave para países
+# ═══════════════════════════════════════════════════════════════
+# ATRIBUIÇÃO GEOPOLÍTICA CORRETA (Origem vs Alvos)
+# ═══════════════════════════════════════════════════════════════
+
+# Palavras-chave de ORIGEM (atribuição forte de país natal)
+ORIGIN_KEYWORDS = {
+    'RU': [
+        'russia-based', 'russian intelligence', 'russian threat', 'russian federation',
+        'linked to russia', 'attributed to russia', 'operates from russia',
+        'gru unit', 'svr ', 'fsb ', 'kremlin', 'moscow-based',
+        'russian state', 'russian military', 'russian cyber'
+    ],
+    'CN': [
+        'china-based', 'chinese state', 'chinese intelligence', 'chinese threat',
+        'linked to china', 'attributed to china', 'operates from china',
+        'pla unit', 'people\'s liberation army', 'mss ', 'beijing-based',
+        'prc ', 'people\'s republic of china', 'chinese military'
+    ],
+    'US': [
+        'united states', 'u.s. intelligence', 'american intelligence',
+        'nsa ', 'fbi cyber', 'operates from the united states'
+    ],
+    'IR': [
+        'iranian threat', 'iran-based', 'iranian intelligence', 'iranian state',
+        'linked to iran', 'attributed to iran', 'operates from iran', 'operating out of iran',
+        'irgc', 'iranian revolutionary guard', 'mois', 'ministry of intelligence',
+        'tehran-based', 'iranian cyber', 'iranian hacker', 'islamic republic of iran'
+    ],
+    'IL': [
+        'israeli-affiliated', 'israeli intelligence', 'operating from israel',
+        'affiliated with israeli', 'israel-based', 'unit 8200',
+        'israeli cyber', 'idf cyber'
+    ],
+    'KP': [
+        'north korean', 'north korea-based', 'dprk', 'attributed to north korea',
+        'linked to north korea', 'based in pyongyang', 'pyongyang-based',
+        'bureau 121', 'reconnaissance general bureau', 'rgb '
+    ],
+    'EU': [
+        'europe-based', 'european threat', 'operates from europe',
+        'based in germany', 'based in france', 'based in uk',
+        'british intelligence', 'french intelligence', 'german intelligence'
+    ]
+}
+
+# Palavras-chave de ALVO (para EXCLUSÃO - não indicam origem)
+TARGET_EXCLUSION_KEYWORDS = [
+    'targeting', 'targets', 'against', 'attacks on', 'attacking',
+    'focused on', 'aimed at', 'directed at', 'compromised',
+    'victimized', 'targeted at'
+]
+
+# Lista de grupos com país fixo (HARDCODED OVERRIDES - inquebrável)
+FIXED_COUNTRY_GROUPS = {
+    # Irã
+    'muddywater': 'IR',
+    'apt33': 'IR',
+    'apt34': 'IR',
+    'apt35': 'IR',
+    'apt39': 'IR',
+    'oilrig': 'IR',
+    'charming kitten': 'IR',
+    'magic hound': 'IR',
+    'rocket kitten': 'IR',
+    'agrius': 'IR',
+    'cyberav3ngers': 'IR',
+    'fox kitten': 'IR',
+    'moses staff': 'IR',
+    'cobalt mirage': 'IR',
+    'phosphorus': 'IR',
+    'pioneer kitten': 'IR',
+    'static kitten': 'IR',
+    
+    # Rússia
+    'sandworm': 'RU',
+    'apt28': 'RU',
+    'apt29': 'RU',
+    'turla': 'RU',
+    'cozy bear': 'RU',
+    'fancy bear': 'RU',
+    'dragonfly': 'RU',
+    'energetic bear': 'RU',
+    'venomous bear': 'RU',
+    'wizard spider': 'RU',
+    'silence': 'RU',
+    'gamaredon': 'RU',
+    'ember bear': 'RU',
+    'primitive bear': 'RU',
+    'voodoo bear': 'RU',
+    
+    # Coreia do Norte
+    'lazarus': 'KP',
+    'apt38': 'KP',
+    'kimsuky': 'KP',
+    'andariel': 'KP',
+    'bluenoroff': 'KP',
+    'thallium': 'KP',
+    'hidden cobra': 'KP',
+    'applejeus': 'KP',
+    
+    # Israel
+    'predatory sparrow': 'IL',
+    'gonjeshke darande': 'IL',
+    
+    # China
+    'apt1': 'CN',
+    'apt3': 'CN',
+    'apt10': 'CN',
+    'apt12': 'CN',
+    'apt15': 'CN',
+    'apt16': 'CN',
+    'apt17': 'CN',
+    'apt19': 'CN',
+    'apt30': 'CN',
+    'apt40': 'CN',
+    'apt41': 'CN',
+    'menupass': 'CN',
+    'stone panda': 'CN',
+    'double dragon': 'CN',
+    'winnti': 'CN',
+    'bronze': 'CN'  # Bronze Butler, Bronze Union, etc
+}
+
+# Mapeamento de palavras-chave simples para países (fallback - menor prioridade)
+# Mapeamento de palavras-chave simples para países (fallback - menor prioridade)
 COUNTRY_KEYWORDS = {
-    'RU': ['russia', 'russian', 'kremlin', 'gru', 'svr', 'fsb', 'moscow'],
-    'CN': ['china', 'chinese', 'prc', "people's republic", 'beijing'],
-    'US': ['united states', 'american', 'u.s.', 'usa', 'nsa', 'fbi'],
+    'RU': ['russia', 'russian', 'kremlin', 'moscow'],
+    'CN': ['china', 'chinese', 'prc', 'beijing'],
+    'US': ['united states', 'american', 'u.s.', 'usa'],
     'IR': ['iran', 'iranian', 'tehran', 'persian'],
-    'IL': ['israel', 'israeli', 'tel aviv', 'jerusalem', 'idf'],
-    'KP': ['north korea', 'dprk', 'north korean', 'pyongyang', 'bureau 121', 'lazarus', 'kimsuky'],
-    'EU': ['europe', 'european', 'eu ', 'germany', 'france', 'uk', 'britain']
+    'IL': ['israel', 'israeli', 'tel aviv', 'jerusalem'],
+    'KP': ['north korea', 'korean', 'pyongyang'],
+    'EU': ['europe', 'european', 'germany', 'france', 'uk', 'britain']
 }
 
 # Atores lendários com dados hardcoded para garantir precisão
@@ -192,20 +316,70 @@ def download_mitre_data():
 
 
 def detect_country(description, name):
-    """Detecta o país de origem baseado em palavras-chave"""
+    """
+    Detecta o país de ORIGEM do grupo (não os alvos que ele ataca).
+    Usa atribuição forte de contexto e filtros de exclusão de alvos.
+    """
     text = f"{description} {name}".lower()
     
-    # Ordem de prioridade: verificar países mais específicos primeiro
-    # para evitar falsos positivos (ex: "North Korea" antes de "Korea")
-    priority_order = ['KP', 'IL', 'IR', 'CN', 'RU', 'US', 'EU']
+    # ═══════════════════════════════════════════════════════════════
+    # PRIORIDADE 1: Grupos com país fixo (HARDCODED - Inquebrável)
+    # ═══════════════════════════════════════════════════════════════
+    name_lower = name.lower()
+    for group_name, country_code in FIXED_COUNTRY_GROUPS.items():
+        if group_name in name_lower:
+            return country_code
+    
+    # ═══════════════════════════════════════════════════════════════
+    # PRIORIDADE 2: Palavras-chave de ORIGEM (atribuição forte)
+    # ═══════════════════════════════════════════════════════════════
+    # Verificar cada país buscando indicadores fortes de origem
+    priority_order = ['KP', 'IR', 'IL', 'CN', 'RU', 'US', 'EU']
     
     for country_code in priority_order:
-        keywords = COUNTRY_KEYWORDS[country_code]
+        origin_keywords = ORIGIN_KEYWORDS.get(country_code, [])
+        for keyword in origin_keywords:
+            if keyword in text:
+                # Verificar se não é apenas uma menção de alvo
+                if not is_target_mention(text, keyword):
+                    return country_code
+    
+    # ═══════════════════════════════════════════════════════════════
+    # PRIORIDADE 3: Palavras-chave simples (FALLBACK - com exclusão de alvos)
+    # ═══════════════════════════════════════════════════════════════
+    for country_code in priority_order:
+        keywords = COUNTRY_KEYWORDS.get(country_code, [])
         for keyword in keywords:
             if keyword in text:
-                return country_code
+                # Verificar contexto para excluir menções de alvos
+                if not is_target_mention(text, keyword):
+                    return country_code
     
     return None
+
+
+def is_target_mention(text, country_keyword):
+    """
+    Verifica se a menção do país é no contexto de ALVO (não origem).
+    Retorna True se for uma menção de alvo (para excluir).
+    """
+    # Procurar por palavras de alvo próximas à menção do país
+    # Criar um pattern que busca até 50 caracteres antes e depois da keyword
+    keyword_index = text.find(country_keyword)
+    if keyword_index == -1:
+        return False
+    
+    # Extrair contexto ao redor da keyword (50 chars antes e depois)
+    start = max(0, keyword_index - 50)
+    end = min(len(text), keyword_index + len(country_keyword) + 50)
+    context = text[start:end]
+    
+    # Verificar se há palavras de exclusão de alvo no contexto
+    for target_word in TARGET_EXCLUSION_KEYWORDS:
+        if target_word in context:
+            return True  # É uma menção de alvo, excluir
+    
+    return False  # Não é menção de alvo, pode ser origem
 
 
 def calculate_rpg_stats(description, name):
