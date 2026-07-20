@@ -1,187 +1,200 @@
-# 🎯 Cyber Threat Intelligence Portfolio
+# 🎯 Cyber Threat Intelligence Portfolio - Tactical RPG
 
-Portfolio interativo de Cyber Threat Intelligence baseado em Card Game de RPG (estilo Yu-Gi-Oh + War), com sistema bilíngue automático e filtros geopolíticos.
+Portfólio interativo de Cyber Threat Intelligence gamificado como um RPG de Cartas Tático. Combina dados reais de ameaças cibernéticas com uma interface moderna inspirada em SOC/SIEM operacional.
 
-## 📁 Estrutura do Projeto
+## 🚀 Características Principais
+
+### 🎮 Experiência Gamificada
+- **Cards RPG Táticos**: Cada ator de ameaça é um card com raridade (1-5 ⭐), atributos TAC/EST e especialidades
+- **Funil Geopolítico**: Navegação estratégica através de País → Categoria → Cards
+- **Modal Holográfico**: Dossiê de inteligência completo com backdrop blur ao clicar nos cards
+- **Sistema de Alerta Tático**: Mensagem animada para combinações sem atores cadastrados
+
+### 🎨 Design SOC/SIEM Moderno
+- **Paleta**: Preto absoluto (#000000), Cinza grafite (#16161a), Ciano Neon (#00f0ff)
+- **Tipografia**: Monoespaçada (JetBrains Mono, Fira Code, Courier New)
+- **Texturas Dinâmicas**: Padrões CSS animados baseados na subcategoria:
+  - 💰 **Lucro**: Padrão de cifrões verde-menta
+  - 📡 **OSINT/SIGINT**: Radar holográfico ciano com varredura
+  - 🎖️ **Governo/Militares**: Camuflagem digital urbana
+  - ⭐ **Lendas/Especialistas**: Glitch cyberpunk magenta
+  - 🚨 **Polícia**: Sirene azul cobalto pulsante
+
+### 🌍 Sistema Bilíngue (PT/EN)
+- Seletor de idioma global persistente
+- Tradução instantânea de toda interface e conteúdo dos cards
+- Suporte completo para português e inglês
+
+### 🤖 Automação com Python
+- **builder.py**: Script que gera automaticamente o banco de dados
+- Extração de dados do **MITRE ATT&CK** via STIX
+- Mapeamento inteligente de países por palavras-chave
+- Cálculo automático de atributos de RPG (raridade, TAC, EST)
+- Síntese de dossiês de inteligência
+
+## 📂 Estrutura do Projeto
 
 ```
 meu-portfolio-cyber/
-├── index.html          # Interface principal com 3 telas de navegação
+├── index.html              # Interface principal (3 telas)
 ├── css/
-│   └── styles.css      # Estilos customizados e padrões de fundo dinâmicos
+│   └── styles.css          # Estilos táticos e texturas dinâmicas
 ├── js/
-│   ├── data.js         # Banco de dados centralizado (Grupos, Indivíduos, Órgãos Gov)
-│   └── app.js          # Lógica de filtros, idiomas e renderização
-└── assets/
-    └── images/         # Imagens dos cards (geradas no Midjourney)
+│   ├── data.js             # Banco de dados (gerado por builder.py)
+│   └── app.js              # Lógica de navegação, filtros e modal
+├── assets/
+│   └── images/             # Imagens dos cards (opcional)
+├── builder.py              # Script Python automatizador
+├── README.md               # Este arquivo
+└── start.bat               # Atalho para abrir o projeto
 ```
 
-## 🎮 Funcionalidades
+## 🔧 Como Usar
 
-### Sistema de Navegação (3 Telas)
+### 📖 Visualização do Portfólio
 
-#### **Tela 1: Escolha de Categoria**
-- 3 categorias principais:
-  - **Grupos** 💀 (Ransomware, Hacktivismo, Espionagem)
-  - **Indivíduos** 👤 (Lucro, Fama, Adolescentes)
-  - **Org. Governamentais** 🏛️ (Inteligência, Militar, Polícia)
-
-#### **Tela 2: Seleção Geopolítica**
-- Grid de países com bandeiras emoji
-- 14 países/regiões disponíveis
-- Filtro visual interativo
-
-#### **Tela 3: Grid de Cards RPG**
-- Cards dinâmicos estilo Yu-Gi-Oh
-- Padrões de fundo temáticos por subcategoria
-- Sistema de raridade (⭐)
-- Informações bilíngues
-
-### 🌍 Sistema Bilíngue (PT/EN)
-- Alternância global em tempo real
-- Tradução completa de interface e conteúdo
-- Botões de idioma fixos no topo direito
-
-### 🎨 Padrões Visuais por Subcategoria
-
-| Subcategoria | Padrão Visual |
-|-------------|---------------|
-| **Lucro** 💰 | Cifrões em gradiente verde |
-| **Governo** 🏛️ | Camuflagem cinza/preta |
-| **Adolescentes** 👨‍💻 | Glitch neon com animação |
-| **Org. Gov** 🌐 | Cores nacionais nas bordas |
-| **Ransomware** 🔒 | Vermelho sangue escuro |
-| **Hacktivismo** ⚔️ | Verde hacker matrix |
-| **Espionagem** 🕵️ | Azul escuro stealth |
-
-## 🗄️ Banco de Dados Atual
-
-### Grupos (9 entidades)
-- **Ransomware**: LockBit, ALPHV/BlackCat, Conti
-- **Hacktivismo**: Anonymous, Killnet
-- **Espionagem**: APT28 (Fancy Bear), APT29 (Cozy Bear), Lazarus Group
-
-### Indivíduos (6 entidades)
-- **Lucro**: Marcus Hutchins, Albert Gonzalez
-- **Fama**: Kevin Mitnick, Adrian Lamo
-- **Adolescentes**: Arion Kurtaj (Lapsus$), Jonathan James
-
-### Organizações Gov (6 entidades)
-- **Inteligência**: NSA TAO, Unit 8200, GCHQ
-- **Militar**: US Cyber Command, PLA Unit 61398
-- **Polícia**: FBI Cyber Division, Europol EC3
-
-## 🚀 Como Usar
-
-1. **Abrir o projeto**:
+1. **Abrir no navegador**:
    ```bash
-   # Navegue até a pasta do projeto
-   cd C:\Users\termi\Documents\meu-portfolio-cyber
+   # Opção 1: Duplo clique no arquivo
+   start.bat
    
-   # Abra o index.html no navegador
-   start index.html
+   # Opção 2: Abrir diretamente
+   index.html
    ```
 
-2. **Fluxo de Navegação**:
-   - Escolha uma categoria (Grupos, Indivíduos ou Org. Gov)
-   - Clique em uma subcategoria (ex: Ransomware, Lucro, Inteligência)
-   - Selecione um país/região
-   - Veja os cards filtrados com informações detalhadas
+2. **Navegação**:
+   - **Tela 1**: Selecione um país (Rússia, EUA, China, Irã, Israel, Coreia do Norte, União Europeia)
+   - **Tela 2**: Escolha uma categoria e subcategoria
+   - **Tela 3**: Visualize os cards e clique para detalhes
 
-3. **Alternar Idioma**:
-   - Clique em **PT** ou **EN** no canto superior direito
-   - A interface e todos os cards serão traduzidos automaticamente
+### 🐍 Executar o Builder (Atualizar Dados)
 
-## 📝 Como Adicionar Novos Dados
+```bash
+# Instalar dependências
+pip install requests
 
-### Adicionar uma nova ameaça
+# Executar o script
+python builder.py
+```
 
-Edite o arquivo `js/data.js` e adicione ao array correspondente:
+**O que o builder.py faz**:
+1. 🌐 Baixa dados do MITRE ATT&CK
+2. 🔍 Filtra intrusion-sets (grupos de ameaça)
+3. 🗺️ Mapeia países por palavras-chave
+4. ⭐ Calcula raridade e atributos de RPG
+5. 📝 Sintetiza dossiês de inteligência
+6. 🏆 Mescla atores lendários hardcoded
+7. 💾 Gera o arquivo `js/data.js`
+
+## 🎯 Taxonomia de Atores
+
+### 📊 Categorias e Subcategorias
+
+#### 👥 **Grupos**
+- **Lucro**: Ransomware, extorsão, crimes financeiros
+- **OSINT/SIGINT**: Hacktivismo, coleta de dados, surveillance
+- **Associado a Gov**: APTs estatais, espionagem cibernética
+
+#### 👤 **Indivíduos**
+- **Lendas**: Hackers históricos famosos (Kevin Mitnick, Adrian Lamo)
+- **Especialistas**: Alto nível técnico, pesquisadores, vigilantes
+- **Lucro**: Cibercriminosos, fraudadores financeiros
+
+#### 🏛️ **Organizações Governamentais**
+- **Militares**: Guerra cibernética, forças armadas (CNMF, SSF, Bureau 121)
+- **Inteligência**: Espionagem, SIGINT (NSA TAO, Unit 8200, Mossad)
+- **Polícia Especializada**: Law enforcement (FBI Cyber, Europol EC3)
+
+## 🌟 Atores Lendários Destacados
+
+- 💥 **Sandworm Team (GRU Unit 74455)**: APT mais destrutivo do mundo
+- 🇰🇵 **Lazarus Group / APT38**: Heists financeiros bilionários
+- 🕵️ **APT29 (Cozy Bear)**: SolarWinds e supply chain attacks
+- 🐻 **APT28 (Fancy Bear)**: Interferência eleitoral e operações GRU
+- 🦅 **NSA TAO**: Unidade de elite ofensiva americana
+- 🇮🇱 **Unit 8200**: SIGINT israelense (Stuxnet, vigilância regional)
+- 👑 **Kevin Mitnick**: Pioneiro da engenharia social moderna
+
+## 🎨 Personalização
+
+### Adicionar Imagens aos Cards
+
+1. Salve imagens em `assets/images/`
+2. No `data.js`, configure:
+   ```javascript
+   imagePlaceholder: "assets/images/sandworm.png"
+   ```
+
+### Adicionar Novos Atores Manualmente
+
+Edite `js/data.js` e adicione na estrutura:
 
 ```javascript
-// Exemplo: Adicionar novo grupo de ransomware
-cyberDatabase.grupos.ransomware.push({
+cyberDatabase.grupos.lucro.push({
     nome: "Nome do Grupo",
-    pais: { pt: "País PT", en: "País EN" },
-    paisCode: "XX", // Código ISO do país
+    paisCode: "RU",
+    subcategoria: "lucro",
+    raridade: "⭐⭐⭐⭐⭐",
     descricao: {
         pt: "Descrição em português...",
-        en: "Description in English..."
+        en: "Description in english..."
     },
     especialidade: {
-        pt: "Especialidades PT",
-        en: "Specialties EN"
+        pt: "Ransomware, Extorsão",
+        en: "Ransomware, Extortion"
     },
-    raridade: "⭐⭐⭐⭐⭐", // 1 a 5 estrelas
-    tipo: { pt: "Tipo PT", en: "Type EN" },
-    imagePlaceholder: "🎯" // Emoji temporário
+    tipo: {
+        pt: "Ransomware / Lucro",
+        en: "Ransomware / Profit"
+    },
+    imagePlaceholder: "🔒"
 });
-```
-
-### Adicionar imagens reais
-
-1. Gere imagens no Midjourney
-2. Salve em `assets/images/`
-3. Modifique `createCard()` em `app.js` para carregar as imagens:
-
-```javascript
-// Substitua o imagePlaceholder por:
-const img = document.createElement('img');
-img.className = 'card-image';
-img.src = `assets/images/${threat.nome.toLowerCase().replace(/\s/g, '-')}.png`;
-img.alt = threat.nome;
-imageContainer.appendChild(img);
-```
-
-## 🎨 Prompts Sugeridos para Midjourney
-
-Use estes prompts para gerar imagens dos cards:
-
-```
-# Para Grupos de Ransomware:
-cyberpunk hacker logo, dark red and black, skull motif, digital glitch effect, 
-aggressive style, game card art, high contrast --ar 3:4
-
-# Para Indivíduos (Lucro):
-portrait of cyber criminal in hoodie, money symbols background, dark atmosphere, 
-digital art, trading card style, dramatic lighting --ar 3:4
-
-# Para Adolescentes:
-teenage hacker portrait, neon colors, glitch aesthetic, bedroom setup with monitors,
-anime style, game card illustration --ar 3:4
-
-# Para Organizações Governamentais:
-military cyber unit emblem, official government style, shield and eagle motif,
-dark blue and gold colors, professional design --ar 3:4
 ```
 
 ## 🛠️ Tecnologias Utilizadas
 
 - **HTML5**: Estrutura semântica
-- **Tailwind CSS** (via CDN): Framework CSS utilitário
-- **CSS3 Puro**: Animações e padrões customizados
-- **JavaScript Vanilla**: Lógica e interatividade
-- **Design Responsivo**: Grid layout adaptativo
+- **Tailwind CSS**: Framework utility-first via CDN
+- **CSS3**: Texturas dinâmicas, animações, backdrop-filter
+- **JavaScript (ES6+)**: Lógica de navegação e renderização
+- **Python 3**: Script de automação do banco de dados
+- **MITRE ATT&CK**: Fonte de dados de threat intelligence
 
-## 🎯 Próximos Passos
+## 🧪 Funcionalidades Avançadas
 
-- [ ] Gerar imagens no Midjourney e substituir emojis
-- [ ] Adicionar mais entidades ao banco de dados
-- [ ] Implementar modal com detalhes expandidos ao clicar no card
-- [ ] Adicionar sistema de busca/pesquisa
-- [ ] Implementar animações de transição entre telas
-- [ ] Criar modo escuro/claro opcional
-- [ ] Adicionar linha do tempo de atividades
-- [ ] Integrar com API de threat intelligence real (opcional)
+### API de Debug (Console)
 
-## 📄 Licença
+```javascript
+// Acessar no console do navegador
+window.cyberTacticalRPG
 
-Este é um projeto de portfolio educacional. As informações de threat intelligence são baseadas em dados públicos e fontes abertas (OSINT).
+// Trocar idioma programaticamente
+window.cyberTacticalRPG.actions.changeLanguage('en')
 
-## 👤 Autor
+// Navegar para tela específica
+window.cyberTacticalRPG.actions.goToScreen('screen-cards')
 
-Portfolio criado para demonstração de conhecimentos em Cyber Threat Intelligence e desenvolvimento web interativo.
+// Ver estado atual
+console.log(window.cyberTacticalRPG.state)
+```
+
+### Atributos de RPG
+
+- **Raridade (1-5 ⭐)**: Baseada em impacto histórico e capacidade técnica
+- **TAC (Tático)**: Habilidade operacional e técnicas avançadas
+- **EST (Estratégico)**: Alcance geopolítico e impacto de longo prazo
+
+## 📜 Licença
+
+Este é um projeto educacional para demonstração de habilidades em Cyber Threat Intelligence e desenvolvimento front-end.
+
+## 🔗 Recursos Úteis
+
+- [MITRE ATT&CK](https://attack.mitre.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [STIX Data Format](https://oasis-open.github.io/cti-documentation/)
 
 ---
 
-**Nota**: Este projeto usa emojis de bandeiras como placeholders. Para produção, considere usar imagens SVG de bandeiras para melhor compatibilidade entre navegadores.
+**Desenvolvido com 🛡️ por um Analista de CTI**  
+*"Conhecimento é a melhor defesa contra ameaças cibernéticas"*
