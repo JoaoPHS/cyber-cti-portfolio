@@ -3,6 +3,7 @@
 ═══════════════════════════════════════════════════════════════
 CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE BUILDER
 Automatiza a criação do arquivo js/data.js extraindo dados do MITRE ATT&CK
+Com tradução automática PT/EN usando deep_translator
 ═══════════════════════════════════════════════════════════════
 """
 
@@ -10,6 +11,7 @@ import json
 import requests
 import re
 from datetime import datetime
+from deep_translator import GoogleTranslator
 
 # URLs do MITRE ATT&CK STIX
 MITRE_STIX_URL = "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
@@ -114,13 +116,14 @@ def print_banner():
     """Exibe o banner de inicialização"""
     print("\n" + "="*70)
     print("  CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE BUILDER")
-    print("  Automação de dados do MITRE ATT&CK para js/data.js")
+    print("  Automacao de dados do MITRE ATT&CK para js/data.js")
+    print("  Com traducao automatica PT/EN usando deep_translator")
     print("="*70 + "\n")
 
 
 def download_mitre_data():
     """Baixa os dados do MITRE ATT&CK via STIX"""
-    print("[1/5] Baixando dados do MITRE ATT&CK...")
+    print("[1/6] Baixando dados do MITRE ATT&CK...")
     
     try:
         response = requests.get(MITRE_STIX_URL, timeout=30)
@@ -260,22 +263,43 @@ def extract_complete_sentences(text, num_sentences=3):
     return result
 
 
-def synthesize_description(description, lang='pt', actor_name=''):
-    """Sintetiza um dossiê de inteligência com frases completas"""
-    # Extrair 3 frases completas
-    clean_desc = extract_complete_sentences(description, num_sentences=3)
+def translate_to_portuguese(text):
+    """Traduz texto de inglês para português usando Google Translator"""
+    try:
+        translator = GoogleTranslator(source='en', target='pt')
+        # Dividir em chunks menores se o texto for muito grande (limite de 5000 caracteres)
+        if len(text) > 4500:
+            # Dividir por frases
+            sentences = text.split('. ')
+            translated_sentences = []
+            for sentence in sentences:
+                if sentence.strip():
+                    translated = translator.translate(sentence)
+                    translated_sentences.append(translated)
+            return '. '.join(translated_sentences)
+        else:
+            return translator.translate(text)
+    except Exception as e:
+        print(f"[AVISO] Erro na traducao: {e}. Mantendo texto original.")
+        return text
+
+
+def synthesize_description(description):
+    """Sintetiza um dossiê de inteligência com frases completas e traduz para PT"""
+    # Extrair 3 frases completas em inglês
+    clean_desc_en = extract_complete_sentences(description, num_sentences=3)
     
-    # Como não há tradução automática real, manter texto em inglês para ambos idiomas
-    # mas adicionar nota em português para a versão PT
-    if lang == 'pt' and actor_name:
-        prefix = f"[Análise CTI] Ator: {actor_name}. "
-        return prefix + clean_desc
+    # Traduzir para português
+    clean_desc_pt = translate_to_portuguese(clean_desc_en)
     
-    return clean_desc
+    return {
+        'pt': clean_desc_pt,
+        'en': clean_desc_en
+    }
 
 
 def extract_specialty(description):
-    """Extrai termos técnicos marcantes para especialidade"""
+    """Extrai termos técnicos marcantes para especialidade e traduz"""
     # Limpar links primeiro
     description = clean_markdown_links(description)
     
@@ -292,15 +316,27 @@ def extract_specialty(description):
         if keyword.lower() in description.lower():
             found.append(keyword)
     
-    return ', '.join(found[:3]) if found else 'Cyber Operations'
+    specialty_en = ', '.join(found[:3]) if found else 'Cyber Operations'
+    
+    # Traduzir para português
+    specialty_pt = translate_to_portuguese(specialty_en)
+    
+    return {
+        'pt': specialty_pt,
+        'en': specialty_en
+    }
 
 
 def process_mitre_data(mitre_data):
     """Processa os dados do MITRE e extrai intrusion-sets"""
-    print("[2/5] Filtrando e processando intrusion-sets...")
+    print("[2/6] Filtrando e processando intrusion-sets...")
+    print("[3/6] Iniciando traducao automatica dos cards...")
     
     intrusion_sets = []
     objects = mitre_data.get('objects', [])
+    
+    total_to_process = sum(1 for obj in objects if obj.get('type') == 'intrusion-set')
+    processed = 0
     
     for obj in objects:
         if obj.get('type') == 'intrusion-set':
@@ -315,6 +351,12 @@ def process_mitre_data(mitre_data):
             # Calcular stats de RPG
             stats = calculate_rpg_stats(description, name)
             
+            # Sintetizar descrição (já retorna PT e EN)
+            descricao = synthesize_description(description)
+            
+            # Extrair especialidade (já retorna PT e EN)
+            especialidade = extract_specialty(description)
+            
             # Montar ator
             actor = {
                 'nome': name,
@@ -322,14 +364,8 @@ def process_mitre_data(mitre_data):
                 'categoria': 'grupos',
                 'subcategoria': stats['subcategoria'],
                 'raridade': stats['raridade'],
-                'descricao': {
-                    'pt': synthesize_description(description, 'pt', name),
-                    'en': synthesize_description(description, 'en', name)
-                },
-                'especialidade': {
-                    'pt': extract_specialty(description),
-                    'en': extract_specialty(description)
-                },
+                'descricao': descricao,
+                'especialidade': especialidade,
                 'tipo': {
                     'pt': 'APT / Grupo de Ameaça',
                     'en': 'APT / Threat Group'
@@ -338,6 +374,9 @@ def process_mitre_data(mitre_data):
             }
             
             intrusion_sets.append(actor)
+            
+            processed += 1
+            print(f"[OK] {processed}/{total_to_process} - {name} traduzido com sucesso")
     
     print(f"[OK] {len(intrusion_sets)} atores processados do MITRE ATT&CK.")
     return intrusion_sets
@@ -345,7 +384,7 @@ def process_mitre_data(mitre_data):
 
 def merge_legendary_actors(actors):
     """Mescla atores lendários hardcoded com os extraídos do MITRE"""
-    print("[3/5] Mesclando atores lendarios hardcoded...")
+    print("[4/6] Mesclando atores lendarios hardcoded...")
     
     # Remover atores do MITRE que têm versão hardcoded
     legendary_names = set(LEGENDARY_ACTORS.keys())
@@ -361,7 +400,7 @@ def merge_legendary_actors(actors):
 
 def organize_by_structure(actors):
     """Organiza atores na estrutura do cyberDatabase"""
-    print("[4/5] Organizando na estrutura do banco de dados...")
+    print("[5/6] Organizando na estrutura do banco de dados...")
     
     database = {
         'grupos': {
@@ -397,12 +436,13 @@ def organize_by_structure(actors):
 
 def generate_javascript_file(database):
     """Gera o arquivo js/data.js com o formato JavaScript"""
-    print("[5/5] Gerando arquivo js/data.js...")
+    print("[6/6] Gerando arquivo js/data.js...")
     
     js_content = f"""// ═══════════════════════════════════════════════════════════════
 // CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE
 // Gerado automaticamente por builder.py
 // Data: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+// Com traducao automatica PT/EN usando deep_translator
 // ═══════════════════════════════════════════════════════════════
 
 const cyberDatabase = {json.dumps(database, indent=4, ensure_ascii=False)};
@@ -415,7 +455,8 @@ const countries = [
     {{ code: "KP", name: {{ pt: "Coreia do Norte", en: "North Korea" }}, flag: "🇰🇵" }},
     {{ code: "IR", name: {{ pt: "Irã", en: "Iran" }}, flag: "🇮🇷" }},
     {{ code: "IL", name: {{ pt: "Israel", en: "Israel" }}, flag: "🇮🇱" }},
-    {{ code: "EU", name: {{ pt: "União Europeia", en: "European Union" }}, flag: "🇪🇺" }}
+    {{ code: "EU", name: {{ pt: "União Europeia", en: "European Union" }}, flag: "🇪🇺" }},
+    {{ code: "UN", name: {{ pt: "Global", en: "Global" }}, flag: "🌐" }}
 ];
 
 // Traduções da interface
@@ -490,20 +531,21 @@ def main():
         print("\n[ERRO] Falha ao baixar dados. Abortando.")
         return
     
-    # Passo 2: Processar intrusion-sets
+    # Passos 2-3: Processar intrusion-sets com tradução
     actors = process_mitre_data(mitre_data)
     
-    # Passo 3: Mesclar com atores lendários
+    # Passo 4: Mesclar com atores lendários
     actors = merge_legendary_actors(actors)
     
-    # Passo 4: Organizar na estrutura do banco
+    # Passo 5: Organizar na estrutura do banco
     database = organize_by_structure(actors)
     
-    # Passo 5: Gerar arquivo JavaScript
+    # Passo 6: Gerar arquivo JavaScript
     generate_javascript_file(database)
     
     print("\n" + "="*70)
     print("  [BUILD COMPLETO] O arquivo js/data.js esta pronto para uso.")
+    print("  Todos os textos foram traduzidos automaticamente para PT.")
     print("="*70 + "\n")
 
 
