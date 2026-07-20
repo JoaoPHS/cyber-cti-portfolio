@@ -344,18 +344,23 @@ function createCard(threat, lang) {
 // Retorna a classe CSS apropriada baseada na subcategoria
 function getCardBackgroundClass(subcategory) {
     const classMap = {
-        'lucro': 'bg-profit',
-        'fama': 'bg-fame',
-        'adolescentes': 'bg-teens',
-        'ransomware': 'bg-ransomware',
-        'hacktivismo': 'bg-hacktivism',
-        'espionagem': 'bg-espionage',
-        'inteligencia': 'bg-intelligence',
-        'militar': 'bg-military',
-        'policia': 'bg-police'
+        // Grupos
+        'lucro': 'bg-lucro',
+        'fama': 'bg-fama',
+        'governo': 'bg-governo',
+        'osint_sigint': 'bg-osint-sigint',
+        
+        // Indivíduos
+        'lendas': 'bg-lendas',
+        'especialistas': 'bg-especialistas',
+        
+        // Organizações
+        'militares': 'bg-militares',
+        'inteligencia': 'bg-inteligencia',
+        'policia_especializada': 'bg-policia'
     };
     
-    return classMap[subcategory] || 'bg-government';
+    return classMap[subcategory] || 'bg-default';
 }
 
 // SISTEMA DE MODAL - Dossiê de Inteligência

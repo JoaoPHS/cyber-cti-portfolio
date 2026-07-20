@@ -169,127 +169,227 @@ h1 + p {
     display: none;
 }
 
-/* Padrões Modernos por Subcategoria */
+/* ═══════════════════════════════════════════════════════════════
+   ESTILOS DINÂMICOS POR SUBCATEGORIA - TAXONOMIA V2.0
+   ═══════════════════════════════════════════════════════════════ */
 
-/* Lucro - Verde Menta Muted */
-.rpg-card.bg-profit {
-    border-color: #2ed573;
-    box-shadow: 0 0 20px rgba(46, 213, 115, 0.3);
-    background: #09090b;
+/* LUCRO - Padrão Digital de Cifrões $$$ */
+.rpg-card.bg-lucro::before {
+    content: '$$$';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 8rem;
+    font-weight: bold;
+    color: rgba(34, 197, 94, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    line-height: 1;
+    overflow: hidden;
+    word-wrap: break-word;
+    opacity: 0.5;
+    pointer-events: none;
 }
 
-.rpg-card.bg-profit:hover {
+.rpg-card.bg-lucro {
+    border-color: #2ed573;
+    box-shadow: 0 0 20px rgba(46, 213, 115, 0.3);
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+}
+
+.rpg-card.bg-lucro:hover {
     box-shadow: 0 0 30px rgba(46, 213, 115, 0.5);
 }
 
-/* Governo - Cinza Aço/Platina */
-.rpg-card.bg-government {
-    border-color: #e4e4e7;
-    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
-    background: #09090b;
+/* FAMA / LENDAS - Glitch Cyberpunk Neon Magenta */
+.rpg-card.bg-fama::before,
+.rpg-card.bg-lendas::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, transparent 0%, rgba(236, 72, 153, 0.15) 50%, transparent 100%),
+        linear-gradient(0deg, transparent 0%, rgba(168, 85, 247, 0.15) 50%, transparent 100%),
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(236, 72, 153, 0.08) 10px,
+            rgba(236, 72, 153, 0.08) 20px
+        );
+    animation: glitchCyberpunk 3s infinite;
+    pointer-events: none;
 }
 
-.rpg-card.bg-government:hover {
-    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
+@keyframes glitchCyberpunk {
+    0%, 100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    25% {
+        transform: translate(-3px, 3px);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(3px, -3px);
+        opacity: 1;
+    }
+    75% {
+        transform: translate(-2px, -2px);
+        opacity: 0.9;
+    }
 }
 
-/* Adolescentes - Violeta Profundo */
-.rpg-card.bg-teens {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-    background: #09090b;
+.rpg-card.bg-fama,
+.rpg-card.bg-lendas {
+    border-color: #ec4899;
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+    background: linear-gradient(135deg, #831843 0%, #a21caf 100%);
 }
 
-.rpg-card.bg-teens:hover {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+.rpg-card.bg-fama:hover,
+.rpg-card.bg-lendas:hover {
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
 }
 
-/* Organizações Gov - Cinza Aço */
-.rpg-card.bg-org-gov {
-    border-color: #e4e4e7;
-    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
-    background: #09090b;
+/* GOVERNO / MILITARES - Camuflagem Militar Urbana */
+.rpg-card.bg-governo::before,
+.rpg-card.bg-militares::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            rgba(75, 85, 99, 0.3) 0px,
+            rgba(75, 85, 99, 0.3) 8px,
+            rgba(55, 65, 81, 0.3) 8px,
+            rgba(55, 65, 81, 0.3) 16px,
+            rgba(31, 41, 55, 0.3) 16px,
+            rgba(31, 41, 55, 0.3) 24px,
+            rgba(17, 24, 39, 0.3) 24px,
+            rgba(17, 24, 39, 0.3) 32px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            rgba(71, 85, 105, 0.25) 0px,
+            rgba(71, 85, 105, 0.25) 12px,
+            rgba(51, 65, 85, 0.25) 12px,
+            rgba(51, 65, 85, 0.25) 24px,
+            rgba(30, 41, 59, 0.25) 24px,
+            rgba(30, 41, 59, 0.25) 36px
+        );
+    pointer-events: none;
 }
 
-.rpg-card.bg-org-gov:hover {
-    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
+.rpg-card.bg-governo,
+.rpg-card.bg-militares {
+    border-color: #6b7280;
+    box-shadow: 0 0 20px rgba(107, 114, 128, 0.3);
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
-/* Ransomware - Azul Ciano Elétrico */
-.rpg-card.bg-ransomware {
+.rpg-card.bg-governo:hover,
+.rpg-card.bg-militares:hover {
+    box-shadow: 0 0 30px rgba(107, 114, 128, 0.5);
+}
+
+/* OSINT/SIGINT / INTELIGÊNCIA - Radar Cibernético Ciano */
+.rpg-card.bg-osint-sigint::before,
+.rpg-card.bg-inteligencia::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%);
+    background: 
+        radial-gradient(circle, transparent 30%, rgba(0, 240, 255, 0.03) 30%, rgba(0, 240, 255, 0.03) 31%, transparent 31%),
+        radial-gradient(circle, transparent 50%, rgba(0, 240, 255, 0.03) 50%, rgba(0, 240, 255, 0.03) 51%, transparent 51%),
+        radial-gradient(circle, transparent 70%, rgba(0, 240, 255, 0.03) 70%, rgba(0, 240, 255, 0.03) 71%, transparent 71%);
+    animation: radarSweep 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes radarSweep {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.rpg-card.bg-osint-sigint,
+.rpg-card.bg-inteligencia {
     border-color: #00f0ff;
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-    background: #09090b;
+    background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
 }
 
-.rpg-card.bg-ransomware:hover {
+.rpg-card.bg-osint-sigint:hover,
+.rpg-card.bg-inteligencia:hover {
     box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
 }
 
-/* Hacktivismo - Azul Ciano */
-.rpg-card.bg-hacktivism {
-    border-color: #00f0ff;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+/* POLÍCIA ESPECIALIZADA / ESPECIALISTAS - Brilho Azul Cobalto */
+.rpg-card.bg-policia::before,
+.rpg-card.bg-especialistas::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center,
+        rgba(37, 99, 235, 0.15) 0%,
+        rgba(29, 78, 216, 0.08) 40%,
+        transparent 70%
+    );
+    animation: policePulse 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes policePulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+.rpg-card.bg-policia,
+.rpg-card.bg-especialistas {
+    border-color: #2563eb;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
+
+.rpg-card.bg-policia:hover,
+.rpg-card.bg-especialistas:hover {
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
+}
+
+/* PADRÃO - Fallback */
+.rpg-card.bg-default {
+    border-color: #27272a;
+    box-shadow: 0 0 20px rgba(39, 39, 42, 0.3);
     background: #09090b;
-}
-
-.rpg-card.bg-hacktivism:hover {
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
-}
-
-/* Espionagem - Cinza Aço */
-.rpg-card.bg-espionage {
-    border-color: #e4e4e7;
-    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
-    background: #09090b;
-}
-
-.rpg-card.bg-espionage:hover {
-    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
-}
-
-/* Inteligência - Cinza Aço */
-.rpg-card.bg-intelligence {
-    border-color: #e4e4e7;
-    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
-    background: #09090b;
-}
-
-.rpg-card.bg-intelligence:hover {
-    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
-}
-
-/* Militar - Cinza Aço */
-.rpg-card.bg-military {
-    border-color: #e4e4e7;
-    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
-    background: #09090b;
-}
-
-.rpg-card.bg-military:hover {
-    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
-}
-
-/* Polícia - Azul Ciano */
-.rpg-card.bg-police {
-    border-color: #00f0ff;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-    background: #09090b;
-}
-
-.rpg-card.bg-police:hover {
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
-}
-
-/* Fama - Violeta Profundo */
-.rpg-card.bg-fame {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-    background: #09090b;
-}
-
-.rpg-card.bg-fame:hover {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
 }
 
 /* Conteúdo do Card */
