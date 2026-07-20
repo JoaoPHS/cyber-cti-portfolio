@@ -100,16 +100,16 @@ def print_banner():
 
 def download_mitre_data():
     """Baixa os dados do MITRE ATT&CK via STIX"""
-    print("[1/5] 🌐 Baixando dados do MITRE ATT&CK...")
+    print("[1/5] Baixando dados do MITRE ATT&CK...")
     
     try:
         response = requests.get(MITRE_STIX_URL, timeout=30)
         response.raise_for_status()
         data = response.json()
-        print(f"✅ Sucesso! {len(data.get('objects', []))} objetos STIX carregados.")
+        print(f"[OK] Sucesso! {len(data.get('objects', []))} objetos STIX carregados.")
         return data
     except Exception as e:
-        print(f"❌ Erro ao baixar dados: {e}")
+        print(f"[ERRO] Erro ao baixar dados: {e}")
         return None
 
 
@@ -205,7 +205,7 @@ def synthesize_description(description, lang='pt'):
 
 def process_mitre_data(mitre_data):
     """Processa os dados do MITRE e extrai intrusion-sets"""
-    print("[2/5] 🔍 Filtrando e processando intrusion-sets...")
+    print("[2/5] Filtrando e processando intrusion-sets...")
     
     intrusion_sets = []
     objects = mitre_data.get('objects', [])
@@ -247,13 +247,13 @@ def process_mitre_data(mitre_data):
             
             intrusion_sets.append(actor)
     
-    print(f"✅ {len(intrusion_sets)} atores processados do MITRE ATT&CK.")
+    print(f"[OK] {len(intrusion_sets)} atores processados do MITRE ATT&CK.")
     return intrusion_sets
 
 
 def merge_legendary_actors(actors):
     """Mescla atores lendários hardcoded com os extraídos do MITRE"""
-    print("[3/5] ⭐ Mesclando atores lendários hardcoded...")
+    print("[3/5] Mesclando atores lendarios hardcoded...")
     
     # Remover atores do MITRE que têm versão hardcoded
     legendary_names = set(LEGENDARY_ACTORS.keys())
@@ -263,13 +263,13 @@ def merge_legendary_actors(actors):
     for legendary in LEGENDARY_ACTORS.values():
         filtered_actors.append(legendary)
     
-    print(f"✅ {len(LEGENDARY_ACTORS)} atores lendários injetados.")
+    print(f"[OK] {len(LEGENDARY_ACTORS)} atores lendarios injetados.")
     return filtered_actors
 
 
 def organize_by_structure(actors):
     """Organiza atores na estrutura do cyberDatabase"""
-    print("[4/5] 📂 Organizando na estrutura do banco de dados...")
+    print("[4/5] Organizando na estrutura do banco de dados...")
     
     database = {
         'grupos': {
@@ -298,14 +298,14 @@ def organize_by_structure(actors):
     
     # Contabilizar
     total = sum(len(subs) for cat in database.values() for subs in cat.values())
-    print(f"✅ {total} atores organizados na estrutura.")
+    print(f"[OK] {total} atores organizados na estrutura.")
     
     return database
 
 
 def generate_javascript_file(database):
     """Gera o arquivo js/data.js com o formato JavaScript"""
-    print("[5/5] 💾 Gerando arquivo js/data.js...")
+    print("[5/5] Gerando arquivo js/data.js...")
     
     js_content = f"""// ═══════════════════════════════════════════════════════════════
 // CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE
@@ -385,7 +385,7 @@ const translations = {{
     with open('js/data.js', 'w', encoding='utf-8') as f:
         f.write(js_content)
     
-    print("✅ Arquivo js/data.js gerado com sucesso!")
+    print("[OK] Arquivo js/data.js gerado com sucesso!")
 
 
 def main():
@@ -395,7 +395,7 @@ def main():
     # Passo 1: Baixar dados do MITRE
     mitre_data = download_mitre_data()
     if not mitre_data:
-        print("\n❌ Falha ao baixar dados. Abortando.")
+        print("\n[ERRO] Falha ao baixar dados. Abortando.")
         return
     
     # Passo 2: Processar intrusion-sets
@@ -411,7 +411,7 @@ def main():
     generate_javascript_file(database)
     
     print("\n" + "="*70)
-    print("  ✅ BUILD COMPLETO! O arquivo js/data.js está pronto para uso.")
+    print("  [BUILD COMPLETO] O arquivo js/data.js esta pronto para uso.")
     print("="*70 + "\n")
 
 
