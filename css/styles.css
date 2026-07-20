@@ -1,4 +1,4 @@
-/* Estilos Globais */
+/* Estilos Globais - Tema Hacking Moderno */
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +6,31 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
     overflow-x: hidden;
+    background: #000000;
+    position: relative;
+}
+
+/* Grid Digital Cibernético */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(22, 22, 26, 0.8) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 22, 26, 0.8) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* Gerenciamento de Telas */
@@ -32,56 +55,82 @@ body {
     }
 }
 
-/* Cards de Categoria */
+/* Cards de Categoria - Tema Moderno */
 .category-card {
     position: relative;
     overflow: hidden;
+    background: #000000 !important;
+    border: 1px solid #27272a !important;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    border-color: #00f0ff !important;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+.category-card h2,
+.category-card p {
+    color: #a1a1aa;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover h2,
+.category-card:hover p {
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
 }
 
 .category-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    transform: rotate(45deg);
-    animation: shine 3s infinite;
+    display: none;
 }
 
-@keyframes shine {
-    0% {
-        transform: translateX(-100%) translateY(-100%) rotate(45deg);
-    }
-    100% {
-        transform: translateX(100%) translateY(100%) rotate(45deg);
-    }
+/* Botões de Subcategoria */
+.subcategory-btn {
+    color: #a1a1aa;
+    transition: all 0.3s ease;
 }
 
-/* Botões de País */
+.subcategory-btn:hover {
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+    border-color: #00f0ff !important;
+}
+
+/* Títulos das Telas */
+h1 {
+    color: #00f0ff;
+    text-shadow: 0 0 12px #00f0ff;
+    letter-spacing: 0.1em;
+}
+
+h1 + p {
+    color: #a1a1aa;
+}
+
+/* Botões de País - Tema Moderno */
 .country-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
     padding: 1rem;
-    background: rgba(31, 41, 55, 0.8);
-    border-radius: 1rem;
+    background: #000000;
+    border-radius: 0.5rem;
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 1px solid #27272a;
 }
 
 .country-btn:hover {
     transform: translateY(-5px);
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    border-color: #00f0ff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.country-btn:hover .country-name {
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
 }
 
 .country-flag {
@@ -96,198 +145,151 @@ body {
     font-size: 0.875rem;
     font-weight: 600;
     text-align: center;
+    color: #a1a1aa;
+    transition: all 0.3s ease;
 }
 
-/* Cards RPG - Estilo Yu-Gi-Oh */
+/* Cards RPG - Tema Moderno Minimalista */
 .rpg-card {
     position: relative;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    border-radius: 1rem;
+    background: #09090b;
+    border-radius: 0.5rem;
     padding: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 3px solid #0f3460;
+    border: 1px solid #27272a;
     overflow: hidden;
 }
 
 .rpg-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    transform: translateY(-8px) scale(1.02);
 }
 
 .rpg-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.1;
-    pointer-events: none;
+    display: none;
 }
 
-/* Padrões de Fundo por Subcategoria */
+/* Padrões Modernos por Subcategoria */
 
-/* Lucro - Cifrões em padrão */
-.bg-profit::before {
-    background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 35px,
-        rgba(34, 197, 94, 0.1) 35px,
-        rgba(34, 197, 94, 0.1) 70px
-    ),
-    repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 35px,
-        rgba(34, 197, 94, 0.1) 35px,
-        rgba(34, 197, 94, 0.1) 70px
-    );
-}
-
+/* Lucro - Verde Menta Muted */
 .rpg-card.bg-profit {
-    border-color: #22c55e;
-    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+    border-color: #2ed573;
+    box-shadow: 0 0 20px rgba(46, 213, 115, 0.3);
+    background: #09090b;
 }
 
-/* Governo - Camuflagem Cinza/Preto */
-.bg-government::before {
-    background-image: 
-        repeating-linear-gradient(
-            60deg,
-            rgba(55, 65, 81, 0.3) 0px,
-            rgba(55, 65, 81, 0.3) 10px,
-            rgba(31, 41, 55, 0.3) 10px,
-            rgba(31, 41, 55, 0.3) 20px,
-            rgba(17, 24, 39, 0.3) 20px,
-            rgba(17, 24, 39, 0.3) 30px
-        ),
-        repeating-linear-gradient(
-            120deg,
-            rgba(55, 65, 81, 0.2) 0px,
-            rgba(55, 65, 81, 0.2) 15px,
-            rgba(31, 41, 55, 0.2) 15px,
-            rgba(31, 41, 55, 0.2) 30px
-        );
+.rpg-card.bg-profit:hover {
+    box-shadow: 0 0 30px rgba(46, 213, 115, 0.5);
 }
 
+/* Governo - Cinza Aço/Platina */
 .rpg-card.bg-government {
-    border-color: #6b7280;
-    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border-color: #e4e4e7;
+    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
+    background: #09090b;
 }
 
-/* Adolescentes - Glitch Neon */
-.bg-teens::before {
-    background: 
-        linear-gradient(90deg, transparent 0%, rgba(236, 72, 153, 0.1) 50%, transparent 100%),
-        linear-gradient(0deg, transparent 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%),
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(168, 85, 247, 0.05) 10px,
-            rgba(168, 85, 247, 0.05) 20px
-        );
-    animation: glitch 2s infinite;
+.rpg-card.bg-government:hover {
+    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
 }
 
-@keyframes glitch {
-    0%, 100% {
-        transform: translate(0, 0);
-    }
-    20% {
-        transform: translate(-2px, 2px);
-    }
-    40% {
-        transform: translate(2px, -2px);
-    }
-    60% {
-        transform: translate(-2px, -2px);
-    }
-    80% {
-        transform: translate(2px, 2px);
-    }
-}
-
+/* Adolescentes - Violeta Profundo */
 .rpg-card.bg-teens {
-    border-color: #a855f7;
-    background: linear-gradient(135deg, #581c87 0%, #7e22ce 100%);
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    background: #09090b;
 }
 
-/* Organizações Gov - Cores Nacionais */
+.rpg-card.bg-teens:hover {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+}
+
+/* Organizações Gov - Cinza Aço */
 .rpg-card.bg-org-gov {
-    border-width: 4px;
-    border-style: solid;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-color: #e4e4e7;
+    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
+    background: #09090b;
 }
 
-/* Ransomware - Vermelho Escuro */
+.rpg-card.bg-org-gov:hover {
+    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
+}
+
+/* Ransomware - Azul Ciano Elétrico */
 .rpg-card.bg-ransomware {
-    border-color: #dc2626;
-    background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+    border-color: #00f0ff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    background: #09090b;
 }
 
-/* Hacktivismo - Verde Hacker */
+.rpg-card.bg-ransomware:hover {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+/* Hacktivismo - Azul Ciano */
 .rpg-card.bg-hacktivism {
-    border-color: #10b981;
-    background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+    border-color: #00f0ff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    background: #09090b;
 }
 
-/* Espionagem - Azul Escuro */
+.rpg-card.bg-hacktivism:hover {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+/* Espionagem - Cinza Aço */
 .rpg-card.bg-espionage {
-    border-color: #3b82f6;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-color: #e4e4e7;
+    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
+    background: #09090b;
 }
 
-/* Inteligência - Azul Claro */
+.rpg-card.bg-espionage:hover {
+    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
+}
+
+/* Inteligência - Cinza Aço */
 .rpg-card.bg-intelligence {
-    border-color: #60a5fa;
-    background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+    border-color: #e4e4e7;
+    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
+    background: #09090b;
 }
 
-/* Militar - Camuflado Urbano */
-.bg-military::before {
-    background-image: 
-        repeating-linear-gradient(
-            45deg,
-            rgba(75, 85, 99, 0.4) 0px,
-            rgba(75, 85, 99, 0.4) 8px,
-            rgba(55, 65, 81, 0.4) 8px,
-            rgba(55, 65, 81, 0.4) 16px,
-            rgba(31, 41, 55, 0.4) 16px,
-            rgba(31, 41, 55, 0.4) 24px,
-            rgba(17, 24, 39, 0.4) 24px,
-            rgba(17, 24, 39, 0.4) 32px
-        ),
-        repeating-linear-gradient(
-            -45deg,
-            rgba(71, 85, 105, 0.3) 0px,
-            rgba(71, 85, 105, 0.3) 12px,
-            rgba(51, 65, 85, 0.3) 12px,
-            rgba(51, 65, 85, 0.3) 24px,
-            rgba(30, 41, 59, 0.3) 24px,
-            rgba(30, 41, 59, 0.3) 36px
-        );
+.rpg-card.bg-intelligence:hover {
+    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
 }
 
+/* Militar - Cinza Aço */
 .rpg-card.bg-military {
-    border-color: #64748b;
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: #e4e4e7;
+    box-shadow: 0 0 20px rgba(228, 228, 231, 0.2);
+    background: #09090b;
 }
 
-/* Polícia - Azul Policial */
+.rpg-card.bg-military:hover {
+    box-shadow: 0 0 30px rgba(228, 228, 231, 0.4);
+}
+
+/* Polícia - Azul Ciano */
 .rpg-card.bg-police {
-    border-color: #0ea5e9;
-    background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
+    border-color: #00f0ff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    background: #09090b;
 }
 
-/* Fama - Dourado */
+.rpg-card.bg-police:hover {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+/* Fama - Violeta Profundo */
 .rpg-card.bg-fame {
-    border-color: #fbbf24;
-    background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    background: #09090b;
+}
+
+.rpg-card.bg-fame:hover {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
 }
 
 /* Conteúdo do Card */
@@ -301,8 +303,9 @@ body {
 .card-title {
     font-size: 1.25rem;
     font-weight: bold;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+    letter-spacing: 0.05em;
 }
 
 .card-flag {
@@ -316,8 +319,9 @@ body {
 .card-image-container {
     width: 100%;
     height: 200px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 0.5rem;
+    background: #000000;
+    border: 1px solid #27272a;
+    border-radius: 0.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -343,13 +347,13 @@ body {
 .card-description {
     font-size: 0.875rem;
     line-height: 1.5;
-    color: #d1d5db;
+    color: #a1a1aa;
     margin-bottom: 0.75rem;
 }
 
 .card-specialty {
     font-size: 0.75rem;
-    color: #9ca3af;
+    color: #71717a;
     font-style: italic;
 }
 
@@ -364,21 +368,40 @@ body {
 .card-type {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
-    background: rgba(0, 0, 0, 0.3);
+    background: #000000;
+    border: 1px solid #27272a;
     border-radius: 0.25rem;
     text-transform: uppercase;
     font-weight: bold;
+    color: #a1a1aa;
 }
 
 .card-rarity {
     font-size: 1.5rem;
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
 }
 
 /* Idioma ativo */
+#lang-pt,
+#lang-en {
+    background: #000000;
+    border: 1px solid #27272a;
+    color: #a1a1aa;
+}
+
+#lang-pt:hover,
+#lang-en:hover {
+    border-color: #00f0ff;
+    color: #00f0ff;
+}
+
 #lang-pt.active,
 #lang-en.active {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+    background: #00f0ff;
+    color: #000000;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    border-color: #00f0ff;
 }
 
 /* Responsividade */
