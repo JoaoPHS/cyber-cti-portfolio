@@ -17,11 +17,11 @@ MITRE_STIX_URL = "https://raw.githubusercontent.com/mitre/cti/master/enterprise-
 # Mapeamento de palavras-chave para países
 COUNTRY_KEYWORDS = {
     'RU': ['russia', 'russian', 'kremlin', 'gru', 'svr', 'fsb', 'moscow'],
-    'CN': ['china', 'chinese', 'prc', 'people\'s republic', 'beijing'],
+    'CN': ['china', 'chinese', 'prc', "people's republic", 'beijing'],
     'US': ['united states', 'american', 'u.s.', 'usa', 'nsa', 'fbi'],
     'IR': ['iran', 'iranian', 'tehran', 'persian'],
     'IL': ['israel', 'israeli', 'tel aviv', 'jerusalem', 'idf'],
-    'KP': ['north korea', 'dprk', 'korean', 'pyongyang'],
+    'KP': ['north korea', 'dprk', 'north korean', 'pyongyang', 'bureau 121', 'lazarus', 'kimsuky'],
     'EU': ['europe', 'european', 'eu ', 'germany', 'france', 'uk', 'britain']
 }
 
@@ -86,6 +86,26 @@ LEGENDARY_ACTORS = {
             'en': 'State APT / Government'
         },
         'imagePlaceholder': 'assets/images/military.png'
+    },
+    'Kimsuky': {
+        'nome': 'Kimsuky (Thallium)',
+        'paisCode': 'KP',
+        'categoria': 'grupos',
+        'subcategoria': 'governo',
+        'raridade': '⭐⭐⭐⭐',
+        'descricao': {
+            'pt': 'Grupo norte-coreano focado em coleta de inteligência sobre políticas nucleares, sanções e relações diplomáticas. Usa engenharia social sofisticada contra think tanks, pesquisadores e diplomatas globais.',
+            'en': 'North Korean group focused on intelligence gathering about nuclear policies, sanctions and diplomatic relations. Uses sophisticated social engineering against think tanks, researchers and global diplomats.'
+        },
+        'especialidade': {
+            'pt': 'Inteligência Geopolítica, Engenharia Social, Coleta de OSINT',
+            'en': 'Geopolitical Intelligence, Social Engineering, OSINT Collection'
+        },
+        'tipo': {
+            'pt': 'APT Estatal / Governo',
+            'en': 'State APT / Government'
+        },
+        'imagePlaceholder': 'assets/images/military.png'
     }
 }
 
@@ -117,7 +137,12 @@ def detect_country(description, name):
     """Detecta o país de origem baseado em palavras-chave"""
     text = f"{description} {name}".lower()
     
-    for country_code, keywords in COUNTRY_KEYWORDS.items():
+    # Ordem de prioridade: verificar países mais específicos primeiro
+    # para evitar falsos positivos (ex: "North Korea" antes de "Korea")
+    priority_order = ['KP', 'IL', 'IR', 'CN', 'RU', 'US', 'EU']
+    
+    for country_code in priority_order:
+        keywords = COUNTRY_KEYWORDS[country_code]
         for keyword in keywords:
             if keyword in text:
                 return country_code
@@ -240,9 +265,10 @@ def synthesize_description(description, lang='pt', actor_name=''):
     # Extrair 3 frases completas
     clean_desc = extract_complete_sentences(description, num_sentences=3)
     
-    # Para português, adicionar cabeçalho técnico
+    # Como não há tradução automática real, manter texto em inglês para ambos idiomas
+    # mas adicionar nota em português para a versão PT
     if lang == 'pt' and actor_name:
-        prefix = f"Dossiê operacional de CTI focado em análise de ameaças do ator {actor_name}. "
+        prefix = f"[Análise CTI] Ator: {actor_name}. "
         return prefix + clean_desc
     
     return clean_desc
