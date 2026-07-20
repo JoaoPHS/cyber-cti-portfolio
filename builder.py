@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
 ═══════════════════════════════════════════════════════════════
-CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE BUILDER
-Automatiza a criação do arquivo js/data.js extraindo dados do MITRE ATT&CK
-Com tradução automática PT/EN usando deep_translator
+CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE BUILDER v2.0
+Automatiza a criação do arquivo js/data.js extraindo dados de:
+- MITRE ATT&CK (Grupos)
+- FBI Cyber's Most Wanted (Indivíduos)
+- Atores históricos de Israel e UE (hardcoded)
 ═══════════════════════════════════════════════════════════════
 """
 
@@ -13,15 +15,17 @@ import re
 from datetime import datetime
 from deep_translator import GoogleTranslator
 
-# URLs do MITRE ATT&CK STIX
+# ═══════════════════════════════════════════════════════════════
+# URLs DAS FONTES DE DADOS
+# ═══════════════════════════════════════════════════════════════
 MITRE_STIX_URL = "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
+FBI_CYBER_API_URL = "https://api.fbi.gov/@wanted-person"
 
 # ═══════════════════════════════════════════════════════════════
 # DICIONÁRIO DE JARGÕES DE CTI (Cyber Glossary)
 # Corrige traduções literais bizarras mantendo contexto técnico
 # ═══════════════════════════════════════════════════════════════
 CYBER_JARGON_FIXES = {
-    # Ataques e Técnicas
     'bebedouro': 'Watering Hole Attack',
     'buraco de água': 'Watering Hole Attack',
     'buraco aquático': 'Watering Hole Attack',
@@ -29,476 +33,210 @@ CYBER_JARGON_FIXES = {
     'phishing de lança': 'Spear-Phishing',
     'lança de pesca': 'Spear-Phishing',
     'pesca com lança': 'Spear-Phishing',
-    
-    # Malware
     'software de resgate': 'Ransomware',
     'programa de resgate': 'Ransomware',
     'limpador': 'Wiper Malware',
     'limpadores de disco': 'Wiper Malware',
     'limpadores': 'Wiper Malware',
-    
-    # Infraestrutura
     'comando e controle': 'C2 (Command & Control)',
     'comando-e-controle': 'C2',
     'controle e comando': 'C2',
-    
-    # Vulnerabilidades
     'vulnerabilidade de dia zero': 'Zero-Day Exploit',
     'dia zero': 'Zero-Day',
     'exploit de dia zero': 'Zero-Day Exploit',
-    
-    # Ataques Avançados
     'cadeia de suprimentos': 'Supply Chain Attack',
     'cadeia de fornecimento': 'Supply Chain Attack',
-    'ataque de cadeia de suprimento': 'Supply Chain Attack',
-    
-    # Persistência
     'porta dos fundos': 'Backdoor',
     'porta traseira': 'Backdoor',
-    
-    # Operações
     'movimento lateral': 'Lateral Movement',
     'movimentação lateral': 'Lateral Movement',
     'colheita de credenciais': 'Credential Harvesting',
     'exfiltração de dados': 'Data Exfiltration',
-    
-    # Técnicas
     'vivendo da terra': 'Living off the Land (LotL)',
-    'viver fora da terra': 'Living off the Land',
-    
-    # Organizações
     'operações cibernéticas': 'Cyber Operations',
     'operação cibernética': 'Cyber Ops'
 }
 
 # ═══════════════════════════════════════════════════════════════
-# ATRIBUIÇÃO GEOPOLÍTICA CORRETA (Origem vs Alvos)
+# ATRIBUIÇÃO GEOPOLÍTICA (Origem vs Alvos)
 # ═══════════════════════════════════════════════════════════════
 
-# Palavras-chave de ORIGEM (atribuição forte de país natal)
 ORIGIN_KEYWORDS = {
-    'RU': [
-        'russia-based', 'russian intelligence', 'russian threat', 'russian federation',
-        'linked to russia', 'attributed to russia', 'operates from russia',
-        'gru unit', 'svr ', 'fsb ', 'kremlin', 'moscow-based',
-        'russian state', 'russian military', 'russian cyber'
-    ],
-    'CN': [
-        'china-based', 'chinese state', 'chinese intelligence', 'chinese threat',
-        'linked to china', 'attributed to china', 'operates from china',
-        'pla unit', 'people\'s liberation army', 'mss ', 'beijing-based',
-        'prc ', 'people\'s republic of china', 'chinese military'
-    ],
-    'US': [
-        'united states', 'u.s. intelligence', 'american intelligence',
-        'nsa ', 'fbi cyber', 'operates from the united states'
-    ],
-    'IR': [
-        'iranian threat', 'iran-based', 'iranian intelligence', 'iranian state',
-        'linked to iran', 'attributed to iran', 'operates from iran', 'operating out of iran',
-        'irgc', 'iranian revolutionary guard', 'mois', 'ministry of intelligence',
-        'tehran-based', 'iranian cyber', 'iranian hacker', 'islamic republic of iran'
-    ],
-    'IL': [
-        'israeli-affiliated', 'israeli intelligence', 'operating from israel',
-        'affiliated with israeli', 'israel-based', 'unit 8200',
-        'israeli cyber', 'idf cyber'
-    ],
-    'KP': [
-        'north korean', 'north korea-based', 'dprk', 'attributed to north korea',
-        'linked to north korea', 'based in pyongyang', 'pyongyang-based',
-        'bureau 121', 'reconnaissance general bureau', 'rgb '
-    ],
-    'EU': [
-        'europe-based', 'european threat', 'operates from europe',
-        'based in germany', 'based in france', 'based in uk',
-        'british intelligence', 'french intelligence', 'german intelligence'
-    ]
+    'RU': ['russia-based', 'russian intelligence', 'russian threat', 'russian federation',
+           'linked to russia', 'attributed to russia', 'operates from russia',
+           'gru unit', 'svr ', 'fsb ', 'kremlin', 'moscow-based',
+           'russian state', 'russian military', 'russian cyber'],
+    'CN': ['china-based', 'chinese state', 'chinese intelligence', 'chinese threat',
+           'linked to china', 'attributed to china', 'operates from china',
+           'pla unit', 'people\'s liberation army', 'mss ', 'beijing-based',
+           'prc ', 'people\'s republic of china', 'chinese military'],
+    'US': ['united states', 'u.s. intelligence', 'american intelligence',
+           'nsa ', 'fbi cyber', 'operates from the united states'],
+    'IR': ['iranian threat', 'iran-based', 'iranian intelligence', 'iranian state',
+           'linked to iran', 'attributed to iran', 'operates from iran', 'operating out of iran',
+           'irgc', 'iranian revolutionary guard', 'mois', 'ministry of intelligence',
+           'tehran-based', 'iranian cyber', 'iranian hacker', 'islamic republic of iran'],
+    'IL': ['israeli-affiliated', 'israeli intelligence', 'operating from israel',
+           'affiliated with israeli', 'israel-based', 'unit 8200', 'israeli cyber', 'idf cyber'],
+    'KP': ['north korean', 'north korea-based', 'dprk', 'attributed to north korea',
+           'linked to north korea', 'based in pyongyang', 'pyongyang-based',
+           'bureau 121', 'reconnaissance general bureau', 'rgb '],
+    'EU': ['europe-based', 'european threat', 'operates from europe',
+           'based in germany', 'based in france', 'based in uk',
+           'british intelligence', 'french intelligence', 'german intelligence']
 }
 
-# Palavras-chave de ALVO (para EXCLUSÃO - não indicam origem)
 TARGET_EXCLUSION_KEYWORDS = [
     'targeting', 'targets', 'against', 'attacks on', 'attacking',
-    'focused on', 'aimed at', 'directed at', 'compromised',
-    'victimized', 'targeted at'
+    'focused on', 'aimed at', 'directed at', 'compromised', 'victimized', 'targeted at'
 ]
 
-# Lista de grupos com país fixo (HARDCODED OVERRIDES - inquebrável)
 FIXED_COUNTRY_GROUPS = {
-    # Irã
-    'muddywater': 'IR',
-    'apt33': 'IR',
-    'apt34': 'IR',
-    'apt35': 'IR',
-    'apt39': 'IR',
-    'oilrig': 'IR',
-    'charming kitten': 'IR',
-    'magic hound': 'IR',
-    'rocket kitten': 'IR',
-    'agrius': 'IR',
-    'cyberav3ngers': 'IR',
-    'fox kitten': 'IR',
-    'moses staff': 'IR',
-    'cobalt mirage': 'IR',
-    'phosphorus': 'IR',
-    'pioneer kitten': 'IR',
-    'static kitten': 'IR',
-    
-    # Rússia
-    'sandworm': 'RU',
-    'apt28': 'RU',
-    'apt29': 'RU',
-    'turla': 'RU',
-    'cozy bear': 'RU',
-    'fancy bear': 'RU',
-    'dragonfly': 'RU',
-    'energetic bear': 'RU',
-    'venomous bear': 'RU',
-    'wizard spider': 'RU',
-    'silence': 'RU',
-    'gamaredon': 'RU',
-    'ember bear': 'RU',
-    'primitive bear': 'RU',
-    'voodoo bear': 'RU',
-    
-    # Coreia do Norte
-    'lazarus': 'KP',
-    'apt38': 'KP',
-    'kimsuky': 'KP',
-    'andariel': 'KP',
-    'bluenoroff': 'KP',
-    'thallium': 'KP',
-    'hidden cobra': 'KP',
-    'applejeus': 'KP',
-    
-    # Israel
-    'predatory sparrow': 'IL',
-    'gonjeshke darande': 'IL',
-    
-    # China
-    'apt1': 'CN',
-    'apt3': 'CN',
-    'apt10': 'CN',
-    'apt12': 'CN',
-    'apt15': 'CN',
-    'apt16': 'CN',
-    'apt17': 'CN',
-    'apt19': 'CN',
-    'apt30': 'CN',
-    'apt40': 'CN',
-    'apt41': 'CN',
-    'menupass': 'CN',
-    'stone panda': 'CN',
-    'double dragon': 'CN',
-    'winnti': 'CN',
-    'bronze': 'CN'  # Bronze Butler, Bronze Union, etc
+    'muddywater': 'IR', 'apt33': 'IR', 'apt34': 'IR', 'apt35': 'IR', 'apt39': 'IR',
+    'oilrig': 'IR', 'charming kitten': 'IR', 'magic hound': 'IR', 'rocket kitten': 'IR',
+    'agrius': 'IR', 'cyberav3ngers': 'IR', 'fox kitten': 'IR', 'moses staff': 'IR',
+    'sandworm': 'RU', 'apt28': 'RU', 'apt29': 'RU', 'turla': 'RU', 'cozy bear': 'RU',
+    'fancy bear': 'RU', 'dragonfly': 'RU', 'wizard spider': 'RU', 'silence': 'RU',
+    'gamaredon': 'RU', 'ember bear': 'RU',
+    'lazarus': 'KP', 'apt38': 'KP', 'kimsuky': 'KP', 'andariel': 'KP', 'bluenoroff': 'KP',
+    'thallium': 'KP', 'hidden cobra': 'KP', 'applejeus': 'KP',
+    'predatory sparrow': 'IL', 'gonjeshke darande': 'IL',
+    'apt1': 'CN', 'apt3': 'CN', 'apt10': 'CN', 'apt12': 'CN', 'apt15': 'CN',
+    'apt16': 'CN', 'apt17': 'CN', 'apt19': 'CN', 'apt30': 'CN', 'apt40': 'CN',
+    'apt41': 'CN', 'menupass': 'CN', 'winnti': 'CN', 'bronze': 'CN'
 }
 
-# Mapeamento de palavras-chave simples para países (fallback - menor prioridade)
-# Mapeamento de palavras-chave simples para países (fallback - menor prioridade)
-COUNTRY_KEYWORDS = {
-    'RU': ['russia', 'russian', 'kremlin', 'moscow'],
-    'CN': ['china', 'chinese', 'prc', 'beijing'],
-    'US': ['united states', 'american', 'u.s.', 'usa'],
-    'IR': ['iran', 'iranian', 'tehran', 'persian'],
-    'IL': ['israel', 'israeli', 'tel aviv', 'jerusalem'],
-    'KP': ['north korea', 'korean', 'pyongyang'],
-    'EU': ['europe', 'european', 'germany', 'france', 'uk', 'britain']
-}
-
-# Atores lendários com dados hardcoded para garantir precisão
-LEGENDARY_ACTORS = {
-    'Sandworm Team': {
-        'nome': 'Sandworm Team (GRU Unit 74455)',
-        'paisCode': 'RU',
-        'categoria': 'grupos',
-        'subcategoria': 'governo',
+# ═══════════════════════════════════════════════════════════════
+# ATORES HISTÓRICOS DE ELITE (Israel e UE)
+# ═══════════════════════════════════════════════════════════════
+ELITE_ACTORS = [
+    {
+        'nome': 'Shalev Hulio',
+        'paisCode': 'IL',
+        'categoria': 'individuos',
+        'subcategoria': 'especialistas',
         'raridade': '⭐⭐⭐⭐⭐',
         'descricao': {
-            'pt': 'Unidade de elite do GRU russo considerada o APT mais destrutivo do mundo. Responsável por BlackEnergy, NotPetya (US$ 10 bilhões em danos), quedas da rede elétrica ucraniana (2015, 2016) e sabotagem das Olimpíadas de Pyeongchang 2018.',
-            'en': 'Elite GRU unit considered world\'s most destructive APT. Responsible for BlackEnergy, NotPetya ($10B in damages), Ukrainian power grid blackouts (2015, 2016) and 2018 Pyeongchang Olympics sabotage.'
+            'pt': 'Cofundador e ex-CEO da NSO Group, empresa israelense responsável pela criação do Pegasus, o spyware de zero-click mais sofisticado do mundo. O Pegasus foi usado por governos para vigilância de dissidentes, jornalistas e ativistas. Hulio construiu um império bilionário vendendo armas cibernéticas de nível militar.',
+            'en': 'Co-founder and former CEO of NSO Group, Israeli company responsible for creating Pegasus, the world\'s most sophisticated zero-click spyware. Pegasus was used by governments for surveillance of dissidents, journalists and activists. Hulio built a billion-dollar empire selling military-grade cyber weapons.'
         },
         'especialidade': {
-            'pt': 'Sabotagem Industrial, ICS/SCADA, Wiper Malware, Guerra Híbrida',
-            'en': 'Industrial Sabotage, ICS/SCADA, Wiper Malware, Hybrid Warfare'
+            'pt': 'Zero-Click Exploits, Spyware Commercial, Cyber Arms Trade',
+            'en': 'Zero-Click Exploits, Commercial Spyware, Cyber Arms Trade'
         },
         'tipo': {
-            'pt': 'APT Estatal / Governo',
-            'en': 'State APT / Government'
+            'pt': 'Mercenário Cibernético / Elite',
+            'en': 'Cyber Mercenary / Elite'
         },
-        'imagePlaceholder': 'assets/images/military.png'
+        'tac': 98,
+        'est': 95,
+        'imagePlaceholder': '👤'
     },
-    'Lazarus Group': {
-        'nome': 'Lazarus Group / APT38',
-        'paisCode': 'KP',
-        'categoria': 'grupos',
+    {
+        'nome': 'Tal Dilian',
+        'paisCode': 'IL',
+        'categoria': 'individuos',
         'subcategoria': 'lucro',
         'raridade': '⭐⭐⭐⭐⭐',
         'descricao': {
-            'pt': 'Grupo estatal norte-coreano focado em heists financeiros bilionários. Responsável pelo roubo de US$ 81 milhões do Bangladesh Bank, hack da Sony Pictures e WannaCry. Opera mixers de criptomoedas para financiar o programa nuclear.',
-            'en': 'North Korean state group focused on billion-dollar financial heists. Responsible for $81M Bangladesh Bank theft, Sony Pictures hack, and WannaCry. Operates crypto mixers to fund nuclear program.'
+            'pt': 'Ex-comandante da Unidade 8200 e fundador da Intellexa, criadora do Predator spyware. Dilian comercializa ferramentas de espionagem móvel para governos autoritários e corporações. Opera através de uma rede complexa de empresas de fachada em paraísos fiscais.',
+            'en': 'Former Unit 8200 commander and founder of Intellexa, creator of Predator spyware. Dilian markets mobile espionage tools to authoritarian governments and corporations. Operates through a complex network of shell companies in tax havens.'
         },
         'especialidade': {
-            'pt': 'Heists SWIFT, Lavagem de Criptomoedas, Wiper Malware',
-            'en': 'SWIFT Heists, Cryptocurrency Laundering, Wiper Malware'
+            'pt': 'Mobile Surveillance, Exploit-as-a-Service, SIGINT Operations',
+            'en': 'Mobile Surveillance, Exploit-as-a-Service, SIGINT Operations'
         },
         'tipo': {
-            'pt': 'Lucro Estatal / APT',
-            'en': 'State Profit / APT'
+            'pt': 'Mercenário Cibernético / Lucro',
+            'en': 'Cyber Mercenary / Profit'
         },
-        'imagePlaceholder': '🇰🇵'
+        'tac': 95,
+        'est': 92,
+        'imagePlaceholder': '👤'
     },
-    'APT29': {
-        'nome': 'APT29 (Cozy Bear)',
-        'paisCode': 'RU',
-        'categoria': 'grupos',
-        'subcategoria': 'governo',
-        'raridade': '⭐⭐⭐⭐⭐',
-        'descricao': {
-            'pt': 'Grupo vinculado ao SVR russo, focado em espionagem de longo prazo contra think tanks, governos e pesquisas sensíveis. Responsável pelo SolarWinds (2020), maior hack de supply chain da história.',
-            'en': 'Group linked to Russian SVR, focused on long-term espionage against think tanks, governments and sensitive research. Responsible for SolarWinds (2020), largest supply chain hack in history.'
-        },
-        'especialidade': {
-            'pt': 'Supply Chain Attacks, Persistência Avançada, Stealth Operacional',
-            'en': 'Supply Chain Attacks, Advanced Persistence, Operational Stealth'
-        },
-        'tipo': {
-            'pt': 'APT Estatal / Governo',
-            'en': 'State APT / Government'
-        },
-        'imagePlaceholder': 'assets/images/military.png'
-    },
-    'Kimsuky': {
-        'nome': 'Kimsuky (Thallium)',
-        'paisCode': 'KP',
-        'categoria': 'grupos',
-        'subcategoria': 'governo',
+    {
+        'nome': 'Sandro Gauci',
+        'paisCode': 'EU',
+        'categoria': 'individuos',
+        'subcategoria': 'especialistas',
         'raridade': '⭐⭐⭐⭐',
         'descricao': {
-            'pt': 'Grupo norte-coreano focado em coleta de inteligência sobre políticas nucleares, sanções e relações diplomáticas. Usa engenharia social sofisticada contra think tanks, pesquisadores e diplomatas globais.',
-            'en': 'North Korean group focused on intelligence gathering about nuclear policies, sanctions and diplomatic relations. Uses sophisticated social engineering against think tanks, researchers and global diplomats.'
+            'pt': 'Pesquisador sênior de segurança em VoIP e telecomunicações, criador do SIPVicious, um dos frameworks de auditoria de segurança SIP/VoIP mais utilizados no mundo. Gauci é reconhecido globalmente por suas contribuições para a segurança de infraestruturas de telecomunicações.',
+            'en': 'Senior security researcher in VoIP and telecommunications, creator of SIPVicious, one of the world\'s most used SIP/VoIP security audit frameworks. Gauci is globally recognized for his contributions to telecommunications infrastructure security.'
         },
         'especialidade': {
-            'pt': 'Inteligência Geopolítica, Engenharia Social, Coleta de OSINT',
-            'en': 'Geopolitical Intelligence, Social Engineering, OSINT Collection'
+            'pt': 'VoIP Security, Telecom Auditing, SIP Protocol Research',
+            'en': 'VoIP Security, Telecom Auditing, SIP Protocol Research'
         },
         'tipo': {
-            'pt': 'APT Estatal / Governo',
-            'en': 'State APT / Government'
+            'pt': 'Pesquisador de Segurança / Elite',
+            'en': 'Security Researcher / Elite'
         },
-        'imagePlaceholder': 'assets/images/military.png'
+        'tac': 92,
+        'est': 80,
+        'imagePlaceholder': '👤'
+    },
+    {
+        'nome': 'Wau Holland',
+        'paisCode': 'EU',
+        'categoria': 'individuos',
+        'subcategoria': 'lendas',
+        'raridade': '⭐⭐⭐⭐⭐',
+        'descricao': {
+            'pt': 'Lendário cofundador do Chaos Computer Club (CCC) em 1981, o maior e mais antigo coletivo de hackers éticos da Europa. Holland foi pioneiro do hacktivismo político e defensor da privacidade digital. Sua filosofia de "hackear é aprender" influenciou gerações de pesquisadores de segurança.',
+            'en': 'Legendary co-founder of Chaos Computer Club (CCC) in 1981, Europe\'s largest and oldest ethical hacker collective. Holland was a pioneer of political hacktivism and digital privacy advocate. His philosophy of "hacking is learning" influenced generations of security researchers.'
+        },
+        'especialidade': {
+            'pt': 'Ethical Hacking, Digital Rights Activism, Hacker Culture',
+            'en': 'Ethical Hacking, Digital Rights Activism, Hacker Culture'
+        },
+        'tipo': {
+            'pt': 'Lenda Histórica / Hacktivista',
+            'en': 'Historical Legend / Hacktivist'
+        },
+        'tac': 88,
+        'est': 90,
+        'imagePlaceholder': '👤'
     }
-}
+]
 
-
-def print_banner():
-    """Exibe o banner de inicialização"""
-    print("\n" + "="*70)
-    print("  CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE BUILDER")
-    print("  Automacao de dados do MITRE ATT&CK para js/data.js")
-    print("  Com traducao automatica PT/EN usando deep_translator")
-    print("="*70 + "\n")
-
-
-def download_mitre_data():
-    """Baixa os dados do MITRE ATT&CK via STIX"""
-    print("[1/6] Baixando dados do MITRE ATT&CK...")
-    
-    try:
-        response = requests.get(MITRE_STIX_URL, timeout=30)
-        response.raise_for_status()
-        data = response.json()
-        print(f"[OK] Sucesso! {len(data.get('objects', []))} objetos STIX carregados.")
-        return data
-    except Exception as e:
-        print(f"[ERRO] Erro ao baixar dados: {e}")
-        return None
-
-
-def detect_country(description, name):
-    """
-    Detecta o país de ORIGEM do grupo (não os alvos que ele ataca).
-    Usa atribuição forte de contexto e filtros de exclusão de alvos.
-    """
-    text = f"{description} {name}".lower()
-    
-    # ═══════════════════════════════════════════════════════════════
-    # PRIORIDADE 1: Grupos com país fixo (HARDCODED - Inquebrável)
-    # ═══════════════════════════════════════════════════════════════
-    name_lower = name.lower()
-    for group_name, country_code in FIXED_COUNTRY_GROUPS.items():
-        if group_name in name_lower:
-            return country_code
-    
-    # ═══════════════════════════════════════════════════════════════
-    # PRIORIDADE 2: Palavras-chave de ORIGEM (atribuição forte)
-    # ═══════════════════════════════════════════════════════════════
-    # Verificar cada país buscando indicadores fortes de origem
-    priority_order = ['KP', 'IR', 'IL', 'CN', 'RU', 'US', 'EU']
-    
-    for country_code in priority_order:
-        origin_keywords = ORIGIN_KEYWORDS.get(country_code, [])
-        for keyword in origin_keywords:
-            if keyword in text:
-                # Verificar se não é apenas uma menção de alvo
-                if not is_target_mention(text, keyword):
-                    return country_code
-    
-    # ═══════════════════════════════════════════════════════════════
-    # PRIORIDADE 3: Palavras-chave simples (FALLBACK - com exclusão de alvos)
-    # ═══════════════════════════════════════════════════════════════
-    for country_code in priority_order:
-        keywords = COUNTRY_KEYWORDS.get(country_code, [])
-        for keyword in keywords:
-            if keyword in text:
-                # Verificar contexto para excluir menções de alvos
-                if not is_target_mention(text, keyword):
-                    return country_code
-    
-    return None
-
-
-def is_target_mention(text, country_keyword):
-    """
-    Verifica se a menção do país é no contexto de ALVO (não origem).
-    Retorna True se for uma menção de alvo (para excluir).
-    """
-    # Procurar por palavras de alvo próximas à menção do país
-    # Criar um pattern que busca até 50 caracteres antes e depois da keyword
-    keyword_index = text.find(country_keyword)
-    if keyword_index == -1:
-        return False
-    
-    # Extrair contexto ao redor da keyword (50 chars antes e depois)
-    start = max(0, keyword_index - 50)
-    end = min(len(text), keyword_index + len(country_keyword) + 50)
-    context = text[start:end]
-    
-    # Verificar se há palavras de exclusão de alvo no contexto
-    for target_word in TARGET_EXCLUSION_KEYWORDS:
-        if target_word in context:
-            return True  # É uma menção de alvo, excluir
-    
-    return False  # Não é menção de alvo, pode ser origem
-
-
-def calculate_rpg_stats(description, name):
-    """Calcula atributos de RPG baseando-se no perfil técnico"""
-    text = f"{description} {name}".lower()
-    
-    # Grupos destrutivos/ICS
-    if any(kw in text for kw in ['wiper', 'destructive', 'ics', 'scada', 'power grid', 'infrastructure']):
-        return {
-            'raridade': '⭐⭐⭐⭐⭐',
-            'subcategoria': 'governo',
-            'tac': 95,
-            'est': 98
-        }
-    
-    # Espionagem cibernética pura
-    elif any(kw in text for kw in ['espionage', 'intelligence', 'surveillance', 'apt']):
-        return {
-            'raridade': '⭐⭐⭐⭐',
-            'subcategoria': 'governo',
-            'tac': 80,
-            'est': 90
-        }
-    
-    # Ransomware/Lucro
-    elif any(kw in text for kw in ['ransomware', 'extortion', 'financial', 'cryptocurrency']):
-        return {
-            'raridade': '⭐⭐⭐⭐⭐',
-            'subcategoria': 'lucro',
-            'tac': 90,
-            'est': 85
-        }
-    
-    # Hacktivismo/OSINT
-    elif any(kw in text for kw in ['hacktivist', 'activist', 'ddos', 'defacement']):
-        return {
-            'raridade': '⭐⭐⭐',
-            'subcategoria': 'osint_sigint',
-            'tac': 70,
-            'est': 65
-        }
-    
-    # Padrão
-    else:
-        return {
-            'raridade': '⭐⭐⭐',
-            'subcategoria': 'governo',
-            'tac': 75,
-            'est': 75
-        }
-
+# ═══════════════════════════════════════════════════════════════
+# FUNÇÕES DE LIMPEZA E TRADUÇÃO
+# ═══════════════════════════════════════════════════════════════
 
 def clean_markdown_links(text):
     """Remove links Markdown [texto](url) mantendo apenas o texto"""
-    # Padrão: [texto](url) -> texto
-    cleaned = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
-    return cleaned
-
+    return re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
 
 def clean_citations(text):
     """Remove citações do estilo (Citation: ...)"""
-    # Remove (Citation: ...)
-    cleaned = re.sub(r'\(Citation:[^\)]+\)', '', text)
-    return cleaned
-
+    return re.sub(r'\(Citation:[^\)]+\)', '', text)
 
 def clean_text(text):
-    """Limpa completamente o texto removendo links, citações e caracteres indesejados"""
-    # Remover links Markdown
+    """Limpa completamente o texto"""
     text = clean_markdown_links(text)
-    
-    # Remover citações
     text = clean_citations(text)
-    
-    # Remover múltiplos espaços
     text = re.sub(r'\s+', ' ', text)
-    
-    # Remover espaços antes de pontuação
     text = re.sub(r'\s+([.,;!?])', r'\1', text)
-    
-    # Remover espaços extras após pontuação
     text = re.sub(r'([.,;!?])\s+', r'\1 ', text)
-    
     return text.strip()
-
 
 def extract_complete_sentences(text, num_sentences=3):
     """Extrai as primeiras N frases completas do texto"""
-    # Limpar o texto primeiro
     text = clean_text(text)
-    
-    # Dividir por pontos finais seguidos de espaço e letra maiúscula ou fim de string
-    # Isso preserva abreviações como "U.S." e "e.g."
     sentences = re.split(r'(?<=[.!?])\s+(?=[A-Z])', text)
-    
-    # Filtrar frases vazias e muito curtas
     sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
-    
-    # Pegar apenas as primeiras N frases
     selected_sentences = sentences[:num_sentences]
-    
-    # Juntar as frases
     result = ' '.join(selected_sentences)
-    
-    # Garantir que termina com ponto
     if result and not result.endswith(('.', '!', '?')):
-        # Se não termina com pontuação, adicionar ponto
         result += '.'
-    
     return result
 
-
 def translate_to_portuguese(text):
-    """Traduz texto de inglês para português usando Google Translator"""
+    """Traduz texto de inglês para português"""
     try:
         translator = GoogleTranslator(source='en', target='pt')
-        # Dividir em chunks menores se o texto for muito grande (limite de 5000 caracteres)
         if len(text) > 4500:
-            # Dividir por frases
             sentences = text.split('. ')
             translated_sentences = []
             for sentence in sentences:
@@ -512,205 +250,251 @@ def translate_to_portuguese(text):
         print(f"[AVISO] Erro na traducao: {e}. Mantendo texto original.")
         return text
 
-
 def fix_cyber_jargon(text):
-    """
-    Pós-processa texto traduzido corrigindo traduções literais de jargões de CTI.
-    Substitui termos técnicos mal traduzidos por terminologia aceita no mercado.
-    """
+    """Pós-processa texto traduzido corrigindo traduções literais de jargões"""
     if not text:
         return text
-    
-    # Aplicar todas as correções do dicionário
     corrected_text = text
     for wrong_term, correct_term in CYBER_JARGON_FIXES.items():
-        # Busca case-insensitive mas preserva capitalização original
         pattern = re.compile(re.escape(wrong_term), re.IGNORECASE)
         corrected_text = pattern.sub(correct_term, corrected_text)
-    
     return corrected_text
 
+# ═══════════════════════════════════════════════════════════════
+# ATRIBUIÇÃO GEOPOLÍTICA
+# ═══════════════════════════════════════════════════════════════
 
-def synthesize_description(description):
-    """Sintetiza um dossiê de inteligência com frases completas e traduz para PT"""
-    # Extrair 3 frases completas em inglês
-    clean_desc_en = extract_complete_sentences(description, num_sentences=3)
-    
-    # Traduzir para português
-    clean_desc_pt = translate_to_portuguese(clean_desc_en)
-    
-    # Corrigir jargões técnicos mal traduzidos
-    clean_desc_pt = fix_cyber_jargon(clean_desc_pt)
-    
-    return {
-        'pt': clean_desc_pt,
-        'en': clean_desc_en
-    }
+def is_target_mention(text, country_keyword):
+    """Verifica se a menção do país é no contexto de ALVO"""
+    keyword_index = text.find(country_keyword)
+    if keyword_index == -1:
+        return False
+    start = max(0, keyword_index - 50)
+    end = min(len(text), keyword_index + len(country_keyword) + 50)
+    context = text[start:end]
+    for target_word in TARGET_EXCLUSION_KEYWORDS:
+        if target_word in context:
+            return True
+    return False
 
+def detect_country_from_text(description, name):
+    """Detecta o país de ORIGEM do grupo/indivíduo"""
+    text = f"{description} {name}".lower()
+    
+    # Prioridade 1: Grupos fixos
+    name_lower = name.lower()
+    for group_name, country_code in FIXED_COUNTRY_GROUPS.items():
+        if group_name in name_lower:
+            return country_code
+    
+    # Prioridade 2: Palavras-chave de origem forte
+    for country_code, origin_keywords in ORIGIN_KEYWORDS.items():
+        for keyword in origin_keywords:
+            if keyword in text:
+                if not is_target_mention(text, keyword):
+                    return country_code
+    
+    return None
 
-def extract_specialty(description):
-    """
-    Extrai termos técnicos marcantes para especialidade.
-    Mantém jargões conhecidos em INGLÊS para impacto técnico (estilo Yu-Gi-Oh).
-    """
-    # Limpar links primeiro
-    description = clean_markdown_links(description)
-    
-    # Jargões técnicos de InfoSec (mantidos em inglês por serem termos universais)
-    tech_keywords = [
-        'Zero-Click Exploits', 'Supply Chain Attacks', 'Living off the Land',
-        'Spear-Phishing', 'Watering Hole Attacks', 'DDoS Operations', 'Ransomware-as-a-Service',
-        'Data Exfiltration', 'Credential Harvesting', 'Advanced Malware Development',
-        'Social Engineering', 'ICS/SCADA Operations', 'APT Tactics', 'Advanced Persistence',
-        'Zero-Day Exploits', 'Backdoor Development', 'C2 Infrastructure', 'Lateral Movement',
-        'Wiper Malware', 'Cryptojacking', 'Fileless Malware', 'Cyber Espionage'
-    ]
-    
-    found = []
-    for keyword in tech_keywords:
-        if keyword.lower().replace('-', ' ') in description.lower():
-            found.append(keyword)
-    
-    # Se não encontrou jargões específicos, usar termo genérico
-    if not found:
-        specialty_en = 'Cyber Operations'
-        specialty_pt = 'Operações Cibernéticas'
-    else:
-        # Pegar os 3 primeiros jargões encontrados
-        specialty_en = ', '.join(found[:3])
-        
-        # Para PT: traduzir apenas se não forem jargões técnicos universais
-        # Caso contrário, manter em inglês para impacto técnico
-        specialty_pt_raw = translate_to_portuguese(specialty_en)
-        specialty_pt = fix_cyber_jargon(specialty_pt_raw)
-    
-    return {
-        'pt': specialty_pt,
-        'en': specialty_en
-    }
+# ═══════════════════════════════════════════════════════════════
+# PROCESSAMENTO DE GRUPOS (MITRE ATT&CK)
+# ═══════════════════════════════════════════════════════════════
 
+def download_mitre_data():
+    """Baixa os dados do MITRE ATT&CK"""
+    print("\n[1/5] Baixando dados do MITRE ATT&CK...")
+    try:
+        response = requests.get(MITRE_STIX_URL, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+        print(f"[OK] {len(data.get('objects', []))} objetos STIX carregados.")
+        return data
+    except Exception as e:
+        print(f"[ERRO] Erro ao baixar MITRE: {e}")
+        return None
 
-def process_mitre_data(mitre_data):
-    """Processa os dados do MITRE e extrai intrusion-sets"""
-    print("[2/6] Filtrando e processando intrusion-sets...")
-    print("[3/6] Iniciando traducao automatica dos cards...")
+def process_mitre_groups(mitre_data):
+    """Processa grupos do MITRE ATT&CK"""
+    print("\n[2/5] Processando grupos do MITRE ATT&CK...")
     
-    intrusion_sets = []
+    groups = []
     objects = mitre_data.get('objects', [])
     
-    total_to_process = sum(1 for obj in objects if obj.get('type') == 'intrusion-set')
-    processed = 0
-    
     for obj in objects:
-        if obj.get('type') == 'intrusion-set':
-            name = obj.get('name', 'Unknown')
-            description = obj.get('description', '')
-            
-            # Detectar país
-            country_code = detect_country(description, name)
-            if not country_code:
-                continue  # Descartar atores sem país mapeado
-            
-            # Calcular stats de RPG
-            stats = calculate_rpg_stats(description, name)
-            
-            # Sintetizar descrição (já retorna PT e EN)
-            descricao = synthesize_description(description)
-            
-            # Extrair especialidade (já retorna PT e EN)
-            especialidade = extract_specialty(description)
-            
-            # Montar ator
-            actor = {
-                'nome': name,
-                'paisCode': country_code,
-                'categoria': 'grupos',
-                'subcategoria': stats['subcategoria'],
-                'raridade': stats['raridade'],
-                'descricao': descricao,
-                'especialidade': especialidade,
-                'tipo': {
-                    'pt': 'APT / Grupo de Ameaça',
-                    'en': 'APT / Threat Group'
-                },
-                'imagePlaceholder': '🎯'
-            }
-            
-            intrusion_sets.append(actor)
-            
-            processed += 1
-            print(f"[OK] {processed}/{total_to_process} - {name} traduzido com sucesso")
+        if obj.get('type') != 'intrusion-set':
+            continue
+        
+        name = obj.get('name', 'Unknown')
+        description = obj.get('description', '')
+        
+        country_code = detect_country_from_text(description, name)
+        if not country_code:
+            continue
+        
+        # Classificar subcategoria
+        text = description.lower()
+        if any(kw in text for kw in ['ransomware', 'extortion', 'financial', 'cryptocurrency', 'money']):
+            subcategoria = 'lucro'
+            raridade = '⭐⭐⭐⭐⭐'
+            tac, est = 90, 85
+        elif any(kw in text for kw in ['wiper', 'destructive', 'ics', 'scada', 'infrastructure', 'sabotage']):
+            subcategoria = 'governo'
+            raridade = '⭐⭐⭐⭐⭐'
+            tac, est = 95, 98
+        elif any(kw in text for kw in ['espionage', 'intelligence', 'surveillance', 'apt']):
+            subcategoria = 'governo'
+            raridade = '⭐⭐⭐⭐'
+            tac, est = 80, 90
+        else:
+            subcategoria = 'osint_sigint'
+            raridade = '⭐⭐⭐'
+            tac, est = 70, 65
+        
+        # Sintetizar descrição
+        clean_desc_en = extract_complete_sentences(description, 3)
+        clean_desc_pt = translate_to_portuguese(clean_desc_en)
+        clean_desc_pt = fix_cyber_jargon(clean_desc_pt)
+        
+        groups.append({
+            'nome': name,
+            'paisCode': country_code,
+            'categoria': 'grupos',
+            'subcategoria': subcategoria,
+            'raridade': raridade,
+            'descricao': {'pt': clean_desc_pt, 'en': clean_desc_en},
+            'especialidade': {'pt': 'Operações Cibernéticas', 'en': 'Cyber Operations'},
+            'tipo': {'pt': 'APT / Grupo de Ameaça', 'en': 'APT / Threat Group'},
+            'tac': tac,
+            'est': est,
+            'imagePlaceholder': '🎯'
+        })
     
-    print(f"[OK] {len(intrusion_sets)} atores processados do MITRE ATT&CK.")
-    return intrusion_sets
+    print(f"[OK] {len(groups)} grupos processados do MITRE.")
+    return groups
 
+# ═══════════════════════════════════════════════════════════════
+# PROCESSAMENTO DE INDIVÍDUOS (FBI CYBER)
+# ═══════════════════════════════════════════════════════════════
 
-def merge_legendary_actors(actors):
-    """Mescla atores lendários hardcoded com os extraídos do MITRE"""
-    print("[4/6] Mesclando atores lendarios hardcoded...")
-    
-    # Remover atores do MITRE que têm versão hardcoded
-    legendary_names = set(LEGENDARY_ACTORS.keys())
-    filtered_actors = [a for a in actors if not any(ln in a['nome'] for ln in legendary_names)]
-    
-    # Adicionar atores lendários
-    for legendary in LEGENDARY_ACTORS.values():
-        filtered_actors.append(legendary)
-    
-    print(f"[OK] {len(LEGENDARY_ACTORS)} atores lendarios injetados.")
-    return filtered_actors
+def download_fbi_data():
+    """Baixa dados do FBI Cyber's Most Wanted"""
+    print("\n[3/5] Baixando dados do FBI Cyber's Most Wanted...")
+    try:
+        response = requests.get(FBI_CYBER_API_URL, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+        items = data.get('items', [])
+        print(f"[OK] {len(items)} procurados do FBI carregados.")
+        return items
+    except Exception as e:
+        print(f"[AVISO] Erro ao baixar FBI: {e}. Continuando sem dados do FBI.")
+        return []
 
-
-def organize_by_structure(actors):
-    """Organiza atores na estrutura do cyberDatabase"""
-    print("[5/6] Organizando na estrutura do banco de dados...")
+def process_fbi_individuals(fbi_items):
+    """Processa indivíduos procurados pelo FBI"""
+    print("\n[4/5] Processando indivíduos do FBI Cyber...")
     
+    individuals = []
+    fbi_legendary = ['bogachev', 'yakubets', 'seleznev', 'karim baratov']
+    
+    for item in fbi_items:
+        if not item.get('title'):
+            continue
+        
+        name = item.get('title', 'Unknown')
+        description = item.get('description', '')
+        details = item.get('details', '')
+        text = f"{description} {details}".lower()
+        
+        # Detectar país
+        country_code = detect_country_from_text(text, name)
+        if not country_code:
+            if 'russia' in text or 'moscow' in text:
+                country_code = 'RU'
+            elif 'china' in text or 'beijing' in text:
+                country_code = 'CN'
+            elif 'iran' in text or 'tehran' in text:
+                country_code = 'IR'
+            else:
+                country_code = 'US'
+        
+        # Detectar agentes de inteligência
+        if any(kw in text for kw in ['fsb', 'gru', 'intelligence officer', 'military intelligence']):
+            subcategoria = 'especialistas'
+            raridade = '⭐⭐⭐⭐⭐'
+            tac, est = 95, 92
+        elif any(leg in name.lower() for leg in fbi_legendary):
+            subcategoria = 'lendas'
+            raridade = '⭐⭐⭐⭐⭐'
+            tac, est = 98, 95
+        else:
+            subcategoria = 'lucro'
+            raridade = '⭐⭐⭐⭐'
+            tac, est = 85, 80
+        
+        # Extrair foto
+        imagem = '👤'
+        if 'images' in item and item['images']:
+            for img in item['images']:
+                if img.get('original'):
+                    imagem = img['original']
+                    break
+                elif img.get('large'):
+                    imagem = img['large']
+                    break
+        
+        # Descrição
+        clean_desc_en = extract_complete_sentences(description or details, 2)
+        clean_desc_pt = translate_to_portuguese(clean_desc_en)
+        clean_desc_pt = fix_cyber_jargon(clean_desc_pt)
+        
+        individuals.append({
+            'nome': name,
+            'paisCode': country_code,
+            'categoria': 'individuos',
+            'subcategoria': subcategoria,
+            'raridade': raridade,
+            'descricao': {'pt': clean_desc_pt, 'en': clean_desc_en},
+            'especialidade': {'pt': 'Cybercrime', 'en': 'Cybercrime'},
+            'tipo': {'pt': 'Procurado / FBI Cyber', 'en': 'Wanted / FBI Cyber'},
+            'tac': tac,
+            'est': est,
+            'imagePlaceholder': imagem
+        })
+    
+    print(f"[OK] {len(individuals)} indivíduos processados do FBI.")
+    return individuals
+
+# ═══════════════════════════════════════════════════════════════
+# GERAÇÃO DO ARQUIVO FINAL
+# ═══════════════════════════════════════════════════════════════
+
+def generate_js_file(all_data):
+    """Gera o arquivo js/data.js"""
+    print("\n[5/5] Gerando arquivo js/data.js...")
+    
+    # Organizar por estrutura
     database = {
-        'grupos': {
-            'lucro': [],
-            'osint_sigint': [],
-            'governo': []
-        },
-        'individuos': {
-            'lendas': [],
-            'especialistas': [],
-            'lucro': []
-        },
-        'organizacoes': {
-            'militares': [],
-            'inteligencia': [],
-            'policia_especializada': []
-        }
+        'grupos': {'lucro': [], 'osint_sigint': [], 'governo': []},
+        'individuos': {'lendas': [], 'especialistas': [], 'lucro': []},
+        'organizacoes': {'militares': [], 'inteligencia': [], 'policia_especializada': []}
     }
     
-    for actor in actors:
+    for actor in all_data:
         categoria = actor.get('categoria', 'grupos')
         subcategoria = actor.get('subcategoria', 'governo')
-        
         if categoria in database and subcategoria in database[categoria]:
             database[categoria][subcategoria].append(actor)
     
-    # Contabilizar
-    total = sum(len(subs) for cat in database.values() for subs in cat.values())
-    print(f"[OK] {total} atores organizados na estrutura.")
-    
-    return database
-
-
-def generate_javascript_file(database):
-    """Gera o arquivo js/data.js com o formato JavaScript"""
-    print("[6/6] Gerando arquivo js/data.js...")
-    
     js_content = f"""// ═══════════════════════════════════════════════════════════════
-// CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE
+// CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE v2.0
 // Gerado automaticamente por builder.py
 // Data: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-// Com traducao automatica PT/EN usando deep_translator
+// Fontes: MITRE ATT&CK, FBI Cyber's Most Wanted, Atores Históricos
 // ═══════════════════════════════════════════════════════════════
 
 const cyberDatabase = {json.dumps(database, indent=4, ensure_ascii=False)};
 
-// Lista de países (usada na Tela 1)
 const countries = [
     {{ code: "RU", name: {{ pt: "Rússia", en: "Russia" }}, flag: "🇷🇺" }},
     {{ code: "US", name: {{ pt: "EUA", en: "USA" }}, flag: "🇺🇸" }},
@@ -722,12 +506,10 @@ const countries = [
     {{ code: "UN", name: {{ pt: "Global", en: "Global" }}, flag: "🌐" }}
 ];
 
-// Traduções da interface
 const translations = {{
     pt: {{
         "title-geopolitics": "Selecione o País de Origem",
         "subtitle-geopolitics": "Escolha a região geopolítica para iniciar a análise",
-        
         "title-category": "Escolha a Categoria de Ameaça",
         "subtitle-category": "Selecione o tipo de ator de ameaça que deseja explorar",
         "category-groups": "Grupos",
@@ -736,7 +518,6 @@ const translations = {{
         "desc-individuals": "Hackers e criminosos solitários",
         "category-gov": "Organizações Governamentais",
         "desc-gov": "Agências estatais e militares",
-        
         "subcat-profit": "Lucro",
         "subcat-government": "Associado a Gov",
         "subcat-osint-sigint": "OSINT/SIGINT",
@@ -745,14 +526,12 @@ const translations = {{
         "subcat-military": "Militares",
         "subcat-intelligence": "Inteligência",
         "subcat-police": "Polícia Especializada",
-        
         "title-cards": "Cards de Ameaças",
         "btn-back": "Voltar"
     }},
     en: {{
         "title-geopolitics": "Select Country of Origin",
         "subtitle-geopolitics": "Choose the geopolitical region to start analysis",
-        
         "title-category": "Choose Threat Category",
         "subtitle-category": "Select the type of threat actor you want to explore",
         "category-groups": "Groups",
@@ -761,7 +540,6 @@ const translations = {{
         "desc-individuals": "Lone hackers and criminals",
         "category-gov": "Government Organizations",
         "desc-gov": "State agencies and military",
-        
         "subcat-profit": "Profit",
         "subcat-government": "Associated with Gov",
         "subcat-osint-sigint": "OSINT/SIGINT",
@@ -770,47 +548,55 @@ const translations = {{
         "subcat-military": "Military",
         "subcat-intelligence": "Intelligence",
         "subcat-police": "Specialized Police",
-        
         "title-cards": "Threat Cards",
         "btn-back": "Back"
     }}
 }};
 """
     
-    # Salvar arquivo
     with open('js/data.js', 'w', encoding='utf-8') as f:
         f.write(js_content)
     
-    print("[OK] Arquivo js/data.js gerado com sucesso!")
+    total = sum(len(subs) for cat in database.values() for subs in cat.values())
+    print(f"[OK] Arquivo js/data.js gerado com {total} atores!")
 
+# ═══════════════════════════════════════════════════════════════
+# MAIN - ORQUESTRAÇÃO
+# ═══════════════════════════════════════════════════════════════
 
 def main():
     """Função principal do builder"""
-    print_banner()
+    print("\n" + "="*70)
+    print("  CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE BUILDER v2.0")
+    print("  Fontes: MITRE ATT&CK + FBI Cyber's Most Wanted + Atores de Elite")
+    print("="*70)
     
-    # Passo 1: Baixar dados do MITRE
+    all_actors = []
+    
+    # Processar MITRE ATT&CK (Grupos)
     mitre_data = download_mitre_data()
-    if not mitre_data:
-        print("\n[ERRO] Falha ao baixar dados. Abortando.")
-        return
+    if mitre_data:
+        groups = process_mitre_groups(mitre_data)
+        all_actors.extend(groups)
     
-    # Passos 2-3: Processar intrusion-sets com tradução
-    actors = process_mitre_data(mitre_data)
+    # Processar FBI Cyber (Indivíduos)
+    fbi_items = download_fbi_data()
+    if fbi_items:
+        individuals = process_fbi_individuals(fbi_items)
+        all_actors.extend(individuals)
     
-    # Passo 4: Mesclar com atores lendários
-    actors = merge_legendary_actors(actors)
+    # Injetar atores de elite (Israel e UE)
+    print("\n[ELITE] Injetando atores históricos de Israel e União Europeia...")
+    all_actors.extend(ELITE_ACTORS)
+    print(f"[OK] {len(ELITE_ACTORS)} atores de elite injetados.")
     
-    # Passo 5: Organizar na estrutura do banco
-    database = organize_by_structure(actors)
-    
-    # Passo 6: Gerar arquivo JavaScript
-    generate_javascript_file(database)
+    # Gerar arquivo final
+    generate_js_file(all_actors)
     
     print("\n" + "="*70)
-    print("  [BUILD COMPLETO] O arquivo js/data.js esta pronto para uso.")
-    print("  Todos os textos foram traduzidos automaticamente para PT.")
+    print("  [BUILD COMPLETO] O arquivo js/data.js está pronto!")
+    print(f"  Total de atores: {len(all_actors)}")
     print("="*70 + "\n")
-
 
 if __name__ == "__main__":
     main()
