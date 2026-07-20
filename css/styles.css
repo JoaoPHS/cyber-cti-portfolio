@@ -250,10 +250,34 @@ body {
     background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
 }
 
-/* Militar - Verde Oliva */
+/* Militar - Camuflado Urbano */
+.bg-military::before {
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            rgba(75, 85, 99, 0.4) 0px,
+            rgba(75, 85, 99, 0.4) 8px,
+            rgba(55, 65, 81, 0.4) 8px,
+            rgba(55, 65, 81, 0.4) 16px,
+            rgba(31, 41, 55, 0.4) 16px,
+            rgba(31, 41, 55, 0.4) 24px,
+            rgba(17, 24, 39, 0.4) 24px,
+            rgba(17, 24, 39, 0.4) 32px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            rgba(71, 85, 105, 0.3) 0px,
+            rgba(71, 85, 105, 0.3) 12px,
+            rgba(51, 65, 85, 0.3) 12px,
+            rgba(51, 65, 85, 0.3) 24px,
+            rgba(30, 41, 59, 0.3) 24px,
+            rgba(30, 41, 59, 0.3) 36px
+        );
+}
+
 .rpg-card.bg-military {
-    border-color: #84cc16;
-    background: linear-gradient(135deg, #3f6212 0%, #4d7c0f 100%);
+    border-color: #64748b;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
 /* Polícia - Azul Policial */

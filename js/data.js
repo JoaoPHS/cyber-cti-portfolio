@@ -51,6 +51,22 @@ const cyberDatabase = {
                 raridade: "⭐⭐⭐⭐",
                 tipo: { pt: "Ransomware", en: "Ransomware" },
                 imagePlaceholder: "💰"
+            },
+            {
+                nome: "DarkSide",
+                pais: { pt: "Rússia", en: "Russia" },
+                paisCode: "RU",
+                descricao: {
+                    pt: "Grupo de ransomware profissional responsável pelo ataque ao Colonial Pipeline em 2021, causando crise de combustível nos EUA. Dissolvido após pressão do governo russo, mas membros migraram para BlackMatter e ALPHV.",
+                    en: "Professional ransomware group responsible for Colonial Pipeline attack in 2021, causing fuel crisis in USA. Dissolved after Russian government pressure, but members migrated to BlackMatter and ALPHV."
+                },
+                especialidade: {
+                    pt: "Ransomware Corporativo, Dupla Extorsão, RaaS",
+                    en: "Corporate Ransomware, Double Extortion, RaaS"
+                },
+                raridade: "⭐⭐⭐⭐⭐",
+                tipo: { pt: "Ransomware", en: "Ransomware" },
+                imagePlaceholder: "⛽"
             }
         ],
         hacktivismo: [
@@ -71,20 +87,36 @@ const cyberDatabase = {
                 imagePlaceholder: "🎭"
             },
             {
-                nome: "Killnet",
+                nome: "Killnet | Daemon Club",
                 pais: { pt: "Rússia", en: "Russia" },
                 paisCode: "RU",
                 descricao: {
-                    pt: "Grupo pró-Rússia focado em ataques DDoS contra alvos da OTAN e apoiadores da Ucrânia durante o conflito de 2022-2026.",
-                    en: "Pro-Russia group focused on DDoS attacks against NATO targets and Ukraine supporters during 2022-2026 conflict."
+                    pt: "Coletivo hacktivista pró-Rússia formado por Killnet e Daemon Club. Especializado em ataques DDoS coordenados contra infraestruturas críticas da OTAN, governos europeus e instituições financeiras. Atuou intensamente durante 2022-2026 como braço cibernético não-oficial do conflito russo-ucraniano.",
+                    en: "Pro-Russia hacktivist collective formed by Killnet and Daemon Club. Specialized in coordinated DDoS attacks against NATO critical infrastructures, European governments, and financial institutions. Acted intensively during 2022-2026 as unofficial cyber arm of Russia-Ukraine conflict."
                 },
                 especialidade: {
-                    pt: "DDoS em Massa, Guerra de Informação",
-                    en: "Mass DDoS, Information Warfare"
+                    pt: "DDoS em Massa, Guerra de Informação, Desfiguração de Sites",
+                    en: "Mass DDoS, Information Warfare, Website Defacement"
                 },
                 raridade: "⭐⭐⭐⭐",
                 tipo: { pt: "Hacktivismo", en: "Hacktivism" },
                 imagePlaceholder: "⚔️"
+            },
+            {
+                nome: "Sandworm Team",
+                pais: { pt: "Rússia", en: "Russia" },
+                paisCode: "RU",
+                descricao: {
+                    pt: "Grupo de elite russo (GRU Unit 74455) responsável por BlackEnergy, NotPetya e ataques à rede elétrica ucraniana. Considerado um dos APTs mais destrutivos e perigosos do mundo.",
+                    en: "Elite Russian group (GRU Unit 74455) responsible for BlackEnergy, NotPetya, and attacks on Ukrainian power grid. Considered one of the most destructive and dangerous APTs in the world."
+                },
+                especialidade: {
+                    pt: "Wiper Malware, Sabotagem Industrial, ICS/SCADA",
+                    en: "Wiper Malware, Industrial Sabotage, ICS/SCADA"
+                },
+                raridade: "⭐⭐⭐⭐⭐",
+                tipo: { pt: "Hacktivismo", en: "Hacktivism" },
+                imagePlaceholder: "💥"
             }
         ],
         espionagem: [
@@ -135,6 +167,38 @@ const cyberDatabase = {
                 raridade: "⭐⭐⭐⭐⭐",
                 tipo: { pt: "Espionagem", en: "Espionage" },
                 imagePlaceholder: "🇰🇵"
+            },
+            {
+                nome: "APT41 (Barium)",
+                pais: { pt: "China", en: "China" },
+                paisCode: "CN",
+                descricao: {
+                    pt: "Grupo híbrido chinês que combina espionagem estatal com crimes financeiros para lucro pessoal. Alvo de indiciamento pelo DOJ dos EUA em 2020. Opera desde 2012 visando telecomunicações, healthcare e tecnologia.",
+                    en: "Chinese hybrid group combining state espionage with financial crimes for personal profit. Targeted by US DOJ indictment in 2020. Operating since 2012 targeting telecommunications, healthcare, and technology."
+                },
+                especialidade: {
+                    pt: "Cyber Espionage, Supply Chain Attacks, Ransomware",
+                    en: "Cyber Espionage, Supply Chain Attacks, Ransomware"
+                },
+                raridade: "⭐⭐⭐⭐⭐",
+                tipo: { pt: "Espionagem", en: "Espionage" },
+                imagePlaceholder: "🐉"
+            },
+            {
+                nome: "APT33 (Elfin)",
+                pais: { pt: "Irã", en: "Iran" },
+                paisCode: "IR",
+                descricao: {
+                    pt: "Grupo iraniano focado em espionagem contra setores de aviação, energia e defesa no Oriente Médio e EUA. Ligado ao governo iraniano, usa spear phishing e exploits para acesso inicial.",
+                    en: "Iranian group focused on espionage against aviation, energy, and defense sectors in Middle East and USA. Linked to Iranian government, uses spear phishing and exploits for initial access."
+                },
+                especialidade: {
+                    pt: "Spear Phishing, Destructive Malware, ICS Targeting",
+                    en: "Spear Phishing, Destructive Malware, ICS Targeting"
+                },
+                raridade: "⭐⭐⭐⭐",
+                tipo: { pt: "Espionagem", en: "Espionage" },
+                imagePlaceholder: "🦅"
             }
         ]
     },
@@ -295,6 +359,22 @@ const cyberDatabase = {
                 raridade: "⭐⭐⭐⭐⭐",
                 tipo: { pt: "Inteligência", en: "Intelligence" },
                 imagePlaceholder: "🕵️‍♂️"
+            },
+            {
+                nome: "Mossad Cyber Unit",
+                pais: { pt: "Israel", en: "Israel" },
+                paisCode: "IL",
+                descricao: {
+                    pt: "Unidade cibernética do Mossad israelense, focada em operações ofensivas contra ameaças nucleares (Irã), terrorismo e espionagem estratégica. Responsável por ataques sofisticados como Flame e sabotagem de centrifugas iranianas.",
+                    en: "Cyber unit of Israeli Mossad, focused on offensive operations against nuclear threats (Iran), terrorism, and strategic espionage. Responsible for sophisticated attacks like Flame and sabotage of Iranian centrifuges."
+                },
+                especialidade: {
+                    pt: "Sabotagem Cibernética, SIGINT, Operações Encobertas",
+                    en: "Cyber Sabotage, SIGINT, Covert Operations"
+                },
+                raridade: "⭐⭐⭐⭐⭐",
+                tipo: { pt: "Inteligência", en: "Intelligence" },
+                imagePlaceholder: "🔯"
             }
         ],
         militar: [
