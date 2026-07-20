@@ -380,8 +380,8 @@ const cyberDatabase = {
             },
             {
                 nome: "Marcus Hutchins (MalwareTech)",
-                pais: { pt: "Reino Unido", en: "United Kingdom" },
-                paisCode: "GB",
+                pais: { pt: "União Europeia", en: "European Union" },
+                paisCode: "EU",
                 subcategoria: "lucro",
                 descricao: {
                     pt: "Pesquisador que acidentalmente parou o WannaCry em 2017 descobrindo kill switch. Anteriormente desenvolveu o banking trojan Kronos. Condenado nos EUA por malware, mas recebeu sentença suspensa.",
@@ -644,15 +644,9 @@ const countries = [
     { code: "CN", name: { pt: "China", en: "China" }, flag: "🇨🇳" },
     { code: "KP", name: { pt: "Coreia do Norte", en: "North Korea" }, flag: "🇰🇵" },
     { code: "IR", name: { pt: "Irã", en: "Iran" }, flag: "🇮🇷" },
-    { code: "KR", name: { pt: "Coreia do Sul", en: "South Korea" }, flag: "🇰🇷" },
     { code: "IL", name: { pt: "Israel", en: "Israel" }, flag: "🇮🇱" },
-    { code: "GB", name: { pt: "Reino Unido", en: "United Kingdom" }, flag: "🇬🇧" },
-    { code: "DE", name: { pt: "Alemanha", en: "Germany" }, flag: "🇩🇪" },
-    { code: "FR", name: { pt: "França", en: "France" }, flag: "🇫🇷" },
-    { code: "BR", name: { pt: "Brasil", en: "Brazil" }, flag: "🇧🇷" },
-    { code: "IN", name: { pt: "Índia", en: "India" }, flag: "🇮🇳" },
-    { code: "UN", name: { pt: "Global", en: "Global" }, flag: "🌐" },
-    { code: "EU", name: { pt: "União Europeia", en: "European Union" }, flag: "🇪🇺" }
+    { code: "EU", name: { pt: "União Europeia", en: "European Union" }, flag: "🇪🇺" },
+    { code: "UN", name: { pt: "Global", en: "Global" }, flag: "🌐" }
 ];
 
 // Traduções da interface
