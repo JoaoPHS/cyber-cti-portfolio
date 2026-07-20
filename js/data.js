@@ -87,12 +87,12 @@ const cyberDatabase = {
                 imagePlaceholder: "🎭"
             },
             {
-                nome: "Killnet | Daemon Club",
+                nome: "Killnet | Deanon Club",
                 pais: { pt: "Rússia", en: "Russia" },
                 paisCode: "RU",
                 descricao: {
-                    pt: "Coletivo hacktivista pró-Rússia formado por Killnet e Daemon Club. Especializado em ataques DDoS coordenados contra infraestruturas críticas da OTAN, governos europeus e instituições financeiras. Atuou intensamente durante 2022-2026 como braço cibernético não-oficial do conflito russo-ucraniano.",
-                    en: "Pro-Russia hacktivist collective formed by Killnet and Daemon Club. Specialized in coordinated DDoS attacks against NATO critical infrastructures, European governments, and financial institutions. Acted intensively during 2022-2026 as unofficial cyber arm of Russia-Ukraine conflict."
+                    pt: "Coletivo hacktivista pró-Rússia formado por Killnet e Deanon Club. Especializado em ataques DDoS coordenados contra infraestruturas críticas da OTAN, governos europeus e instituições financeiras. Atuou intensamente durante 2022-2026 como braço cibernético não-oficial do conflito russo-ucraniano.",
+                    en: "Pro-Russia hacktivist collective formed by Killnet and Deanon Club. Specialized in coordinated DDoS attacks against NATO critical infrastructures, European governments, and financial institutions. Acted intensively during 2022-2026 as unofficial cyber arm of Russia-Ukraine conflict."
                 },
                 especialidade: {
                     pt: "DDoS em Massa, Guerra de Informação, Desfiguração de Sites",
