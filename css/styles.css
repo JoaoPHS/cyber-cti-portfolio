@@ -39,6 +39,42 @@ body > * {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   ANIMAÇÕES E TRANSIÇÕES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Fade-In suave com flicker digital */
+@keyframes fadeInFlicker {
+    0% { opacity: 0; transform: translateY(10px); }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeInFlicker 0.4s ease-out;
+}
+
+/* Pulsação de borda neon */
+@keyframes neonPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.6); }
+}
+
+/* Carregamento de barra de progresso */
+@keyframes progressLoad {
+    from { width: 0%; }
+}
+
+/* Indicador piscante */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.blink-indicator {
+    animation: blink 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    COMPONENTES DE INTERFACE GLOBAL
    ═══════════════════════════════════════════════════════════════ */
 
@@ -98,7 +134,7 @@ body > * {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     padding: 2rem 1.5rem;
     background: #09090b;
     border: 2px solid #27272a;
@@ -106,25 +142,51 @@ body > * {
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 140px;
+    position: relative;
 }
 
 .country-btn:hover {
     border-color: #00f0ff;
-    box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    animation: neonPulse 1.5s ease-in-out infinite;
     transform: translateY(-8px) scale(1.05);
 }
 
+.country-flag {
+    font-size: 3rem;
+    line-height: 1;
+}
+
 .country-name {
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 600;
     color: #a1a1aa;
     text-align: center;
     transition: color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .country-btn:hover .country-name {
     color: #00f0ff;
     text-shadow: 0 0 8px #00f0ff;
+}
+
+/* Indicador de disponibilidade */
+.country-indicator {
+    font-size: 0.65rem;
+    color: #00f0ff;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.country-indicator.available {
+    color: #2ed573;
+}
+
+.country-indicator.empty {
+    color: #ff6b6b;
+    opacity: 0.5;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -188,6 +250,17 @@ body > * {
 
 .rpg-card:hover {
     transform: translateY(-8px);
+}
+
+.rpg-card:hover .card-image-placeholder,
+.rpg-card:hover .card-image {
+    filter: saturate(1.4) contrast(1.1);
+    transform: scale(1.05);
+}
+
+.rpg-card .card-image,
+.rpg-card .card-image-placeholder {
+    transition: all 0.4s ease;
 }
 
 /* Header do Card */
@@ -492,7 +565,28 @@ body > * {
     height: 100%;
     background: linear-gradient(90deg, #0891b2 0%, #00f0ff 100%);
     box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
-    transition: width 1s ease;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: progressLoad 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modal responsivo */
+.modal-content-wrapper {
+    max-width: 900px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .modal-content-wrapper {
+        max-width: 95%;
+    }
+    
+    .modal-body {
+        flex-direction: column !important;
+    }
+    
+    .modal-image-container {
+        margin: 0 auto 1.5rem !important;
+    }
 }
 
 /* Alerta Tático (Nenhuma Ameaça Detectada) */

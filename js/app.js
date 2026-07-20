@@ -124,13 +124,16 @@ function renderCountries() {
     const lang = appState.currentLanguage;
     
     countries.forEach(country => {
+        // Verificar se o país tem cards disponíveis
+        const hasCards = checkCountryHasCards(country.code);
+        
         const btn = document.createElement('button');
-        btn.className = 'country-btn';
+        btn.className = 'country-btn fade-in';
         btn.onclick = () => selectCountry(country.code);
         
         // Emoji da bandeira
         const flagDiv = document.createElement('div');
-        flagDiv.className = 'text-6xl';
+        flagDiv.className = 'country-flag';
         flagDiv.textContent = country.flag;
         
         // Nome do país
@@ -138,12 +141,36 @@ function renderCountries() {
         nameDiv.className = 'country-name';
         nameDiv.textContent = country.name[lang];
         
+        // Indicador de disponibilidade
+        const indicatorDiv = document.createElement('div');
+        indicatorDiv.className = `country-indicator ${hasCards ? 'available blink-indicator' : 'empty'}`;
+        indicatorDiv.textContent = hasCards 
+            ? (lang === 'pt' ? '[ DISPONÍVEL ]' : '[ AVAILABLE ]')
+            : (lang === 'pt' ? '[ SEM DETECÇÕES ]' : '[ NO DETECTIONS ]');
+        
         btn.appendChild(flagDiv);
         btn.appendChild(nameDiv);
+        btn.appendChild(indicatorDiv);
         container.appendChild(btn);
     });
     
     console.log(`[CTI] Renderizados ${countries.length} países`);
+}
+
+function checkCountryHasCards(countryCode) {
+    // Verificar se existe algum card deste país em qualquer categoria
+    const allActors = [
+        ...cyberDatabase.grupos.lucro,
+        ...cyberDatabase.grupos.osint_sigint,
+        ...cyberDatabase.grupos.governo,
+        ...cyberDatabase.individuos.lendas,
+        ...cyberDatabase.individuos.especialistas,
+        ...cyberDatabase.individuos.lucro,
+        ...cyberDatabase.organizacoes.militares,
+        ...cyberDatabase.organizacoes.inteligencia,
+        ...cyberDatabase.organizacoes.policia_especializada
+    ];
+    return allActors.some(actor => actor.paisCode === countryCode);
 }
 
 function selectCountry(countryCode) {
@@ -415,7 +442,9 @@ function openThreatModal(threat, lang) {
         <div class="modal-image-container">
             <div class="modal-image-placeholder">
                 ${threat.imagePlaceholder && threat.imagePlaceholder.startsWith('assets/') 
-                    ? `<img src="${threat.imagePlaceholder}" alt="${threat.nome}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.textContent='🎯';">` 
+                    ? `<img src="${threat.imagePlaceholder}" alt="${threat.nome}" class="modal-image-img" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleImageError(this);">` 
+                    : threat.imagePlaceholder && (threat.imagePlaceholder.startsWith('http://') || threat.imagePlaceholder.startsWith('https://'))
+                    ? `<img src="${threat.imagePlaceholder}" alt="${threat.nome}" class="modal-image-img" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleImageError(this);">`
                     : (threat.imagePlaceholder || '🎯')}
             </div>
         </div>
@@ -456,7 +485,7 @@ function openThreatModal(threat, lang) {
                         <span class="stat-value">${levels.tactical}/100</span>
                     </div>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: ${levels.tactical}%;"></div>
+                        <div class="progress-bar" data-target="${levels.tactical}" style="width: 0%;"></div>
                     </div>
                 </div>
                 
@@ -467,18 +496,57 @@ function openThreatModal(threat, lang) {
                         <span class="stat-value">${levels.strategic}/100</span>
                     </div>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: ${levels.strategic}%;"></div>
+                        <div class="progress-bar" data-target="${levels.strategic}" style="width: 0%;"></div>
                     </div>
                 </div>
             </div>
         </div>
     `;
-    
-    // Mostrar modal
+
+    // Abrir modal
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     
+    // Animar barras de progresso após uma curta pausa
+    setTimeout(() => {
+        const progressBars = modalBody.querySelectorAll('.progress-bar[data-target]');
+        progressBars.forEach(bar => {
+            const target = bar.getAttribute('data-target');
+            bar.style.width = `${target}%`;
+        });
+    }, 100);
+    
     console.log(`[CTI] Modal aberto: ${threat.nome}`);
+}
+
+function handleImageError(img) {
+    console.log('[CTI] Imagem quebrada detectada, aplicando fallback');
+    
+    // Criar div de fallback com visual "CLASSIFIED"
+    const fallback = document.createElement('div');
+    fallback.style.cssText = `
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #000 0%, #0a0a0a 100%);
+        border: 2px solid #00f0ff;
+        color: #00f0ff;
+        font-family: 'JetBrains Mono', monospace;
+        text-shadow: 0 0 10px #00f0ff;
+    `;
+    
+    fallback.innerHTML = `
+        <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+        <div style="font-size: 1.5rem; font-weight: bold; letter-spacing: 0.3em;">CLASSIFIED</div>
+        <div style="font-size: 0.875rem; opacity: 0.7; margin-top: 0.5rem;">SECRETO</div>
+    `;
+    
+    // Substituir imagem pelo fallback
+    img.parentElement.appendChild(fallback);
+    img.style.display = 'none';
 }
 
 function closeThreatModal() {
@@ -493,16 +561,18 @@ function initializeModal() {
     // Botão fechar
     document.getElementById('modal-close').addEventListener('click', closeThreatModal);
     
-    // Fechar ao clicar fora do conteúdo
+    // Fechar ao clicar fora do conteúdo (overlay)
     document.getElementById('threat-modal').addEventListener('click', (e) => {
         if (e.target.id === 'threat-modal') {
+            console.log('[CTI MODAL] Fechado via overlay click');
             closeThreatModal();
         }
     });
     
     // Fechar com tecla ESC
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+        if (e.key === 'Escape' && document.getElementById('threat-modal').classList.contains('active')) {
+            console.log('[CTI MODAL] Fechado via tecla ESC');
             closeThreatModal();
         }
     });
