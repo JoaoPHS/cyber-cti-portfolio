@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
 // CYBER THREAT INTELLIGENCE PORTFOLIO - DATABASE
 // Gerado automaticamente por builder.py
-// Data: 2026-07-20 15:11:05
+// Data: 2026-07-20 15:21:09
 // Com traducao automatica PT/EN usando deep_translator
 // ═══════════════════════════════════════════════════════════════
 
@@ -19,8 +19,8 @@ const cyberDatabase = {
                     "en": "Wizard Spider is a Russia-based financially motivated threat group originally known for the creation and deployment of TrickBot since at least 2016. Wizard Spider possesses a diverse arsenal of tools and has conducted ransomware campaigns against a variety of organizations, ranging from major corporations to hospitals."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -39,8 +39,8 @@ const cyberDatabase = {
                     "en": "FIN7 is a financially-motivated threat group that has been active since 2013. FIN7 has targeted the retail, restaurant, hospitality, software, consulting, financial services, medical equipment, cloud services, media, food and beverage, transportation, pharmaceutical, and utilities industries in the United States. A portion of FIN7 was operated out of a front company called Combi Security and often used point-of-sale malware for targeting efforts."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -59,8 +59,8 @@ const cyberDatabase = {
                     "en": "admin@338 is a China-based cyber threat group. It has previously used newsworthy events as lures to deliver malware and has primarily targeted organizations involved in financial, economic, and trade policy, typically using publicly available RATs such as PoisonIvy, as well as some non-public backdoors."
                 },
                 "especialidade": {
-                    "pt": "Porta dos fundos",
-                    "en": "Backdoor"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -159,8 +159,8 @@ const cyberDatabase = {
                     "en": "INC Ransom is a ransomware and data extortion threat group associated with the deployment of INC Ransomware that has been active since at least July 2023. INC Ransom has targeted organizations worldwide most commonly in the industrial, healthcare, and education sectors in the US and Europe."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -179,8 +179,8 @@ const cyberDatabase = {
                     "en": "Rocke is an alleged Chinese-speaking adversary whose primary objective appeared to be cryptojacking, or stealing victim system resources for the purposes of mining cryptocurrency. The name Rocke comes from the email address \"rocke@live.cn\" used to create the wallet which held collected cryptocurrency. Researchers have detected overlaps between Rocke and the Iron Cybercrime Group, though this attribution has not been confirmed."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Criptojacking",
+                    "en": "Cryptojacking"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -219,8 +219,8 @@ const cyberDatabase = {
                     "en": "Water Galura are the operators of the Qilin Ransomware-as-a-Service (RaaS) who handle payload generation, ransom negotiations, and the publication of stolen data for Qilin affilates recruited on Russian cybercrime forums. Water Galura have been active since at least 2022 and use a double extortion model where they demand payment for providing decryption keys and for refraining from publishing the stolen data to their leak site."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -239,8 +239,8 @@ const cyberDatabase = {
                     "en": "AppleJeus is a North Korean state-sponsored threat group attributed to the Reconnaissance General Bureau. Associated with the broader Lazarus Group umbrella of actors, AppleJeus has been active since at least 2018 and is closely aligned in resources with TEMP.hermit, another DPRK-affiliated group under the same umbrella. The group’s primary mission is to generate and launder revenue to provide financial support to the government."
                 },
                 "especialidade": {
-                    "pt": "Porta dos fundos",
-                    "en": "Backdoor"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -303,8 +303,8 @@ const cyberDatabase = {
                     "en": "Indrik Spider is a Russia-based cybercriminal group that has been active since at least 2014. Indrik Spider initially started with the Dridex banking Trojan, and then by 2017 they began running ransomware operations using BitPaymer, WastedLocker, and Hades ransomware. Following U.S. sanctions and an indictment in 2019, Indrik Spider changed their tactics and diversified their toolset."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -323,8 +323,8 @@ const cyberDatabase = {
                     "en": "LuminousMoth is a Chinese-speaking cyber espionage group that has been active since at least October 2020. LuminousMoth has targeted high-profile organizations, including government entities, in Myanmar, the Philippines, Thailand, and other parts of Southeast Asia. Some security researchers have concluded there is a connection between LuminousMoth and Mustang Panda based on similar targeting and TTPs, as well as network infrastructure overlaps."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -343,8 +343,8 @@ const cyberDatabase = {
                     "en": "Medusa Group has been active since at least 2021 and was initially operated as a closed ransomware group before evolving into a Ransomware-as-a-Service (RaaS) operation. Some reporting indicates that certain attacks may still be conducted directly by the ransomware’s core developers. Public sources have also referred to the group as “Spearwing” or “Medusa Actors.” Medusa Group employs living-off-the-land techniques, frequently leveraging publicly available tools and common remote management software to conduct operations."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -363,8 +363,8 @@ const cyberDatabase = {
                     "en": "Elderwood is a suspected Chinese cyber espionage group that was reportedly responsible for the 2009 Google intrusion known as Operation Aurora. The group has targeted defense organizations, supply chain manufacturers, human rights and nongovernmental organizations (NGOs), and IT service providers."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -379,12 +379,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "UNC3886 é um grupo de ciberespionagem do nexo China que está ativo desde pelo menos 2022, visando organizações de defesa, tecnologia e telecomunicações localizadas nos Estados Unidos e nas regiões Ásia-Pacífico-Japão (APJ). O UNC3886 demonstrou um profundo conhecimento de dispositivos de ponta e tecnologias de virtualização por meio da exploração de vulnerabilidades de dia zero e do uso de novas famílias e utilitários de malware.",
+                    "pt": "UNC3886 é um grupo de ciberespionagem do nexo China que está ativo desde pelo menos 2022, visando organizações de defesa, tecnologia e telecomunicações localizadas nos Estados Unidos e nas regiões Ásia-Pacífico-Japão (APJ). O UNC3886 demonstrou um profundo conhecimento de dispositivos de ponta e tecnologias de virtualização por meio da exploração de vulnerabilidades de Zero-Day e do uso de novas famílias e utilitários de malware.",
                     "en": "UNC3886 is a China-nexus cyberespionage group that has been active since at least 2022, targeting defense, technology, and telecommunication organizations located in the United States and the Asia-Pacific-Japan (APJ) regions. UNC3886 has displayed a deep understanding of edge devices and virtualization technologies through the exploitation of zero-day vulnerabilities and the use of novel malware families and utilities."
                 },
                 "especialidade": {
-                    "pt": "Dia Zero",
-                    "en": "Zero-Day"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -403,8 +403,8 @@ const cyberDatabase = {
                     "en": "WIRTE is a cyberespionage actor, believed to be a subgroup of the Hamas-affiliated Gaza Cybergang, that has been active since at least August 2018. WIRTE has targeted diplomatic, financial, military, legal, and technology organizations across the Middle East, North Africa, and in Europe to gather intelligence. WIRTE has remained persistently active despite the ongoing Israel-Hamas conflict and has expanded their operations to include wiper malware attacks against Israeli targets."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Malware do Wiper Malware",
+                    "en": "Wiper Malware"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -423,8 +423,8 @@ const cyberDatabase = {
                     "en": "Star Blizzard is a cyber espionage and influence group originating in Russia that has been active since at least 2019. Star Blizzard campaigns align closely with Russian state interests and have included persistent phishing and credential theft against academic, defense, government, NGO, and think tank organizations in NATO countries, particularly the US and the UK."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -439,12 +439,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "Dragonfly é um grupo de espionagem cibernética atribuído ao Centro 16 do Serviço Federal de Segurança (FSB) da Rússia. Ativo desde pelo menos 2010, o Dragonfly tem como alvo empresas de defesa e aviação, entidades governamentais, empresas relacionadas a sistemas de controle industrial e setores de infraestrutura crítica em todo o mundo por meio de cadeia de suprimentos, spearphishing e ataques de comprometimento drive-by.",
+                    "pt": "Dragonfly é um grupo de espionagem cibernética atribuído ao Centro 16 do Serviço Federal de Segurança (FSB) da Rússia. Ativo desde pelo menos 2010, o Dragonfly tem como alvo empresas de defesa e aviação, entidades governamentais, empresas relacionadas a sistemas de controle industrial e setores de infraestrutura crítica em todo o mundo por meio de Supply Chain Attack, spearphishing e ataques de comprometimento drive-by.",
                     "en": "Dragonfly is a cyber espionage group that has been attributed to Russia's Federal Security Service (FSB) Center 16. Active since at least 2010, Dragonfly has targeted defense and aviation companies, government entities, companies related to industrial control systems, and critical infrastructure sectors worldwide through supply chain, spearphishing, and drive-by compromise attacks."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -463,8 +463,8 @@ const cyberDatabase = {
                     "en": "APT-C-36 is a suspected South American threat group that has engaged in espionage and financially motivated operations since at least 2018. APT-C-36 has targeted government institutions and entities in the financial, energy, and professional manufacturing sectors across Colombia and other Latin American countries."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -483,8 +483,8 @@ const cyberDatabase = {
                     "en": "OilRig is a suspected Iranian threat group that has targeted Middle Eastern and international victims since at least 2014. The group has targeted a variety of sectors, including financial, government, energy, chemical, and telecommunications. It appears the group carries out supply chain attacks, leveraging the trust relationship between organizations to attack their primary targets."
                 },
                 "especialidade": {
-                    "pt": "Ataques à cadeia de suprimentos, APT",
-                    "en": "Supply Chain Attacks, APT"
+                    "pt": "Ataques à Supply Chain Attack",
+                    "en": "Supply Chain Attacks"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -539,12 +539,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "Daggerfly é uma entidade APT ligada à República Popular da China, ativa pelo menos desde 2012. Daggerfly tem como alvo indivíduos, entidades governamentais e ONGs, e empresas de telecomunicações na Ásia e na África. Daggerfly está associado ao uso exclusivo de malware MgBot e é conhecido por várias campanhas potenciais de infecção na cadeia de suprimentos.",
+                    "pt": "Daggerfly é uma entidade APT ligada à República Popular da China, ativa pelo menos desde 2012. Daggerfly tem como alvo indivíduos, entidades governamentais e ONGs, e empresas de telecomunicações na Ásia e na África. Daggerfly está associado ao uso exclusivo de malware MgBot e é conhecido por várias campanhas potenciais de infecção na Supply Chain Attack.",
                     "en": "Daggerfly is a People's Republic of China-linked APT entity active since at least 2012. Daggerfly has targeted individuals, government and NGO entities, and telecommunication companies in Asia and Africa. Daggerfly is associated with exclusive use of MgBot malware and is noted for several potential supply chain infection campaigns."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -563,8 +563,8 @@ const cyberDatabase = {
                     "en": "Inception is a cyber espionage group active since at least 2014. The group has targeted multiple industries and governmental entities primarily in Russia, but has also been active in the United States and throughout Europe, Asia, Africa, and the Middle East."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -579,12 +579,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "A BlackTech é um grupo suspeito de espionagem cibernética chinesa que tem como alvo principalmente organizações no Leste Asiático – particularmente Taiwan, Japão e Hong Kong – e nos EUA desde pelo menos 2013. A BlackTech tem usado uma combinação de malware personalizado, ferramentas de dupla utilização e táticas de viver fora da terra para comprometer redes de mídia, construção, engenharia, eletrônica e empresas financeiras.",
+                    "pt": "A BlackTech é um grupo suspeito de espionagem cibernética chinesa que tem como alvo principalmente organizações no Leste Asiático – particularmente Taiwan, Japão e Hong Kong – e nos EUA desde pelo menos 2013. A BlackTech tem usado uma combinação de malware personalizado, ferramentas de dupla utilização e táticas de Living off the Land para comprometer redes de mídia, construção, engenharia, eletrônica e empresas financeiras.",
                     "en": "BlackTech is a suspected Chinese cyber espionage group that has primarily targeted organizations in East Asia--particularly Taiwan, Japan, and Hong Kong--and the US since at least 2013. BlackTech has used a combination of custom malware, dual-use tools, and living off the land tactics to compromise media, construction, engineering, electronics, and financial company networks."
                 },
                 "especialidade": {
-                    "pt": "Vivendo da Terra",
-                    "en": "Living off the Land"
+                    "pt": "Living off the Land (LotL), Espionagem Cibernética",
+                    "en": "Living off the Land, Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -599,12 +599,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "APT42 é um grupo de ameaças patrocinado pelo Irã que realiza espionagem e vigilância cibernética. O grupo concentra-se principalmente em alvos na região do Médio Oriente, mas tem como alvo uma variedade de indústrias e países desde pelo menos 2015. APT42 inicia operações cibernéticas através de e-mails de spearphishing e/ou malware PINEFLOWER para Android, depois monitoriza e recolhe informações dos sistemas e dispositivos comprometidos.",
+                    "pt": "APT42 é um grupo de ameaças patrocinado pelo Irã que realiza espionagem e vigilância cibernética. O grupo concentra-se principalmente em alvos na região do Médio Oriente, mas tem como alvo uma variedade de indústrias e países desde pelo menos 2015. APT42 inicia Cyber Operations através de e-mails de spearphishing e/ou malware PINEFLOWER para Android, depois monitoriza e recolhe informações dos sistemas e dispositivos comprometidos.",
                     "en": "APT42 is an Iranian-sponsored threat group that conducts cyber espionage and surveillance. The group primarily focuses on targets in the Middle East region, but has targeted a variety of industries and countries since at least 2015. APT42 starts cyber operations through spearphishing emails and/or the PINEFLOWER Android malware, then monitors and collects information from the compromised systems and devices."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -623,8 +623,8 @@ const cyberDatabase = {
                     "en": "Earth Lusca is a suspected China-based cyber espionage group that has been active since at least April 2019. Earth Lusca has targeted organizations in Australia, China, Hong Kong, Mongolia, Nepal, the Philippines, Taiwan, Thailand, Vietnam, the United Arab Emirates, Nigeria, Germany, France, and the United States. Targets included government institutions, news media outlets, gambling companies, educational institutions, COVID-19 research organizations, telecommunications companies, religious movements banned in China, and cryptocurrency trading platforms; security researchers assess some Earth Lusca operations may be financially motivated."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -639,12 +639,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "Play é um grupo de ransomware que está ativo desde pelo menos 2022, implantando o ransomware Playcrypt nos setores empresarial, governamental, de infraestrutura crítica, de saúde e de mídia na América do Norte, América do Sul e Europa. Os atores do jogo empregam um modelo de dupla extorsão, criptografando sistemas após a exfiltração de dados, e os pesquisadores de segurança presumem que operam como um grupo fechado.",
+                    "pt": "Play é um grupo de ransomware que está ativo desde pelo menos 2022, implantando o ransomware Playcrypt nos setores empresarial, governamental, de infraestrutura crítica, de saúde e de mídia na América do Norte, América do Sul e Europa. Os atores do jogo empregam um modelo de dupla extorsão, criptografando sistemas após a Data Exfiltration, e os pesquisadores de segurança presumem que operam como um grupo fechado.",
                     "en": "Play is a ransomware group that has been active since at least 2022 deploying Playcrypt ransomware against the business, government, critical infrastructure, healthcare, and media sectors in North America, South America, and Europe. Play actors employ a double-extortion model, encrypting systems after exfiltrating data, and are presumed by security researchers to operate as a closed group."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -659,12 +659,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐",
                 "descricao": {
-                    "pt": "UNC2452 é um suposto grupo de ameaças patrocinado pelo Estado russo, responsável pela intrusão na cadeia de fornecimento de software SolarWinds em 2020. As vítimas desta campanha incluem governos, consultoria, tecnologia, telecomunicações e outras organizações na América do Norte, Europa, Ásia e Médio Oriente. O grupo também comprometeu pelo menos um think tank no final de 2019.",
+                    "pt": "UNC2452 é um suposto grupo de ameaças patrocinado pelo Estado russo, responsável pela intrusão na Supply Chain Attack de software SolarWinds em 2020. As vítimas desta campanha incluem governos, consultoria, tecnologia, telecomunicações e outras organizações na América do Norte, Europa, Ásia e Médio Oriente. O grupo também comprometeu pelo menos um think tank no final de 2019.",
                     "en": "UNC2452 is a suspected Russian state-sponsored threat group responsible for the 2020 SolarWinds software supply chain intrusion. Victims of this campaign include government, consulting, technology, telecom, and other organizations in North America, Europe, Asia, and the Middle East. The group also compromised at least one think tank by late 2019."
                 },
                 "especialidade": {
-                    "pt": "Porta dos fundos",
-                    "en": "Backdoor"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -683,8 +683,8 @@ const cyberDatabase = {
                     "en": "Turla is a cyber espionage threat group that has been attributed to Russia's Federal Security Service (FSB). They have compromised victims in over 50 countries since at least 2004, spanning a range of industries including government, embassies, military, education, research and pharmaceutical companies. Turla is known for conducting watering hole and spearphishing campaigns, and leveraging in-house tools and malware, such as Uroburos."
                 },
                 "especialidade": {
-                    "pt": "Bebedouro",
-                    "en": "Watering Hole"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -719,12 +719,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "Ember Bear é um grupo de espionagem cibernética patrocinado pelo Estado russo que está ativo pelo menos desde 2020, vinculado ao 161º Centro de Treinamento de Especialistas da Diretoria Principal de Inteligência do Estado-Maior da Rússia (GRU) (Unidade 29155). A Ember Bear concentrou operações principalmente contra entidades governamentais e de telecomunicações ucranianas, mas também operou contra entidades de infraestrutura crítica na Europa e nas Américas. Ember Bear conduziu os ataques destrutivos de limpadores WhisperGate contra a Ucrânia no início de 2022.",
+                    "pt": "Ember Bear é um grupo de espionagem cibernética patrocinado pelo Estado russo que está ativo pelo menos desde 2020, vinculado ao 161º Centro de Treinamento de Especialistas da Diretoria Principal de Inteligência do Estado-Maior da Rússia (GRU) (Unidade 29155). A Ember Bear concentrou operações principalmente contra entidades governamentais e de telecomunicações ucranianas, mas também operou contra entidades de infraestrutura crítica na Europa e nas Américas. Ember Bear conduziu os ataques destrutivos de Wiper Malwarees WhisperGate contra a Ucrânia no início de 2022.",
                     "en": "Ember Bear is a Russian state-sponsored cyber espionage group that has been active since at least 2020, linked to Russia's General Staff Main Intelligence Directorate (GRU) 161st Specialist Training Center (Unit 29155). Ember Bear has primarily focused operations against Ukrainian government and telecommunication entities, but has also operated against critical infrastructure entities in Europe and the Americas. Ember Bear conducted the WhisperGate destructive wiper attacks against Ukraine in early 2022."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -743,8 +743,8 @@ const cyberDatabase = {
                     "en": "Patchwork is a cyber espionage group that was first observed in December 2015. While the group has not been definitively attributed, circumstantial evidence suggests the group may be a pro-Indian or Indian entity. Patchwork has been seen targeting industries related to diplomatic and government agencies."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -763,8 +763,8 @@ const cyberDatabase = {
                     "en": "APT28 is a threat group that has been attributed to Russia's General Staff Main Intelligence Directorate (GRU) 85th Main Special Service Center (GTsSS) military unit 26165. This group has been active since at least 2004. APT28 reportedly compromised the Hillary Clinton campaign, the Democratic National Committee, and the Democratic Congressional Campaign Committee in 2016 in an attempt to interfere with the U.S. presidential election."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -783,8 +783,8 @@ const cyberDatabase = {
                     "en": "Aoqin Dragon is a suspected Chinese cyber espionage threat group that has been active since at least 2013. Aoqin Dragon has primarily targeted government, education, and telecommunication organizations in Australia, Cambodia, Hong Kong, Singapore, and Vietnam. Security researchers noted a potential association between Aoqin Dragon and UNC94, based on malware, infrastructure, and targets."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -803,8 +803,8 @@ const cyberDatabase = {
                     "en": "Cinnamon Tempest is a China-based threat group that has been active since at least 2021 deploying multiple strains of ransomware based on the leaked Babuk source code. Cinnamon Tempest does not operate their ransomware on an affiliate model or purchase access but appears to act independently in all stages of the attack lifecycle. Based on victimology, the short lifespan of each ransomware variant, and use of malware attributed to government-sponsored threat groups, Cinnamon Tempest may be motivated by intellectual property theft or cyberespionage rather than financial gain."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Ransomware como serviço",
+                    "en": "Ransomware-as-a-Service"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -823,8 +823,8 @@ const cyberDatabase = {
                     "en": "HEXANE is a cyber espionage threat group that has targeted oil & gas, telecommunications, aviation, and internet service provider organizations since at least 2017. Targeted companies have been located in the Middle East and Africa, including Israel, Saudi Arabia, Kuwait, Morocco, and Tunisia. HEXANE's TTPs appear similar to APT33 and OilRig but due to differences in victims and tools it is tracked as a separate entity."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -843,8 +843,8 @@ const cyberDatabase = {
                     "en": "Ke3chang is a threat group attributed to actors operating out of China. Ke3chang has targeted oil, government, diplomatic, military, and NGOs in Central and South America, the Caribbean, Europe, and North America since at least 2010."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -859,12 +859,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "O Volt Typhoon é um ator patrocinado pelo Estado da República Popular da China (RPC) que está ativo desde pelo menos 2021, visando principalmente organizações de infraestrutura crítica nos EUA e seus territórios, incluindo Guam. A segmentação e o padrão de comportamento do Volt Typhoon foram avaliados como pré-posicionamento para permitir o movimento lateral para ativos de tecnologia operacional (TO) para possíveis ataques destrutivos ou perturbadores. O Volt Typhoon enfatizou a furtividade em operações usando web shells, binários Living-off-the-land (LOTL), atividades práticas no teclado e credenciais roubadas.",
+                    "pt": "O Volt Typhoon é um ator patrocinado pelo Estado da República Popular da China (RPC) que está ativo desde pelo menos 2021, visando principalmente organizações de infraestrutura crítica nos EUA e seus territórios, incluindo Guam. A segmentação e o padrão de comportamento do Volt Typhoon foram avaliados como pré-posicionamento para permitir o Lateral Movement para ativos de tecnologia operacional (TO) para possíveis ataques destrutivos ou perturbadores. O Volt Typhoon enfatizou a furtividade em operações usando web shells, binários Living-off-the-land (LOTL), atividades práticas no teclado e credenciais roubadas.",
                     "en": "Volt Typhoon is a People's Republic of China (PRC) state-sponsored actor that has been active since at least 2021, primarily targeting critical infrastructure organizations in the US and its territories including Guam. Volt Typhoon's targeting and pattern of behavior have been assessed as pre-positioning to enable lateral movement to operational technology (OT) assets for potential destructive or disruptive attacks. Volt Typhoon has emphasized stealth in operations using web shells, living-off-the-land (LOTL) binaries, hands on keyboard activities, and stolen credentials.."
                 },
                 "especialidade": {
-                    "pt": "Comando e Controle, Movimento Lateral",
-                    "en": "Command and Control, Lateral Movement"
+                    "pt": "Lateral Movement",
+                    "en": "Lateral Movement"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -903,8 +903,8 @@ const cyberDatabase = {
                     "en": "Magic Hound is an Iranian-sponsored threat group that conducts long term, resource-intensive cyber espionage operations, likely on behalf of the Islamic Revolutionary Guard Corps. They have targeted European, U.S., and Middle Eastern government and military personnel, academics, journalists, and organizations such as the World Health Organization (WHO), via complex social engineering campaigns since at least 2014."
                 },
                 "especialidade": {
-                    "pt": "Engenharia Social, APT",
-                    "en": "Social Engineering, APT"
+                    "pt": "Engenharia Social, Espionagem Cibernética",
+                    "en": "Social Engineering, Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -943,8 +943,8 @@ const cyberDatabase = {
                     "en": "HAFNIUM is a likely state-sponsored cyber espionage group operating out of China that has been active since at least January 2021. HAFNIUM primarily targets entities in the US across a number of industry sectors, including infectious disease researchers, law firms, higher education institutions, defense contractors, policy think tanks, and NGOs. HAFNIUM has targeted remote management tools and cloud software for intial access and has demonstrated an ability to quickly operationalize exploits for identified vulnerabilities in edge devices."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -963,8 +963,8 @@ const cyberDatabase = {
                     "en": "APT39 is one of several names for cyber espionage activity conducted by the Iranian Ministry of Intelligence and Security (MOIS) through the front company Rana Intelligence Computing since at least 2014. APT39 has primarily targeted the travel, hospitality, academic, and telecommunications industries in Iran and across Asia, Africa, Europe, and North America to track individuals and entities considered to be a threat by the MOIS."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -983,8 +983,8 @@ const cyberDatabase = {
                     "en": "MuddyWater is a cyber espionage group assessed to be a subordinate element within Iran's Ministry of Intelligence and Security (MOIS). Since at least 2017, MuddyWater has targeted a range of government and private organizations across sectors, including telecommunications, local government, finance, defense, and oil and natural gas organizations, in the Middle East (specifically the UAE and Saudi Arabia), Asia, Africa, Europe, and North America. MuddyWater has reused domains dating back to October 2025, and has a preference for NameCheap and Hosterdaddy Private Limited (AS136557)."
                 },
                 "especialidade": {
-                    "pt": "Comando e Controle",
-                    "en": "Command and Control"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -999,12 +999,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "APT38 é um grupo de ameaças patrocinado pelo Estado norte-coreano especializado em operações cibernéticas financeiras; foi atribuído ao Reconnaissance General Bureau. Ativo desde pelo menos 2014, o APT38 tem como alvo bancos, instituições financeiras, cassinos, bolsas de criptomoedas, terminais do sistema SWIFT e caixas eletrônicos em pelo menos 38 países em todo o mundo. Operações significativas incluem o assalto ao Banco de Bangladesh em 2016, durante o qual o APT38 roubou US$ 81 milhões, bem como ataques contra o Bancomext e o Banco de Chile; alguns de seus ataques foram destrutivos.",
+                    "pt": "APT38 é um grupo de ameaças patrocinado pelo Estado norte-coreano especializado em Cyber Operations financeiras; foi atribuído ao Reconnaissance General Bureau. Ativo desde pelo menos 2014, o APT38 tem como alvo bancos, instituições financeiras, cassinos, bolsas de criptomoedas, terminais do sistema SWIFT e caixas eletrônicos em pelo menos 38 países em todo o mundo. Operações significativas incluem o assalto ao Banco de Bangladesh em 2016, durante o qual o APT38 roubou US$ 81 milhões, bem como ataques contra o Bancomext e o Banco de Chile; alguns de seus ataques foram destrutivos.",
                     "en": "APT38 is a North Korean state-sponsored threat group that specializes in financial cyber operations; it has been attributed to the Reconnaissance General Bureau. Active since at least 2014, APT38 has targeted banks, financial institutions, casinos, cryptocurrency exchanges, SWIFT system endpoints, and ATMs in at least 38 countries worldwide. Significant operations include the 2016 Bank of Bangladesh heist, during which APT38 stole $81 million, as well as attacks against Bancomext and Banco de Chile; some of their attacks have been destructive."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1023,8 +1023,8 @@ const cyberDatabase = {
                     "en": "BRONZE BUTLER is a cyber espionage group with likely Chinese origins that has been active since at least 2008. The group primarily targets Japanese organizations, particularly those in government, biotechnology, electronics manufacturing, and industrial chemistry."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1059,12 +1059,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "APT5 é um ator de espionagem baseado na China que atua desde pelo menos 2007, visando principalmente as indústrias de telecomunicações, aeroespacial e de defesa nos EUA, Europa e Ásia. O APT5 demonstrou habilidade avançada e interesse significativo em comprometer dispositivos de rede e seu software subjacente, inclusive por meio do uso de explorações de dia zero.",
+                    "pt": "APT5 é um ator de espionagem baseado na China que atua desde pelo menos 2007, visando principalmente as indústrias de telecomunicações, aeroespacial e de defesa nos EUA, Europa e Ásia. O APT5 demonstrou habilidade avançada e interesse significativo em comprometer dispositivos de rede e seu software subjacente, inclusive por meio do uso de explorações de Zero-Day.",
                     "en": "APT5 is a China-based espionage actor that has been active since at least 2007 primarily targeting the telecommunications, aerospace, and defense industries throughout the U.S., Europe, and Asia. APT5 has displayed advanced tradecraft and significant interest in compromising networking devices and their underlying software including through the use of zero-day exploits."
                 },
                 "especialidade": {
-                    "pt": "APT, dia zero",
-                    "en": "APT, Zero-Day"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1083,8 +1083,8 @@ const cyberDatabase = {
                     "en": "BackdoorDiplomacy is a cyber espionage threat group that has been active since at least 2017. BackdoorDiplomacy has targeted Ministries of Foreign Affairs and telecommunication companies in Africa, Europe, the Middle East, and Asia."
                 },
                 "especialidade": {
-                    "pt": "Porta dos fundos",
-                    "en": "Backdoor"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1103,8 +1103,8 @@ const cyberDatabase = {
                     "en": "Leviathan is a Chinese state-sponsored cyber espionage group that has been attributed to the Ministry of State Security's (MSS) Hainan State Security Department and an affiliated front company. Active since at least 2009, Leviathan has targeted the following sectors: academia, aerospace/aviation, biomedical, defense industrial base, government, healthcare, manufacturing, maritime, and transportation across the US, Canada, Australia, Europe, the Middle East, and Southeast Asia."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1123,8 +1123,8 @@ const cyberDatabase = {
                     "en": "Ajax Security Team is a group that has been active since at least 2010 and believed to be operating out of Iran. By 2014 Ajax Security Team transitioned from website defacement operations to malware-based cyber espionage campaigns targeting the US defense industrial base and Iranian users of anti-censorship technologies."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1143,8 +1143,8 @@ const cyberDatabase = {
                     "en": "Mustang Panda is a China-based cyber espionage threat actor that has been conducting operations since at least 2012. Mustang Panda has been known to use tailored phishing lures and decoy documents to deliver malicious payloads. Mustang Panda has targeted government, diplomatic, and non-governmental organizations, including think tanks, religious institutions, and research entities, across the United States, Europe, and Asia, with notable activity in Russia, Mongolia, Myanmar, Pakistan, and Vietnam."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1203,8 +1203,8 @@ const cyberDatabase = {
                     "en": "BITTER is a suspected South Asian cyber espionage threat group that has been active since at least 2013. BITTER has targeted government, energy, and engineering organizations in Pakistan, China, Bangladesh, and Saudi Arabia."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1243,8 +1243,8 @@ const cyberDatabase = {
                     "en": "menuPass is a threat group that has been active since at least 2006. Individual members of menuPass are known to have acted in association with the Chinese Ministry of State Security's (MSS) Tianjin State Security Bureau and worked for the Huaying Haitai Science and Technology Development Company. menuPass has targeted healthcare, defense, aerospace, finance, maritime, biotechnology, energy, and government sectors globally, with an emphasis on Japanese organizations. In 2016 and 2017, the group is known to have targeted managed IT service providers (MSPs), manufacturing and mining companies, and a university."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1263,8 +1263,8 @@ const cyberDatabase = {
                     "en": "Operation Wocao described activities carried out by a China-based cyber espionage adversary. Operation Wocao targeted entities within the government, managed service providers, energy, health care, and technology sectors across several countries, including China, France, Germany, the United Kingdom, and the United States. Operation Wocao used similar TTPs and tools to APT20, suggesting a possible overlap."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1283,8 +1283,8 @@ const cyberDatabase = {
                     "en": "APT19 is a Chinese-based threat group that has targeted a variety of industries, including defense, finance, energy, pharmaceutical, telecommunications, high tech, education, manufacturing, and legal services. In 2017, a phishing campaign was used to target seven law and investment firms. Some analysts track APT19 and Deep Panda as the same group, but it is unclear from open source information if the groups are the same."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1383,8 +1383,8 @@ const cyberDatabase = {
                     "en": "APT37 is a North Korean state-sponsored cyber espionage group that has been active since at least 2012. The group has targeted victims primarily in South Korea, but also in Japan, Vietnam, Russia, Nepal, China, India, Romania, Kuwait, and other parts of the Middle East. APT37 has also been linked to the following campaigns between 2016-2018: Operation Daybreak, Operation Erebus, Golden Time, Evil New Year, Are you Happy?, FreeMilk, North Korean Human Rights, and Evil New Year 2018."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1399,7 +1399,7 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "VOID MANTICORE é um grupo ameaçador avaliado para operar em nome do Ministério de Inteligência e Segurança do Irã (MOIS). Ativo desde pelo menos meados de 2022, o VOID MANTICORE tem como alvo entidades governamentais, infraestruturas críticas e organizações do setor privado em toda a Albânia, Israel e Estados Unidos. VOID MANTICORE conduz operações cibernéticas destrutivas, combinando ataques de limpeza com campanhas de hack-and-leak.",
+                    "pt": "VOID MANTICORE é um grupo ameaçador avaliado para operar em nome do Ministério de Inteligência e Segurança do Irã (MOIS). Ativo desde pelo menos meados de 2022, o VOID MANTICORE tem como alvo entidades governamentais, infraestruturas críticas e organizações do setor privado em toda a Albânia, Israel e Estados Unidos. VOID MANTICORE conduz Cyber Operations destrutivas, combinando ataques de limpeza com campanhas de hack-and-leak.",
                     "en": "VOID MANTICORE is a threat group assessed to operate on behalf of Iran’s Ministry of Intelligence and Security (MOIS). Active since at least mid-2022, VOID MANTICORE has targeted government entities, critical infrastructure, and private sector organizations across Albania, Israel, and the United States. VOID MANTICORE conducts destructive cyber operations, combining wiper attacks with hack-and-leak campaigns."
                 },
                 "especialidade": {
@@ -1423,8 +1423,8 @@ const cyberDatabase = {
                     "en": "APT41 is a threat group that researchers have assessed as Chinese state-sponsored espionage group that also conducts financially-motivated operations. Active since at least 2012, APT41 has been observed targeting various industries, including but not limited to healthcare, telecom, technology, finance, education, retail and video game industries in 14 countries. Notable behaviors include using a wide range of malware and tools to complete mission objectives."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1443,8 +1443,8 @@ const cyberDatabase = {
                     "en": "Group5 is a threat group with a suspected Iranian nexus, though this attribution is not definite. The group has targeted individuals connected to the Syrian opposition via spearphishing and watering holes, normally using Syrian and Iranian themes. Group5 has used two commonly available remote access tools (RATs), njRAT and NanoCore, as well as an Android RAT, DroidJack."
                 },
                 "especialidade": {
-                    "pt": "Bebedouro",
-                    "en": "Watering Hole"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1483,8 +1483,8 @@ const cyberDatabase = {
                     "en": "Winnti Group is a threat group with Chinese origins that has been active since at least 2010. The group has heavily targeted the gaming industry, but it has also expanded the scope of its targeting. Some reporting suggests a number of other groups, including Axiom, APT17, and Ke3chang, are closely linked to Winnti Group."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1503,8 +1503,8 @@ const cyberDatabase = {
                     "en": "RedEcho is a People’s Republic of China-related threat actor associated with long-running intrusions in Indian critical infrastructure entities. RedEcho overlaps with various other PRC-linked threat groups, such as APT41, and is linked to ShadowPad malware use through shared infrastructure."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1543,8 +1543,8 @@ const cyberDatabase = {
                     "en": "CURIUM is an Iranian threat group, first reported in September 2019 and active since at least July 2018, targeting IT service providers in the Middle East. CURIUM has since invested in building relationships with potential targets via social media over a period of months to establish trust and confidence before sending malware. Security researchers note CURIUM has demonstrated great patience and persistence by chatting with potential targets daily and sending benign files to help lower their security consciousness."
                 },
                 "especialidade": {
-                    "pt": "Persistência",
-                    "en": "Persistence"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1563,8 +1563,8 @@ const cyberDatabase = {
                     "en": "The Windigo group has been operating since at least 2011, compromising thousands of Linux and Unix servers using the Ebury SSH backdoor to create a spam botnet. Despite law enforcement intervention against the creators, Windigo operators continued updating Ebury through 2019."
                 },
                 "especialidade": {
-                    "pt": "Porta dos fundos",
-                    "en": "Backdoor"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1603,8 +1603,8 @@ const cyberDatabase = {
                     "en": "CostaRicto is a suspected hacker-for-hire cyber espionage campaign that has targeted multiple industries worldwide since at least 2019. CostaRicto's targets, a large portion of which are financial institutions, are scattered across Europe, the Americas, Asia, Australia, and Africa, with a large concentration in South Asia."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1683,8 +1683,8 @@ const cyberDatabase = {
                     "en": "Sidewinder is a suspected Indian threat actor group that has been active since at least 2012. They have been observed targeting government, military, and business entities throughout Asia, primarily focusing on Pakistan, China, Nepal, and Afghanistan."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1723,8 +1723,8 @@ const cyberDatabase = {
                     "en": "APT30 is a threat group suspected to be associated with the Chinese government. While Naikon shares some characteristics with APT30, the two groups do not appear to be exact matches."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1743,8 +1743,8 @@ const cyberDatabase = {
                     "en": "BlackByte is a ransomware threat actor operating since at least 2021. BlackByte is associated with several versions of ransomware also labeled BlackByte Ransomware. BlackByte ransomware operations initially used a common encryption key allowing for the development of a universal decryptor, but subsequent versions such as BlackByte 2.0 Ransomware use more robust encryption mechanisms."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1803,8 +1803,8 @@ const cyberDatabase = {
                     "en": "Tonto Team is a suspected Chinese state-sponsored cyber espionage threat group that has primarily targeted South Korea, Japan, Taiwan, and the United States since at least 2009; by 2020 they expanded operations to include other Asian as well as Eastern European countries. Tonto Team has targeted government, military, energy, mining, financial, education, healthcare, and technology organizations, including through the Heartbeat Campaign (2009-2012) and Operation Bitter Biscuit (2017)."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1823,8 +1823,8 @@ const cyberDatabase = {
                     "en": "Gamaredon Group is a suspected Russian cyber espionage group that has targeted military, law enforcement, judiciary, non-profit, and non-governmental organizations in Ukraine since at least 2013. The name Gamaredon Group derives from a misspelling of the word \"Armageddon,\" found in early campaigns. In November 2021, the Ukrainian government publicly attributed Gamaredon Group to Russia’s Federal Security Service (FSB) Center 18, an assessment later supported by multiple independent cybersecurity researchers."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1843,8 +1843,8 @@ const cyberDatabase = {
                     "en": "Agrius is an Iranian threat actor active since 2020 notable for a series of ransomware and wiper operations in the Middle East, with an emphasis on Israeli targets. Public reporting has linked Agrius to Iran's Ministry of Intelligence and Security (MOIS)."
                 },
                 "especialidade": {
-                    "pt": "Ransomware",
-                    "en": "Ransomware"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1903,8 +1903,8 @@ const cyberDatabase = {
                     "en": "Axiom is a suspected Chinese cyber espionage group that has targeted the aerospace, defense, government, manufacturing, and media sectors since at least 2008. Some reporting suggests a degree of overlap between Axiom and Winnti Group but the two groups appear to be distinct based on differences in reporting on TTPs and targeting."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1923,8 +1923,8 @@ const cyberDatabase = {
                     "en": "Nomadic Octopus is a Russian-speaking cyber espionage threat group that has primarily targeted Central Asia, including local governments, diplomatic missions, and individuals, since at least 2014. Nomadic Octopus has been observed conducting campaigns involving Android and Windows malware, mainly using the Delphi programming language, and building custom variants."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1943,8 +1943,8 @@ const cyberDatabase = {
                     "en": "APT12 is a threat group that has been attributed to China. The group has targeted a variety of victims including but not limited to media outlets, high-tech companies, and multiple governments."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -1963,8 +1963,8 @@ const cyberDatabase = {
                     "en": "APT3 is a China-based threat group that researchers have attributed to China's Ministry of State Security. This group is responsible for the campaigns known as Operation Clandestine Fox, Operation Clandestine Wolf, and Operation Double Tap. As of June 2015, the group appears to have shifted from targeting primarily US victims to primarily political organizations in Hong Kong."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2023,8 +2023,8 @@ const cyberDatabase = {
                     "en": "ZIRCONIUM is a threat group operating out of China, active since at least 2017, that has targeted individuals associated with the 2020 US presidential election and prominent leaders in the international affairs community."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2043,8 +2043,8 @@ const cyberDatabase = {
                     "en": "APT1 is a Chinese threat group that has been attributed to the 2nd Bureau of the People’s Liberation Army (PLA) General Staff Department’s (GSD) 3rd Department, commonly known by its Military Unit Cover Designator (MUCD) as Unit 61398."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2063,8 +2063,8 @@ const cyberDatabase = {
                     "en": "Naikon is assessed to be a state-sponsored cyber espionage group attributed to the Chinese People’s Liberation Army’s (PLA) Chengdu Military Region Second Technical Reconnaissance Bureau (Military Unit Cover Designator 78020). Active since at least 2010, Naikon has primarily conducted operations against government, military, and civil organizations in Southeast Asia, as well as against international bodies such as the United Nations Development Programme (UNDP) and the Association of Southeast Asian Nations (ASEAN). While Naikon shares some characteristics with APT30, the two groups do not appear to be exact matches."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2103,8 +2103,8 @@ const cyberDatabase = {
                     "en": "Mofang is a likely China-based cyber espionage group, named for its frequent practice of imitating a victim's infrastructure. This adversary has been observed since at least May 2012 conducting focused attacks against government and critical infrastructure in Myanmar, as well as several other countries and sectors including military, automobile, and weapons industries."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2123,8 +2123,8 @@ const cyberDatabase = {
                     "en": "Machete is a suspected Spanish-speaking cyber espionage group that has been active since at least 2010. It has primarily focused its operations within Latin America, with a particular emphasis on Venezuela, but also in the US, Europe, Russia, and parts of Asia. Machete generally targets high-profile organizations such as government institutions, intelligence services, and military units, as well as telecommunications and power companies."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2139,12 +2139,12 @@ const cyberDatabase = {
                 "subcategoria": "governo",
                 "raridade": "⭐⭐⭐⭐⭐",
                 "descricao": {
-                    "pt": "Winter Vivern é um grupo ligado aos interesses russos e bielorrussos, activo desde pelo menos 2020, visando vários governos europeus e entidades ONG, juntamente com ataques esporádicos a vítimas indianas e norte-americanas. O grupo aproveita uma combinação de atividade de phishing baseada em documentos e exploração do lado do servidor para acesso inicial, aproveitando a infraestrutura criada e controlada pelo adversário para comando e controle subsequentes.",
+                    "pt": "Winter Vivern é um grupo ligado aos interesses russos e bielorrussos, activo desde pelo menos 2020, visando vários governos europeus e entidades ONG, juntamente com ataques esporádicos a vítimas indianas e norte-americanas. O grupo aproveita uma combinação de atividade de phishing baseada em documentos e exploração do lado do servidor para acesso inicial, aproveitando a infraestrutura criada e controlada pelo adversário para C2 (Command & Control) subsequentes.",
                     "en": "Winter Vivern is a group linked to Russian and Belorussian interests active since at least 2020 targeting various European government and NGO entities, along with sporadic targeting of Indian and US victims. The group leverages a combination of document-based phishing activity and server-side exploitation for initial access, leveraging adversary-controlled and -created infrastructure for follow-on command and control."
                 },
                 "especialidade": {
-                    "pt": "Comando e Controle",
-                    "en": "Command and Control"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2163,8 +2163,8 @@ const cyberDatabase = {
                     "en": "APT33 is a suspected Iranian threat group that has carried out operations since at least 2013. The group has targeted organizations across multiple industries in the United States, Saudi Arabia, and South Korea, with a particular interest in the aviation and energy sectors."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2183,8 +2183,8 @@ const cyberDatabase = {
                     "en": "Operation Sharpshooter is the name of a cyber espionage campaign discovered in October 2018 targeting nuclear, defense, energy, and financial companies. Though overlaps between this adversary and Lazarus Group have been noted, definitive links have not been established."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2283,8 +2283,8 @@ const cyberDatabase = {
                     "en": "Deep Panda is a suspected Chinese threat group known to target many industries, including government, defense, financial, and telecommunications. The intrusion into healthcare company Anthem has been attributed to Deep Panda. This group is also known as Shell Crew, WebMasters, KungFu Kittens, and PinkPanther."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2303,8 +2303,8 @@ const cyberDatabase = {
                     "en": "CopyKittens is an Iranian cyber espionage group that has been operating since at least 2013. It has targeted countries including Israel, Saudi Arabia, Turkey, the U.S., Jordan, and Germany. The group is responsible for the campaign known as Operation Wilted Tulip."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2323,7 +2323,7 @@ const cyberDatabase = {
                     "en": "Thrip is an espionage group that has targeted satellite communications, telecoms, and defense contractor companies in the U.S. and Southeast Asia. The group uses custom malware as well as \"living off the land\" techniques."
                 },
                 "especialidade": {
-                    "pt": "Vivendo da Terra",
+                    "pt": "Living off the Land (LotL)",
                     "en": "Living off the Land"
                 },
                 "tipo": {
@@ -2383,8 +2383,8 @@ const cyberDatabase = {
                     "en": "PittyTiger is a threat group believed to operate out of China that uses multiple different types of malware to maintain command and control."
                 },
                 "especialidade": {
-                    "pt": "Comando e Controle",
-                    "en": "Command and Control"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2403,8 +2403,8 @@ const cyberDatabase = {
                     "en": "APT17 is a China-based threat group that has conducted network intrusions against U.S. government entities, the defense industry, law firms, information technology companies, mining companies, and non-government organizations."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2423,8 +2423,8 @@ const cyberDatabase = {
                     "en": "IndigoZebra is a suspected Chinese cyber espionage group that has been targeting Central Asian governments since at least 2014."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2463,8 +2463,8 @@ const cyberDatabase = {
                     "en": "APT16 is a China-based threat group that has launched spearphishing campaigns targeting Japanese and Taiwanese organizations."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2503,8 +2503,8 @@ const cyberDatabase = {
                     "en": "APT-C-23 is a threat group that has been active since at least 2014. APT-C-23 has primarily focused its operations on the Middle East, including Israeli military assets. APT-C-23 has developed mobile spyware targeting Android and iOS devices since 2017."
                 },
                 "especialidade": {
-                    "pt": "APTO",
-                    "en": "APT"
+                    "pt": "Operações Cibernéticas",
+                    "en": "Cyber Operations"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",
@@ -2523,8 +2523,8 @@ const cyberDatabase = {
                     "en": "Charming Kitten is an Iranian cyber espionage group that has been active since approximately 2014. They appear to focus on targeting individuals of interest to Iran who work in academic research, human rights, and media, with most victims having been located in Iran, the US, Israel, and the UK. [Charming Kitten often tries to access private email and Facebook accounts, and sometimes establishes a foothold on victim computers as a secondary objective. The group's TTPs overlap extensively with another group, Magic Hound, resulting in reporting that may not distinguish between the two groups' activities."
                 },
                 "especialidade": {
-                    "pt": "Operações Cibernéticas",
-                    "en": "Cyber Operations"
+                    "pt": "Espionagem Cibernética",
+                    "en": "Cyber Espionage"
                 },
                 "tipo": {
                     "pt": "APT / Grupo de Ameaça",

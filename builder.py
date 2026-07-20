@@ -16,6 +16,61 @@ from deep_translator import GoogleTranslator
 # URLs do MITRE ATT&CK STIX
 MITRE_STIX_URL = "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
 
+# ═══════════════════════════════════════════════════════════════
+# DICIONÁRIO DE JARGÕES DE CTI (Cyber Glossary)
+# Corrige traduções literais bizarras mantendo contexto técnico
+# ═══════════════════════════════════════════════════════════════
+CYBER_JARGON_FIXES = {
+    # Ataques e Técnicas
+    'bebedouro': 'Watering Hole Attack',
+    'buraco de água': 'Watering Hole Attack',
+    'buraco aquático': 'Watering Hole Attack',
+    'lança-phishing': 'Spear-Phishing',
+    'phishing de lança': 'Spear-Phishing',
+    'lança de pesca': 'Spear-Phishing',
+    'pesca com lança': 'Spear-Phishing',
+    
+    # Malware
+    'software de resgate': 'Ransomware',
+    'programa de resgate': 'Ransomware',
+    'limpador': 'Wiper Malware',
+    'limpadores de disco': 'Wiper Malware',
+    'limpadores': 'Wiper Malware',
+    
+    # Infraestrutura
+    'comando e controle': 'C2 (Command & Control)',
+    'comando-e-controle': 'C2',
+    'controle e comando': 'C2',
+    
+    # Vulnerabilidades
+    'vulnerabilidade de dia zero': 'Zero-Day Exploit',
+    'dia zero': 'Zero-Day',
+    'exploit de dia zero': 'Zero-Day Exploit',
+    
+    # Ataques Avançados
+    'cadeia de suprimentos': 'Supply Chain Attack',
+    'cadeia de fornecimento': 'Supply Chain Attack',
+    'ataque de cadeia de suprimento': 'Supply Chain Attack',
+    
+    # Persistência
+    'porta dos fundos': 'Backdoor',
+    'porta traseira': 'Backdoor',
+    
+    # Operações
+    'movimento lateral': 'Lateral Movement',
+    'movimentação lateral': 'Lateral Movement',
+    'colheita de credenciais': 'Credential Harvesting',
+    'exfiltração de dados': 'Data Exfiltration',
+    
+    # Técnicas
+    'vivendo da terra': 'Living off the Land (LotL)',
+    'viver fora da terra': 'Living off the Land',
+    
+    # Organizações
+    'operações cibernéticas': 'Cyber Operations',
+    'operação cibernética': 'Cyber Ops'
+}
+
 # Mapeamento de palavras-chave para países
 COUNTRY_KEYWORDS = {
     'RU': ['russia', 'russian', 'kremlin', 'gru', 'svr', 'fsb', 'moscow'],
@@ -284,6 +339,24 @@ def translate_to_portuguese(text):
         return text
 
 
+def fix_cyber_jargon(text):
+    """
+    Pós-processa texto traduzido corrigindo traduções literais de jargões de CTI.
+    Substitui termos técnicos mal traduzidos por terminologia aceita no mercado.
+    """
+    if not text:
+        return text
+    
+    # Aplicar todas as correções do dicionário
+    corrected_text = text
+    for wrong_term, correct_term in CYBER_JARGON_FIXES.items():
+        # Busca case-insensitive mas preserva capitalização original
+        pattern = re.compile(re.escape(wrong_term), re.IGNORECASE)
+        corrected_text = pattern.sub(correct_term, corrected_text)
+    
+    return corrected_text
+
+
 def synthesize_description(description):
     """Sintetiza um dossiê de inteligência com frases completas e traduz para PT"""
     # Extrair 3 frases completas em inglês
@@ -292,6 +365,9 @@ def synthesize_description(description):
     # Traduzir para português
     clean_desc_pt = translate_to_portuguese(clean_desc_en)
     
+    # Corrigir jargões técnicos mal traduzidos
+    clean_desc_pt = fix_cyber_jargon(clean_desc_pt)
+    
     return {
         'pt': clean_desc_pt,
         'en': clean_desc_en
@@ -299,27 +375,40 @@ def synthesize_description(description):
 
 
 def extract_specialty(description):
-    """Extrai termos técnicos marcantes para especialidade e traduz"""
+    """
+    Extrai termos técnicos marcantes para especialidade.
+    Mantém jargões conhecidos em INGLÊS para impacto técnico (estilo Yu-Gi-Oh).
+    """
     # Limpar links primeiro
     description = clean_markdown_links(description)
     
-    keywords = [
+    # Jargões técnicos de InfoSec (mantidos em inglês por serem termos universais)
+    tech_keywords = [
         'Zero-Click Exploits', 'Supply Chain Attacks', 'Living off the Land',
-        'Spear Phishing', 'Watering Hole', 'DDoS', 'Ransomware',
-        'Data Exfiltration', 'Credential Harvesting', 'Malware Development',
-        'Social Engineering', 'ICS/SCADA', 'APT', 'Persistence',
-        'Zero-Day', 'Backdoor', 'Command and Control', 'Lateral Movement'
+        'Spear-Phishing', 'Watering Hole Attacks', 'DDoS Operations', 'Ransomware-as-a-Service',
+        'Data Exfiltration', 'Credential Harvesting', 'Advanced Malware Development',
+        'Social Engineering', 'ICS/SCADA Operations', 'APT Tactics', 'Advanced Persistence',
+        'Zero-Day Exploits', 'Backdoor Development', 'C2 Infrastructure', 'Lateral Movement',
+        'Wiper Malware', 'Cryptojacking', 'Fileless Malware', 'Cyber Espionage'
     ]
     
     found = []
-    for keyword in keywords:
-        if keyword.lower() in description.lower():
+    for keyword in tech_keywords:
+        if keyword.lower().replace('-', ' ') in description.lower():
             found.append(keyword)
     
-    specialty_en = ', '.join(found[:3]) if found else 'Cyber Operations'
-    
-    # Traduzir para português
-    specialty_pt = translate_to_portuguese(specialty_en)
+    # Se não encontrou jargões específicos, usar termo genérico
+    if not found:
+        specialty_en = 'Cyber Operations'
+        specialty_pt = 'Operações Cibernéticas'
+    else:
+        # Pegar os 3 primeiros jargões encontrados
+        specialty_en = ', '.join(found[:3])
+        
+        # Para PT: traduzir apenas se não forem jargões técnicos universais
+        # Caso contrário, manter em inglês para impacto técnico
+        specialty_pt_raw = translate_to_portuguese(specialty_en)
+        specialty_pt = fix_cyber_jargon(specialty_pt_raw)
     
     return {
         'pt': specialty_pt,
