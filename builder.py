@@ -175,13 +175,90 @@ def calculate_rpg_stats(description, name):
         }
 
 
+def clean_markdown_links(text):
+    """Remove links Markdown [texto](url) mantendo apenas o texto"""
+    # Padrão: [texto](url) -> texto
+    cleaned = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
+    return cleaned
+
+
+def clean_citations(text):
+    """Remove citações do estilo (Citation: ...)"""
+    # Remove (Citation: ...)
+    cleaned = re.sub(r'\(Citation:[^\)]+\)', '', text)
+    return cleaned
+
+
+def clean_text(text):
+    """Limpa completamente o texto removendo links, citações e caracteres indesejados"""
+    # Remover links Markdown
+    text = clean_markdown_links(text)
+    
+    # Remover citações
+    text = clean_citations(text)
+    
+    # Remover múltiplos espaços
+    text = re.sub(r'\s+', ' ', text)
+    
+    # Remover espaços antes de pontuação
+    text = re.sub(r'\s+([.,;!?])', r'\1', text)
+    
+    # Remover espaços extras após pontuação
+    text = re.sub(r'([.,;!?])\s+', r'\1 ', text)
+    
+    return text.strip()
+
+
+def extract_complete_sentences(text, num_sentences=3):
+    """Extrai as primeiras N frases completas do texto"""
+    # Limpar o texto primeiro
+    text = clean_text(text)
+    
+    # Dividir por pontos finais seguidos de espaço e letra maiúscula ou fim de string
+    # Isso preserva abreviações como "U.S." e "e.g."
+    sentences = re.split(r'(?<=[.!?])\s+(?=[A-Z])', text)
+    
+    # Filtrar frases vazias e muito curtas
+    sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
+    
+    # Pegar apenas as primeiras N frases
+    selected_sentences = sentences[:num_sentences]
+    
+    # Juntar as frases
+    result = ' '.join(selected_sentences)
+    
+    # Garantir que termina com ponto
+    if result and not result.endswith(('.', '!', '?')):
+        # Se não termina com pontuação, adicionar ponto
+        result += '.'
+    
+    return result
+
+
+def synthesize_description(description, lang='pt', actor_name=''):
+    """Sintetiza um dossiê de inteligência com frases completas"""
+    # Extrair 3 frases completas
+    clean_desc = extract_complete_sentences(description, num_sentences=3)
+    
+    # Para português, adicionar cabeçalho técnico
+    if lang == 'pt' and actor_name:
+        prefix = f"Dossiê operacional de CTI focado em análise de ameaças do ator {actor_name}. "
+        return prefix + clean_desc
+    
+    return clean_desc
+
+
 def extract_specialty(description):
     """Extrai termos técnicos marcantes para especialidade"""
+    # Limpar links primeiro
+    description = clean_markdown_links(description)
+    
     keywords = [
         'Zero-Click Exploits', 'Supply Chain Attacks', 'Living off the Land',
         'Spear Phishing', 'Watering Hole', 'DDoS', 'Ransomware',
         'Data Exfiltration', 'Credential Harvesting', 'Malware Development',
-        'Social Engineering', 'ICS/SCADA', 'APT', 'Persistence'
+        'Social Engineering', 'ICS/SCADA', 'APT', 'Persistence',
+        'Zero-Day', 'Backdoor', 'Command and Control', 'Lateral Movement'
     ]
     
     found = []
@@ -190,17 +267,6 @@ def extract_specialty(description):
             found.append(keyword)
     
     return ', '.join(found[:3]) if found else 'Cyber Operations'
-
-
-def synthesize_description(description, lang='pt'):
-    """Sintetiza um dossiê de inteligência de 4-6 linhas"""
-    # Limitar a 600 caracteres e garantir final de frase
-    truncated = description[:600]
-    last_period = truncated.rfind('.')
-    if last_period > 400:
-        truncated = truncated[:last_period + 1]
-    
-    return truncated
 
 
 def process_mitre_data(mitre_data):
@@ -231,8 +297,8 @@ def process_mitre_data(mitre_data):
                 'subcategoria': stats['subcategoria'],
                 'raridade': stats['raridade'],
                 'descricao': {
-                    'pt': synthesize_description(description, 'pt'),
-                    'en': synthesize_description(description, 'en')
+                    'pt': synthesize_description(description, 'pt', name),
+                    'en': synthesize_description(description, 'en', name)
                 },
                 'especialidade': {
                     'pt': extract_specialty(description),
