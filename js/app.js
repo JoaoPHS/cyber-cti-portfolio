@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeNavigation();
     initializeFilters();
     updateLanguage();
+    
+    // Garantir que apenas a primeira tela esteja visível
+    goToScreen('screen-category');
 });
 
 // SISTEMA DE IDIOMAS
@@ -80,14 +83,20 @@ function initializeNavigation() {
 }
 
 function goToScreen(screenId) {
-    // Remover classe 'active' de todas as telas
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
+    // Esconder todas as telas
+    const allScreens = document.querySelectorAll('.screen');
+    allScreens.forEach(screen => {
+        screen.classList.add('hidden');
     });
     
-    // Ativar a tela selecionada
-    document.getElementById(screenId).classList.add('active');
+    // Mostrar apenas a tela selecionada
+    const targetScreen = document.getElementById(screenId);
+    targetScreen.classList.remove('hidden');
+    
     appState.currentScreen = screenId;
+    
+    // Log para debug
+    console.log(`[CTI] Navegando para: ${screenId}`);
 }
 
 function resetFilters() {
@@ -114,6 +123,8 @@ function selectSubcategory(category, subcategory) {
     appState.selectedCategory = category;
     appState.selectedSubcategory = subcategory;
     
+    console.log(`[CTI] Categoria selecionada: ${category} - ${subcategory}`);
+    
     // Ir para a tela de seleção geopolítica
     goToScreen('screen-geopolitics');
     renderCountries();
@@ -125,6 +136,8 @@ function renderCountries() {
     container.innerHTML = '';
     
     const lang = appState.currentLanguage;
+    
+    console.log(`[CTI] Renderizando ${countries.length} países`);
     
     countries.forEach(country => {
         const btn = document.createElement('button');
@@ -148,6 +161,9 @@ function renderCountries() {
 
 function selectCountry(countryCode) {
     appState.selectedCountry = countryCode;
+    
+    console.log(`[CTI] País selecionado: ${countryCode}`);
+    
     filterAndDisplayCards();
     goToScreen('screen-cards');
 }
@@ -159,6 +175,8 @@ function filterAndDisplayCards() {
     // Obter dados da categoria/subcategoria selecionada
     const data = cyberDatabase[selectedCategory][selectedSubcategory] || [];
     
+    console.log(`[CTI] Dados disponíveis antes do filtro: ${data.length}`);
+    
     // Filtrar por país
     if (selectedCountry === 'UN' || selectedCountry === 'EU') {
         // Mostrar todos para países globais
@@ -166,6 +184,8 @@ function filterAndDisplayCards() {
     } else {
         appState.filteredData = data.filter(item => item.paisCode === selectedCountry);
     }
+    
+    console.log(`[CTI] Cards após filtro: ${appState.filteredData.length}`);
     
     renderCards();
 }

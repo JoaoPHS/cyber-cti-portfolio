@@ -12,13 +12,11 @@ body {
 
 /* Gerenciamento de Telas */
 .screen {
-    display: none;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
-.screen.active {
-    display: flex;
+.screen:not(.hidden) {
     opacity: 1;
     animation: fadeIn 0.5s ease-in-out;
 }
