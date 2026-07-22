@@ -472,7 +472,7 @@ STATIC_INDIVIDUALS = [
             'pt': 'Lenda Histórica / Engenharia Social',
             'en': 'Historical Legend / Social Engineering'
         },
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     # ================= UNITED STATES =================
     {
@@ -497,7 +497,7 @@ STATIC_INDIVIDUALS = [
             'pt': 'Carder / ShadowCrew',
             'en': 'Carder / ShadowCrew'
         },
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     {
         'id': 'gary_mckinnon',
@@ -521,7 +521,7 @@ STATIC_INDIVIDUALS = [
             'pt': 'Hacktivista / Invasor de Defesa',
             'en': 'Hacktivist / Defense Intruder'
         },
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     # ================= CHINA =================
     {
@@ -546,7 +546,7 @@ STATIC_INDIVIDUALS = [
             'pt': 'Oficial PLA / APT1',
             'en': 'PLA Officer / APT1'
         },
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     # ================= RUSSIA =================
     {
@@ -571,7 +571,7 @@ STATIC_INDIVIDUALS = [
             'pt': 'Pioneiro do Cibercrime Bancário',
             'en': 'Banking Cybercrime Pioneer'
         },
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     # ================= NORTH KOREA =================
     {
@@ -596,7 +596,7 @@ STATIC_INDIVIDUALS = [
             'pt': 'Operador Lazarus / Lab 110',
             'en': 'Lazarus Operative / Lab 110'
         },
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     # ================= US (historical juvenile) =================
     {
@@ -621,7 +621,7 @@ STATIC_INDIVIDUALS = [
             'pt': 'Lenda Juvenil / NASA Breach',
             'en': 'Juvenile Legend / NASA Breach'
         },
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     # ================= IRAN =================
     {
@@ -769,7 +769,7 @@ STATIC_ORGANIZATIONS = [
             'pt': 'Espionagem e Operações Militares',
             'en': 'Espionage & Military Operations'
         },
-        'image': 'assets/images/classe_espionagem.jpg'
+        'image': 'assets/images/class_espionage.jpg'
     },
     {
         'id': 'pf_cyber_division',
@@ -1110,7 +1110,7 @@ ELITE_ACTORS = [
         },
         'tactical': 98,
         'strategic': 95,
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     {
         'name': 'Tal Dilian',
@@ -1132,7 +1132,7 @@ ELITE_ACTORS = [
         },
         'tactical': 95,
         'strategic': 92,
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     {
         'name': 'Sandro Gauci',
@@ -1154,7 +1154,7 @@ ELITE_ACTORS = [
         },
         'tactical': 92,
         'strategic': 80,
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     },
     {
         'name': 'Wau Holland',
@@ -1176,7 +1176,7 @@ ELITE_ACTORS = [
         },
         'tactical': 88,
         'strategic': 90,
-        'image': 'assets/images/classe_individuos.jpg'
+        'image': 'assets/images/class_individuals.jpg'
     }
 ]
 

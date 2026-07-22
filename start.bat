@@ -1,20 +1,20 @@
 @echo off
-REM Script de inicializacao do Portfolio Cyber Threat Intelligence
+REM Cyber Threat Intelligence Portfolio — local launcher
 
 echo =====================================
 echo  CYBER THREAT INTELLIGENCE PORTFOLIO
 echo =====================================
 echo.
-echo Abrindo o portfolio no navegador...
+echo Opening the portfolio in your browser...
 echo.
 
 start index.html
 
-echo Portfolio aberto com sucesso!
+echo Portfolio opened successfully!
 echo.
-echo Para desenvolvimento, voce pode usar:
-echo - Live Server (extensao VS Code)
-echo - Python: python -m http.server 8000
+echo For local development you can also use:
+echo - VS Code Live Server
+echo - Python: python -m http.server 8765
 echo - Node.js: npx serve
 echo.
 pause

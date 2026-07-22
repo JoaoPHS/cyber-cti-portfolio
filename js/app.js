@@ -614,13 +614,13 @@ function createMilitaryStarSVG(size = 14) {
 }
 
 const GENERIC_CARD_IMAGE_PATHS = new Set([
-    'assets/images/classe_grupos.jpg',
-    'assets/images/classe_individuos.jpg',
-    'assets/images/classe_organizacoes.jpg',
-    'assets/images/classe_espionagem.jpg',
+    'assets/images/class_groups.jpg',
+    'assets/images/class_individuals.jpg',
+    'assets/images/class_organizations.jpg',
+    'assets/images/class_espionage.jpg',
     'assets/images/profit.jpg',
     'assets/images/osint.jpg',
-    'assets/images/assct.jpg',
+    'assets/images/associated.jpg',
     'assets/images/associate.jpg',
     'assets/images/famous.jpg',
     'assets/images/enforcement.jpg',
@@ -653,19 +653,19 @@ function getCategoryClassArt(card) {
     if (cat === 'groups' || cat === 'grupos') {
         if (sub === 'profit' || sub === 'lucro') return 'assets/images/profit.jpg';
         if (sub === 'osint_sigint') return 'assets/images/osint.jpg';
-        if (sub === 'government' || sub === 'governo') return 'assets/images/assct.jpg';
-        return 'assets/images/classe_grupos.jpg';
+        if (sub === 'government' || sub === 'governo') return 'assets/images/associated.jpg';
+        return 'assets/images/class_groups.jpg';
     }
     if (cat === 'organizations' || cat === 'organizacoes') {
         if (sub === 'military_espionage' || sub === 'espionagem_militar') {
-            return 'assets/images/classe_espionagem.jpg';
+            return 'assets/images/class_espionage.jpg';
         }
         return 'assets/images/enforce.jpg';
     }
     if (cat === 'individuals' || cat === 'individuos') {
         return 'assets/images/famous.jpg';
     }
-    return 'assets/images/classe_grupos.jpg';
+    return 'assets/images/class_groups.jpg';
 }
 
 function getClassImagePath(threat) {
@@ -692,7 +692,7 @@ function handleCardImageError(img, threat) {
         getCategoryClassArt(threat),
         'assets/images/famous.jpg',
         'assets/images/person.jpg',
-        'assets/images/classe_grupos.jpg',
+        'assets/images/class_groups.jpg',
         'assets/images/gru.jpg'
     ];
     const next = parseInt(tried, 10) || 0;
@@ -957,7 +957,7 @@ function handleImageError(img) {
         this.onerror = null;
         this.src = 'assets/images/famous.jpg';
     };
-    img.src = 'assets/images/classe_individuos.jpg';
+    img.src = 'assets/images/class_individuals.jpg';
 }
 
 function closeThreatModal() {

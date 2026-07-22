@@ -4360,7 +4360,7 @@ const cyberDatabase = {
                     "pt": "Lenda Histórica / Engenharia Social",
                     "en": "Historical Legend / Social Engineering"
                 },
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "countryCode": "US",
                 "rarity": "⭐⭐⭐⭐⭐"
             },
@@ -4389,7 +4389,7 @@ const cyberDatabase = {
                     "pt": "Carder / ShadowCrew",
                     "en": "Carder / ShadowCrew"
                 },
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "countryCode": "US",
                 "rarity": "⭐⭐⭐⭐⭐"
             },
@@ -4418,7 +4418,7 @@ const cyberDatabase = {
                     "pt": "Hacktivista / Invasor de Defesa",
                     "en": "Hacktivist / Defense Intruder"
                 },
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "countryCode": "US",
                 "rarity": "⭐⭐⭐⭐"
             },
@@ -4447,7 +4447,7 @@ const cyberDatabase = {
                     "pt": "Oficial PLA / APT1",
                     "en": "PLA Officer / APT1"
                 },
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "countryCode": "CN",
                 "rarity": "⭐⭐⭐⭐⭐"
             },
@@ -4476,7 +4476,7 @@ const cyberDatabase = {
                     "pt": "Pioneiro do Cibercrime Bancário",
                     "en": "Banking Cybercrime Pioneer"
                 },
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "countryCode": "RU",
                 "rarity": "⭐⭐⭐⭐"
             },
@@ -4505,7 +4505,7 @@ const cyberDatabase = {
                     "pt": "Operador Lazarus / Lab 110",
                     "en": "Lazarus Operative / Lab 110"
                 },
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "countryCode": "KP",
                 "rarity": "⭐⭐⭐⭐⭐"
             },
@@ -4534,7 +4534,7 @@ const cyberDatabase = {
                     "pt": "Lenda Juvenil / NASA Breach",
                     "en": "Juvenile Legend / NASA Breach"
                 },
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "countryCode": "US",
                 "rarity": "⭐⭐⭐⭐"
             },
@@ -4674,7 +4674,7 @@ const cyberDatabase = {
                 },
                 "tactical": 98,
                 "strategic": 95,
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "stars": 5
             },
             {
@@ -4697,7 +4697,7 @@ const cyberDatabase = {
                 },
                 "tactical": 95,
                 "strategic": 92,
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "stars": 5
             },
             {
@@ -4720,7 +4720,7 @@ const cyberDatabase = {
                 },
                 "tactical": 92,
                 "strategic": 80,
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "stars": 4
             },
             {
@@ -4743,7 +4743,7 @@ const cyberDatabase = {
                 },
                 "tactical": 88,
                 "strategic": 90,
-                "image": "assets/images/classe_individuos.jpg",
+                "image": "assets/images/class_individuals.jpg",
                 "stars": 5
             },
             {
@@ -5210,7 +5210,7 @@ const cyberDatabase = {
                 },
                 "tactical": 86,
                 "strategic": 92,
-                "image": "assets/images/classe_espionagem.jpg",
+                "image": "assets/images/class_espionage.jpg",
                 "stars": 4
             },
             {
