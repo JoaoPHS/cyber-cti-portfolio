@@ -3,18 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Cyber Threat Intelligence Portfolio - Tactical RPG</title>
+    <meta name="description" content="Portfólio interativo de Cyber Threat Intelligence no formato RPG tático. Atores reais do MITRE ATT&CK e FBI Cyber, dossiês geopolíticos e mapa de ameaças em tempo real.">
+
+    <!-- Open Graph / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cyber Threat Intelligence - RPG Portfolio">
+    <meta property="og:description" content="Terminal operacional de CTI: explore grupos APT, indivíduos e agências estatais em cards RPG. Dados alimentados por MITRE ATT&CK, FBI Cyber e fontes OSINT/SIGINT.">
+    <meta property="og:image" content="assets/images/classe_grupos.jpg">
+    <meta property="og:image:alt" content="Cyber Threat Intelligence RPG Portfolio">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cyber Threat Intelligence - RPG Portfolio">
+    <meta name="twitter:description" content="Portfólio tático de CTI alimentado por MITRE ATT&CK e FBI Cyber — cards RPG, dossiês e mapa live.">
+    <meta name="twitter:image" content="assets/images/classe_grupos.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/images/classe_individuos.jpg">
+    <link rel="apple-touch-icon" href="assets/images/classe_individuos.jpg">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+    <link rel="stylesheet" href="css/styles.css?v=20260722sec">
 </head>
 <body class="text-white min-h-screen">
     
     <!-- Seletor de Idioma Global (Persistente) -->
-    <div class="fixed top-6 right-6 z-50 flex gap-3">
-        <button id="lang-pt" class="lang-btn px-5 py-2 rounded-lg font-bold transition-all">
+    <div class="fixed top-4 right-4 z-50 flex gap-1.5">
+        <button id="lang-pt" class="lang-btn px-2 py-1 rounded font-bold transition-all text-xs">
             PT
         </button>
-        <button id="lang-en" class="lang-btn px-5 py-2 rounded-lg font-bold transition-all">
+        <button id="lang-en" class="lang-btn px-2 py-1 rounded font-bold transition-all text-xs">
             EN
         </button>
     </div>
@@ -22,78 +45,123 @@
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <!-- TELA 1: SELEÇÃO DE PAÍS (GEOPOLÍTICA) -->
     <!-- ═══════════════════════════════════════════════════════════════ -->
-    <div id="screen-geopolitics" class="screen min-h-screen flex flex-col items-center justify-center p-8">
-        <div class="text-center mb-16 fade-in">
-            <h1 class="text-6xl font-bold mb-6 tracking-wider" data-lang="title-geopolitics"></h1>
-            <p class="text-2xl opacity-80" data-lang="subtitle-geopolitics"></p>
+    <div id="screen-geopolitics" class="screen min-h-screen flex flex-col items-center justify-center py-8 px-2 sm:px-4 md:p-8">
+        <div class="text-center mb-6 md:mb-8 fade-in px-4">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 tracking-wider" data-lang="title-geopolitics"></h1>
+            <p class="text-sm sm:text-lg md:text-2xl opacity-80" data-lang="subtitle-geopolitics"></p>
         </div>
+
+        <!-- Botão: Live Threat Map (Check Point) -->
+        <button id="btn-live-threat-map" class="live-threat-map-btn w-full max-w-sm md:max-w-md mx-auto mb-6 md:mb-8 py-3 px-4 md:py-4 fade-in" type="button">
+            <span class="live-threat-map-label">
+                <img src="assets/images/radar.svg" alt="" class="live-threat-map-icon" width="22" height="22">
+                <span class="live-threat-map-title" data-lang="btn-live-map"></span>
+            </span>
+            <span class="live-threat-map-indicator blink-indicator" data-lang="indicator-available"></span>
+        </button>
         
-        <div id="countries-container" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 max-w-7xl fade-in">
-            <!-- Países serão injetados dinamicamente -->
+        <div id="countries-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-3 px-4 w-full max-w-7xl fade-in">
+            <!-- Countries injected dynamically from js/data.js (includes IN + BR) -->
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- TELA: LIVE THREAT MAP (Check Point ThreatCloud) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div id="livemap-screen" class="screen hidden min-h-screen flex flex-col p-6 md:p-8">
+        <button id="btn-back-livemap" class="btn-back" type="button">
+            <span class="arrow-icon">←</span>
+        </button>
+
+        <div class="text-center mb-4 mt-10 fade-in">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-wider" data-lang="title-live-map"></h1>
+            <p class="text-sm opacity-60 mt-2 font-mono" data-lang="subtitle-live-map"></p>
+        </div>
+
+        <div class="live-map-frame-wrap fade-in flex-1 w-full max-w-7xl mx-auto">
+            <iframe
+                id="live-threat-iframe"
+                class="live-threat-iframe w-full h-[75vh]"
+                title="Check Point ThreatCloud Live Cyber Attack Map"
+                src="about:blank"
+                frameborder="0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin allow-popups"
+                allow="fullscreen"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <!-- TELA 2: ESCOLHA DE CATEGORIA (VETOR DE ABORDAGEM) -->
     <!-- ═══════════════════════════════════════════════════════════════ -->
-    <div id="screen-category" class="screen hidden min-h-screen flex flex-col items-center justify-center p-8">
+    <div id="screen-category" class="screen hidden min-h-screen flex flex-col items-center justify-center py-8 px-4 md:p-8">
         <!-- Botão Voltar -->
         <button id="btn-back-countries" class="btn-back">
-            <span class="text-2xl">←</span>
-            <span data-lang="btn-back"></span>
+            <span class="arrow-icon">←</span>
         </button>
 
-        <div class="text-center mb-16">
-            <h1 class="text-5xl font-bold mb-6 tracking-wider" data-lang="title-category"></h1>
-            <p class="text-xl opacity-80" data-lang="subtitle-category"></p>
+        <!-- DOSSIÊ GEOPOLÍTICO: MODUS OPERANDI DE GUERRA CIBERNÉTICA -->
+        <div id="geopolitical-dossier" class="geopolitical-dossier mb-8 md:mb-12">
+            <h3 id="dossier-title" class="dossier-title"></h3>
+            <p id="dossier-modus" class="dossier-modus"></p>
+        </div>
+
+        <div class="text-center mb-8 md:mb-16 px-2">
+            <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 md:mb-6 tracking-wider" data-lang="title-category"></h1>
+            <p class="text-sm sm:text-lg md:text-xl opacity-80" data-lang="subtitle-category"></p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 max-w-7xl w-full">
             <!-- Card: Grupos -->
             <div class="category-card">
-                <div class="text-7xl mb-6 text-center">💀</div>
+                <div class="category-icon-container">
+                    <img src="assets/images/gru.jpg" alt="Grupos" class="category-icon">
+                </div>
                 <h2 class="text-4xl font-bold mb-4 text-center" data-lang="category-groups"></h2>
                 <p class="text-center mb-8 opacity-70" data-lang="desc-groups"></p>
                 
                 <div class="space-y-3">
                     <button class="subcategory-btn" 
-                            data-category="grupos" data-subcategory="lucro" data-lang="subcat-profit"></button>
+                            data-category="groups" data-subcategory="profit" data-lang="subcat-profit"></button>
                     <button class="subcategory-btn" 
-                            data-category="grupos" data-subcategory="osint_sigint" data-lang="subcat-osint-sigint"></button>
+                            data-category="groups" data-subcategory="osint_sigint" data-lang="subcat-osint-sigint"></button>
                     <button class="subcategory-btn" 
-                            data-category="grupos" data-subcategory="governo" data-lang="subcat-government"></button>
+                            data-category="groups" data-subcategory="government" data-lang="subcat-government"></button>
                 </div>
             </div>
 
             <!-- Card: Indivíduos -->
             <div class="category-card">
-                <div class="text-7xl mb-6 text-center">👤</div>
+                <div class="category-icon-container">
+                    <img src="assets/images/person.jpg" alt="Indivíduos" class="category-icon">
+                </div>
                 <h2 class="text-4xl font-bold mb-4 text-center" data-lang="category-individuals"></h2>
                 <p class="text-center mb-8 opacity-70" data-lang="desc-individuals"></p>
                 
                 <div class="space-y-3">
-                    <button class="subcategory-btn" 
-                            data-category="individuos" data-subcategory="lendas" data-lang="subcat-legends"></button>
-                    <button class="subcategory-btn" 
-                            data-category="individuos" data-subcategory="especialistas" data-lang="subcat-specialists"></button>
-                    <button class="subcategory-btn" 
-                            data-category="individuos" data-subcategory="lucro" data-lang="subcat-profit"></button>
+                    <button class="subcategory-btn"
+                            data-category="individuals"
+                            data-subcategory="famous"
+                            data-lang="subcat-famous"></button>
                 </div>
             </div>
 
             <!-- Card: Organizações Governamentais -->
             <div class="category-card">
-                <div class="text-7xl mb-6 text-center">🏛️</div>
+                <div class="category-icon-container">
+                    <img src="assets/images/govs.jpg" alt="Organizações Governamentais" class="category-icon">
+                </div>
                 <h2 class="text-4xl font-bold mb-4 text-center" data-lang="category-gov"></h2>
                 <p class="text-center mb-8 opacity-70" data-lang="desc-gov"></p>
                 
                 <div class="space-y-3">
                     <button class="subcategory-btn" 
-                            data-category="organizacoes" data-subcategory="militares" data-lang="subcat-military"></button>
+                            data-category="organizations" data-subcategory="defense_law" data-lang="subcat-defense-law"></button>
                     <button class="subcategory-btn" 
-                            data-category="organizacoes" data-subcategory="inteligencia" data-lang="subcat-intelligence"></button>
-                    <button class="subcategory-btn" 
-                            data-category="organizacoes" data-subcategory="policia_especializada" data-lang="subcat-police"></button>
+                            data-category="organizations" data-subcategory="military_espionage" data-lang="subcat-espionage-military"></button>
                 </div>
             </div>
         </div>
@@ -102,21 +170,18 @@
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <!-- TELA 3: GRID TÁTICO DE CARDS RPG -->
     <!-- ═══════════════════════════════════════════════════════════════ -->
-    <div id="screen-cards" class="screen hidden min-h-screen flex flex-col p-8">
+    <div id="screen-cards" class="screen hidden min-h-screen flex flex-col py-6 px-2 sm:p-6 md:p-8">
         <!-- Header Tático -->
-        <div class="flex justify-between items-center mb-10">
+        <div class="flex justify-center items-center mb-6 md:mb-10 relative px-4">
             <button id="btn-back-category" class="btn-back">
-                <span class="text-2xl">←</span>
-                <span data-lang="btn-back"></span>
+                <span class="arrow-icon">←</span>
             </button>
             
-            <h1 class="text-5xl font-bold tracking-wider" data-lang="title-cards"></h1>
-            
-            <div class="w-40"></div>
+            <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold tracking-wider text-center" data-lang="title-cards"></h1>
         </div>
         
         <!-- Grid de Cards -->
-        <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center flex-1">
+        <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center px-4 max-w-7xl mx-auto w-full flex-1">
             <!-- Cards serão injetados dinamicamente -->
         </div>
     </div>
@@ -125,7 +190,7 @@
     <!-- MODAL: DOSSIÊ DE INTELIGÊNCIA HOLOGRÁFICO (ZOOM) -->
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <div id="threat-modal" class="modal-overlay">
-        <div class="modal-content-wrapper">
+        <div class="modal-content-wrapper flex flex-col lg:flex-row max-w-lg lg:max-w-4xl w-[92vw] max-h-[85vh] lg:max-h-[90vh] overflow-y-auto lg:overflow-hidden rounded-md border border-zinc-800 bg-black">
             <!-- Botão Fechar -->
             <button id="modal-close" class="modal-close-btn">×</button>
             
@@ -136,8 +201,46 @@
         </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- MODAL: PAINEL DE DOAÇÕES (BITCOIN) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <button id="btn-donate" class="btn-donate" type="button" aria-label="Donate">
+        <span data-lang="btn-donate">₿</span>
+    </button>
+
+    <div id="donate-modal" class="donate-modal-overlay hidden" role="dialog" aria-modal="true">
+        <div class="donate-modal-panel">
+            <button id="donate-modal-close" class="modal-close-btn" type="button" aria-label="Close">×</button>
+            <h2 class="donate-modal-title" data-lang="donate-title">APOIE SE VOCÊ GOSTOU DO PROJETO</h2>
+            <p class="donate-modal-desc" data-lang="donate-desc">Nos ajude doando qualquer valor via Bitcoin ou Pix para continuarmos o projeto e manter o banco de dados de CTI atualizado.</p>
+            <div class="donate-qr-wrap">
+                <img
+                    id="donate-qr"
+                    class="donate-qr"
+                    alt="QR Code Bitcoin"
+                    width="220"
+                    height="220"
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;data=bc1qplt644jvesg0aewdutwz5wxhrzr9mdlma5pz6n&amp;bgcolor=000000&amp;color=00f0ff&amp;qzone=2">
+            </div>
+            <code id="btc-wallet-address" class="donate-wallet-code">bc1qplt644jvesg0aewdutwz5wxhrzr9mdlma5pz6n</code>
+            <button id="btn-copy-btc" class="donate-copy-btn" type="button" data-lang="donate-copy">COPIAR ENDEREÇO</button>
+
+            <!-- Pixgg — arrecadação oficial -->
+            <div class="donate-pix-block">
+                <a
+                    id="btn-donate-pixgg"
+                    class="donate-pix-btn"
+                    href="https://pixgg.com/CyberB4dger"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    DOE VIA PIX // DONATE VIA PIX
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
-    <script src="js/data.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/data.js?v=20260722inbr"></script>
+    <script src="js/app.js?v=20260722inbr"></script>
 </body>
 </html>

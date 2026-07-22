@@ -35,7 +35,7 @@ Portfólio interativo de Cyber Threat Intelligence gamificado como um RPG de Car
 ## 📂 Estrutura do Projeto
 
 ```
-meu-portfolio-cyber/
+cyber-cti-portfolio/
 ├── index.html              # Interface principal (3 telas)
 ├── css/
 │   └── styles.css          # Estilos táticos e texturas dinâmicas
