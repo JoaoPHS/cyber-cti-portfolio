@@ -6,26 +6,42 @@
 const LANG_STORAGE_KEY = 'cti-portfolio-lang';
 
 /**
- * Escape untrusted strings before HTML interpolation (XSS defense).
- * MITRE / FBI / OSINT payloads must never execute as markup or script.
+ * InfoSec — Immutable XSS sanitizer for untrusted external strings
+ * (MITRE ATT&CK / data.js payloads). Dictionary mapping neutralizes
+ * markup metacharacters and quote forms that enable tag injection or
+ * attribute/event-handler payloads (e.g. onerror=, onload=) when values
+ * are concatenated into HTML templates.
+ *
+ * Mapping (OWASP-aligned entity encoding):
+ *   & → &amp;   < → &lt;   > → &gt;
+ *   " → &quot;  ' → &#x27;  / → &#x2F;
  */
+function sanitizeXSS(content) {
+    if (content == null) return '';
+    const entityMap = Object.freeze({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        '/': '&#x2F;'
+    });
+    return String(content).replace(/[&<>"'/]/g, (ch) => entityMap[ch]);
+}
+
+/** @deprecated Prefer sanitizeXSS — kept as a thin alias for call-site compatibility. */
 function escapeHTML(str) {
     try {
-        if (str == null) return '';
-        return String(str)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#x27;');
+        return sanitizeXSS(str);
     } catch (err) {
-        console.warn('[CTI] escapeHTML failed — returning empty string:', err);
+        console.warn('[CTI][InfoSec] sanitizeXSS failed — returning empty string:', err);
         return '';
     }
 }
 
 /**
- * Allow only http(s) or relative asset paths for image src attributes.
+ * InfoSec — Allow only http(s) or relative asset paths for image src.
+ * Rejects javascript:/data:/vbscript: URI schemes used in XSS vectors.
  */
 function sanitizeImageURL(url) {
     try {
@@ -35,11 +51,11 @@ function sanitizeImageURL(url) {
         if (/[\x00-\x1f\x7f]/.test(value)) return '';
         if (/^(javascript|data|vbscript|file):/i.test(value)) return '';
         if (/^https?:\/\//i.test(value) || value.startsWith('assets/') || value.startsWith('./assets/')) {
-            return escapeHTML(value);
+            return sanitizeXSS(value);
         }
         return '';
     } catch (err) {
-        console.warn('[CTI] sanitizeImageURL failed:', err);
+        console.warn('[CTI][InfoSec] sanitizeImageURL failed:', err);
         return '';
     }
 }
@@ -218,14 +234,14 @@ function renderCountries() {
         btn.style.touchAction = 'manipulation';
 
         const flagClass = getFlagIconClass(country.code);
-        const safeFlagClass = escapeHTML(flagClass);
+        const safeFlagClass = sanitizeXSS(flagClass);
         const flagHTML = flagClass === 'global-icon'
-            ? `<span class="country-flag-emoji">${escapeHTML(country.flag)}</span>`
+            ? `<span class="country-flag-emoji">${sanitizeXSS(country.flag)}</span>`
             : `<span class="fi ${safeFlagClass} country-flag-svg w-12 h-8 md:w-16 md:h-12"></span>`;
 
         const availableLabel = translations[lang]?.['indicator-available'] || '[ Available ]';
-        const safeName = escapeHTML(country.name?.[lang] || country.name?.en || country.code || '');
-        const safeAvailable = escapeHTML(availableLabel);
+        const safeName = sanitizeXSS(country.name?.[lang] || country.name?.en || country.code || '');
+        const safeAvailable = sanitizeXSS(availableLabel);
         btn.innerHTML = `
             <span class="country-flag-wrap flex items-center justify-center">${flagHTML}</span>
             <span class="country-name text-xs md:text-sm">${safeName}</span>
@@ -402,7 +418,7 @@ function createCard(threat, lang) {
     card.className = 'rpg-card cursor-pointer';
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', threat.name || threat.nome || 'Threat actor');
+    card.setAttribute('aria-label', String(threat.name || threat.nome || 'Threat actor'));
     card.style.touchAction = 'manipulation';
     applyCardStyle(card, threat);
 
@@ -443,7 +459,8 @@ function createCard(threat, lang) {
 
     const title = document.createElement('div');
     title.className = 'card-title';
-    title.textContent = threat.name || threat.nome;
+    // DOM textContent assignment — no HTML parse; XSS-safe without entity encoding
+    title.textContent = threat.name || threat.nome || '';
 
     const flag = document.createElement('span');
     const code = actorCountryCode(threat);
@@ -744,18 +761,19 @@ function openThreatModal(threat, lang) {
 
     let countryFlagHTML = '';
     if (flagClass === 'global-icon') {
-        countryFlagHTML = `<span class="modal-flag-emoji">${countryData ? countryData.flag : '🌐'}</span>`;
+        countryFlagHTML = `<span class="modal-flag-emoji">${sanitizeXSS(countryData ? countryData.flag : '🌐')}</span>`;
     } else {
-        countryFlagHTML = `<span class="fi ${flagClass} modal-flag-svg"></span>`;
+        countryFlagHTML = `<span class="fi ${sanitizeXSS(flagClass)} modal-flag-svg"></span>`;
     }
 
     const modalLayoutClasses = [
         'modal-content-wrapper',
-        'flex', 'flex-col', 'lg:flex-row',
-        'max-w-lg', 'lg:max-w-4xl',
+        'flex', 'flex-col',
+        'max-w-lg', 'md:max-w-2xl', 'lg:max-w-3xl',
         'w-[92vw]',
         'max-h-[85vh]', 'lg:max-h-[90vh]',
-        'overflow-y-auto', 'lg:overflow-hidden',
+        'overflow-y-auto',
+        'min-h-0',
         'rounded-md',
         'border', 'border-zinc-800',
         'bg-black',
@@ -768,12 +786,11 @@ function openThreatModal(threat, lang) {
     const descObj = threat.description || threat.descricao || {};
     const specObj = threat.specialty || threat.especialidade || {};
 
-    const safeName = escapeHTML(actorName);
-    // Never render polluted type.pt hybrids (e.g. "Agência Intelligence") —
-    // always resolve from subcategory → translations[globalLanguage].
-    const safeType = escapeHTML(resolveOperationalTypeLabel(threat, lang || globalLanguage));
-    const safeDescription = escapeHTML(descObj[lang] || descObj.pt || '');
-    const safeSpecialty = escapeHTML(specObj[lang] || specObj.pt || '');
+    // InfoSec: sanitize all untrusted MITRE/data.js fields before HTML concatenation
+    const safeName = sanitizeXSS(actorName);
+    const safeType = sanitizeXSS(resolveOperationalTypeLabel(threat, lang || globalLanguage));
+    const safeDescription = sanitizeXSS(descObj[lang] || descObj.pt || '');
+    const safeSpecialty = sanitizeXSS(specObj[lang] || specObj.pt || '');
     const safeImageSrc = sanitizeImageURL(getClassImagePath(threat)) || sanitizeImageURL(getCategoryClassArt(threat));
 
     modalBody.innerHTML = `
@@ -781,12 +798,12 @@ function openThreatModal(threat, lang) {
             <div class="modal-visual">
                 <div class="modal-image-container pixelated-screen">
                     <div class="modal-image-placeholder">
-                        <img src="${safeImageSrc}" alt="${safeName}" class="modal-class-image relative block w-full h-44 md:h-56 lg:h-full object-cover object-center" onerror="handleImageError(this);">
+                        <img src="${safeImageSrc}" alt="${safeName}" class="modal-class-image relative block w-full h-44 md:h-64 lg:h-72 object-cover object-center" onerror="handleImageError(this);">
                     </div>
                 </div>
             </div>
 
-            <div class="modal-intel flex-1 p-4 md:p-6 lg:p-8 overflow-x-hidden lg:overflow-y-auto">
+            <div class="modal-intel p-4 md:p-6 lg:p-8">
                 <div class="modal-header">
                     <div class="modal-title">
                         ${lang === 'pt' ? 'DOSSIÊ DE INTELIGÊNCIA' : 'INTELLIGENCE BRIEF'}
@@ -1039,6 +1056,7 @@ window.cyberTacticalRPG = {
     translations,
     countryProfiles: typeof countryProfiles !== 'undefined' ? countryProfiles : {},
     security: {
+        sanitizeXSS,
         escapeHTML,
         sanitizeImageURL
     },

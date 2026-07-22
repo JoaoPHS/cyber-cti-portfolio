@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <!--
+      InfoSec CSP (defense-in-depth, client-side):
+      - default-src 'self' locks first-party origin as the baseline.
+      - script-src allows local app + Tailwind CDN (required by current build).
+      - style-src / font-src allow Flag Icons (jsDelivr) + optional Google Fonts hosts.
+      - img-src allowlists QR (api.qrserver.com) and flag CDN patterns.
+      - frame-src (not iframe-src — invalid CSP token) isolates Check Point ThreatMap.
+      - upgrade-insecure-requests forces HTTPS for all subresources.
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://googleapis.com; font-src 'self' data: https://fonts.gstatic.com https://gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://api.qrserver.com https://qrserver.com https://flagcdn.com https://*.flagcdn.com https://cdn.jsdelivr.net https://cdn.com; frame-src https://threatmap.checkpoint.com https://*.checkpoint.com https://checkpoint.com; connect-src 'self' https://cdn.tailwindcss.com https://api.qrserver.com; upgrade-insecure-requests;">
     <title>Cyber Threat Intelligence Portfolio - Tactical RPG</title>
     <meta name="description" content="Portfólio interativo de Cyber Threat Intelligence no formato RPG tático. Atores reais do MITRE ATT&CK e FBI Cyber, dossiês geopolíticos e mapa de ameaças em tempo real.">
 
@@ -28,7 +37,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
-    <link rel="stylesheet" href="css/styles.css?v=20260722sec">
+    <link rel="stylesheet" href="css/styles.css?v=20260722stackmodal">
 </head>
 <body class="text-white min-h-screen">
     
@@ -79,6 +88,12 @@
         </div>
 
         <div class="live-map-frame-wrap fade-in flex-1 w-full max-w-7xl mx-auto">
+            <!--
+              InfoSec iframe isolation:
+              sandbox = least privilege (scripts + same-origin + popups only).
+              referrerpolicy=no-referrer blocks portfolio Referer leakage to Check Point.
+              loading=lazy defers ThreatMap bandwidth on mobile until the screen is opened.
+            -->
             <iframe
                 id="live-threat-iframe"
                 class="live-threat-iframe w-full h-[75vh]"
@@ -86,7 +101,7 @@
                 src="about:blank"
                 frameborder="0"
                 loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
+                referrerpolicy="no-referrer"
                 sandbox="allow-scripts allow-same-origin allow-popups"
                 allow="fullscreen"
                 allowfullscreen>
@@ -142,6 +157,8 @@
                 <p class="text-center mb-8 opacity-70" data-lang="desc-individuals"></p>
                 
                 <div class="space-y-3">
+                    <!-- Desktop spacer: aligns Famous with Groups → OSINT/SIGINT (2nd row) -->
+                    <div class="subcategory-btn subcategory-btn--spacer" aria-hidden="true">&nbsp;</div>
                     <button class="subcategory-btn"
                             data-category="individuals"
                             data-subcategory="famous"
@@ -240,7 +257,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/data.js?v=20260722inbr"></script>
-    <script src="js/app.js?v=20260722inbr"></script>
+    <script src="js/data.js?v=20260722stackmodal"></script>
+    <script src="js/app.js?v=20260722stackmodal"></script>
 </body>
 </html>

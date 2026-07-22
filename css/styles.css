@@ -453,6 +453,9 @@ body > * {
    ═══════════════════════════════════════════════════════════════ */
 
 .category-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     padding: 1.5rem 1.25rem;
     background: #09090b;
     border: 2px solid #27272a;
@@ -547,6 +550,24 @@ body > * {
         color: #00f0ff;
         background: rgba(0, 240, 255, 0.05);
         text-shadow: 0 0 8px #00f0ff;
+    }
+}
+
+/* Desktop: ghost spacer so "Famous" sits on the same row as Groups → OSINT/SIGINT */
+.subcategory-btn--spacer {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+    border-color: transparent;
+    background: transparent;
+    color: transparent;
+    text-shadow: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .subcategory-btn--spacer {
+        display: block;
     }
 }
 
@@ -1045,7 +1066,8 @@ body > * {
     display: flex;
 }
 
-/* Parent modal shell — mobile scrolls as one continuous RPG timeline */
+/* Parent modal shell — stacked dossier (image → intel) on all viewports.
+   One continuous vertical scroll = clearer reading path than side split. */
 .modal-content-wrapper {
     background: #000000;
     border: 1px solid #27272a;
@@ -1061,14 +1083,40 @@ body > * {
     box-shadow: 0 0 50px rgba(0, 240, 255, 0.2);
     display: flex;
     flex-direction: column;
+    min-height: 0;
+    /* Visible thin scrollbar on the dossier shell */
+    scrollbar-width: thin;
+    scrollbar-color: #00f0ff #18181b;
+}
+
+.modal-content-wrapper::-webkit-scrollbar {
+    display: block;
+    width: 8px;
+}
+
+.modal-content-wrapper::-webkit-scrollbar-track {
+    background: #18181b;
+}
+
+.modal-content-wrapper::-webkit-scrollbar-thumb {
+    background: #00f0ff;
+    border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+    .modal-content-wrapper {
+        max-width: 42rem; /* comfortable reading column on tablet+ */
+        max-height: 90vh;
+    }
 }
 
 @media (min-width: 1024px) {
     .modal-content-wrapper {
-        max-width: 56rem; /* lg:max-w-4xl */
+        max-width: 48rem; /* fluid desktop column, not a wide split pane */
         max-height: 90vh;
-        flex-direction: row;
-        overflow: hidden; /* desktop: lock shell, intel column scrolls */
+        /* Keep auto height + max-height so the whole dossier scrolls together */
+        height: auto;
+        overflow-y: auto;
     }
 }
 
@@ -1122,15 +1170,6 @@ body > * {
     overflow: visible;
 }
 
-@media (min-width: 1024px) {
-    .modal-body {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        overflow: hidden;
-    }
-}
-
 .modal-dossier-layout {
     display: flex;
     flex-direction: column;
@@ -1140,14 +1179,6 @@ body > * {
     overflow: visible;
 }
 
-@media (min-width: 1024px) {
-    .modal-dossier-layout {
-        flex-direction: row;
-        height: 100%;
-        overflow: hidden;
-    }
-}
-
 .modal-visual {
     position: relative;
     flex-shrink: 0;
@@ -1155,32 +1186,13 @@ body > * {
     border-bottom: 1px solid #27272a;
 }
 
-@media (min-width: 1024px) {
-    .modal-visual {
-        width: 42%;
-        border-bottom: none;
-        border-right: 1px solid #27272a;
-        display: flex;
-        align-self: stretch;
-    }
-}
-
-/* Mobile: text flows in the same scroll as the image.
-   Desktop (lg+): only this column scrolls. */
+/* Single reading column: image banner on top, intel flows below */
 .modal-intel {
-    flex: 1;
+    flex: 1 1 auto;
+    width: 100%;
     min-height: 0;
     min-width: 0;
     overflow: visible;
-}
-
-@media (min-width: 1024px) {
-    .modal-intel {
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
-    }
 }
 
 /* Estrutura do Modal */
@@ -1285,14 +1297,15 @@ body > * {
 
 @media (min-width: 768px) {
     .modal-image-container {
-        height: 14rem; /* md:h-56 */
+        height: 16rem;
     }
 }
 
 @media (min-width: 1024px) {
     .modal-image-container {
-        height: 100%;
-        min-height: 28rem;
+        /* Hero banner — stacked dossier, not a full-height side panel */
+        height: 18rem;
+        min-height: 0;
         border-radius: 0;
     }
 }
