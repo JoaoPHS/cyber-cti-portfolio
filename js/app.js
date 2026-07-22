@@ -239,7 +239,7 @@ function renderCountries() {
             ? `<span class="country-flag-emoji">${sanitizeXSS(country.flag)}</span>`
             : `<span class="fi ${safeFlagClass} country-flag-svg w-12 h-8 md:w-16 md:h-12"></span>`;
 
-        const availableLabel = translations[lang]?.['indicator-available'] || '[ Available ]';
+        const availableLabel = translations[lang]?.['indicator-available'] || 'Available';
         const safeName = sanitizeXSS(country.name?.[lang] || country.name?.en || country.code || '');
         const safeAvailable = sanitizeXSS(availableLabel);
         btn.innerHTML = `
