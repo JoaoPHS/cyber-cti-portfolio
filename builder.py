@@ -769,7 +769,7 @@ STATIC_ORGANIZATIONS = [
             'pt': 'Espionagem e Operações Militares',
             'en': 'Espionage & Military Operations'
         },
-        'image': 'assets/images/class_espionage.jpg'
+        'image': 'assets/images/intel.jpg'
     },
     {
         'id': 'pf_cyber_division',

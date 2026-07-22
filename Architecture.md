@@ -34,14 +34,13 @@ cyber-cti-portfolio/
         ├── class_groups.jpg
         ├── class_individuals.jpg
         ├── class_organizations.jpg
-        ├── class_espionage.jpg
         ├── class_famous.jpg
+        ├── intel.jpg                      # Subcategory: Espionage & Military Ops
         ├── profit.jpg
         ├── osint.jpg
         ├── associated.jpg
         ├── famous.jpg
         ├── enforce.jpg
-        ├── military.jpg
         ├── person.jpg
         ├── govs.jpg
         └── gru.jpg

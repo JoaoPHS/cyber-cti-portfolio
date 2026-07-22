@@ -617,7 +617,6 @@ const GENERIC_CARD_IMAGE_PATHS = new Set([
     'assets/images/class_groups.jpg',
     'assets/images/class_individuals.jpg',
     'assets/images/class_organizations.jpg',
-    'assets/images/class_espionage.jpg',
     'assets/images/profit.jpg',
     'assets/images/osint.jpg',
     'assets/images/associated.jpg',
@@ -625,7 +624,6 @@ const GENERIC_CARD_IMAGE_PATHS = new Set([
     'assets/images/famous.jpg',
     'assets/images/enforcement.jpg',
     'assets/images/enforce.jpg',
-    'assets/images/military.jpg',
     'assets/images/group.jpg',
     'assets/images/groups.jpg',
     'assets/images/persons.jpg',
@@ -658,7 +656,7 @@ function getCategoryClassArt(card) {
     }
     if (cat === 'organizations' || cat === 'organizacoes') {
         if (sub === 'military_espionage' || sub === 'espionagem_militar') {
-            return 'assets/images/class_espionage.jpg';
+            return 'assets/images/intel.jpg';
         }
         return 'assets/images/enforce.jpg';
     }

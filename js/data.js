@@ -5210,7 +5210,7 @@ const cyberDatabase = {
                 },
                 "tactical": 86,
                 "strategic": 92,
-                "image": "assets/images/class_espionage.jpg",
+                "image": "assets/images/intel.jpg",
                 "stars": 4
             },
             {
